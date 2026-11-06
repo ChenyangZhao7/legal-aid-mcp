@@ -837,7 +837,7 @@ Expected: FAIL，`ModuleNotFoundError: tools`
 
 - [ ] **Step 3: 实现工具**
 
-`find_legal_service` 的返回注解写 `list[dict] | dict`，`plan_route` 写 `dict`（错误时 `run_tool` 也返回 dict）。
+`find_legal_service` 和 `plan_route` 都用 `structured_output=False`，返回 `str`（`json.dumps(..., ensure_ascii=False)` 的结果）；错误 dict 也 json 序列化。MCP SDK 2.x 会把 list 返回值当成多个 content block，只保留第一个，所以不能直接返回 list。
 - 参数：`keyword: Literal["法院","律师事务所","法律援助中心"]`、`city="济南"`、`district=None`、`limit: Annotated[int, Field(ge=1, le=10)] = 5`。
 - 济南白名单：`{"济南","济南市"}` + 区县 `{"历下区","市中区","槐荫区","天桥区","历城区","长清区","章丘区","济阳区","莱芜区","钢城区","平阴县","商河县"}`。
 - `city` 不在白名单 → `CITY_NOT_FOUND`；`district` 不在白名单 → `CITY_NOT_FOUND`。
@@ -967,7 +967,7 @@ Expected: FAIL，`ModuleNotFoundError: tools.law_search`
 
 - [ ] **Step 3: 实现工具**
 
-`search_law` 与 `verify_citation` 的返回注解都写 `list[dict] | dict`（错误时 `run_tool` 返回 dict）。
+`search_law` 与 `verify_citation` 都用 `structured_output=False`，返回 `str`（`json.dumps(..., ensure_ascii=False)` 的结果）；错误 dict 也 json 序列化。
 
 `search_law`：
 - 参数：`query: str`、`law: Literal["民法典","合同编通则司法解释"] | None = None`、`limit: Annotated[int, Field(ge=1, le=10)] = 5`。
