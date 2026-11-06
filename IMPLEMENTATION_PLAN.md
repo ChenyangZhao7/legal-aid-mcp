@@ -684,8 +684,9 @@ def test_live_budget_exhausted(tmp_path):
     s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak", LIVE_BUDGET="1")
     c = BaiduClient(s, transport=httpx.MockTransport(handler))
     c.place_search("人民法院", "济南", 5)
+    # 不同 page_size = 缓存未命中，才会检查预算
     with pytest.raises(ToolError) as exc:
-        c.place_search("人民法院", "济南", 5)
+        c.place_search("人民法院", "济南", 6)
     assert exc.value.code == "BUDGET_EXHAUSTED"
     assert calls["n"] == 1
 
