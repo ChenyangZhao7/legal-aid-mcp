@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
@@ -144,6 +145,9 @@ class BaiduClient:
             status = -1
         if status != 0:
             message = data.get("message") or ""
+            if self.settings.baidu_ak:
+                message = message.replace(self.settings.baidu_ak, "***")
+            message = re.sub(r"ak=[^&\s]+", "ak=***", message)
             if status in {203, 210, 211, 302}:
                 raise ToolError(
                     "AK_INVALID",

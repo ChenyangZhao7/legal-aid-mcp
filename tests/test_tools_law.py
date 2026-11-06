@@ -72,3 +72,23 @@ def test_citation_status_amended():
     from tools.citation import citation_status
     assert citation_status(SimpleNamespace(status="已修改")) == "amended"
     assert citation_status(SimpleNamespace(status="有效")) == "exists"
+
+async def test_verify_unknown_law_is_out_of_scope(server):
+    data = await call(server, "verify_citation", {"text": "刑法第585条"})
+    assert data[0]["status"] == "out_of_scope"
+
+async def test_verify_literal_placeholder(server):
+    data = await call(server, "verify_citation", {"text": "民诉法第X条"})
+    assert data[0]["status"] == "out_of_scope"
+
+async def test_search_unknown_law_out_of_scope(server):
+    data = await call(server, "search_law", {"query": "刑法第585条"})
+    assert data["error"]["code"] == "OUT_OF_SCOPE"
+
+async def test_search_fake_article_is_no_match(server):
+    data = await call(server, "search_law", {"query": "民法典第9999条"})
+    assert data["error"]["code"] == "NO_MATCH"
+
+async def test_search_law_filter_conflict(server):
+    data = await call(server, "search_law", {"query": "民法典第585条", "law": "合同编通则司法解释"})
+    assert data["error"]["code"] == "NO_MATCH"

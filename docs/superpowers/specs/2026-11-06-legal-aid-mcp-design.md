@@ -284,7 +284,7 @@ python scripts/verify_laws.py
 python -m pytest -q
 python scripts/verify_laws.py
 python -c "import server; print('server import ok')"
-python scripts/mcp_transcript.py > docs/mcp-transcript.json
+python scripts/mcp_transcript.py --out docs/mcp-transcript.json
 ```
 
 ## 11. 交付物与目录

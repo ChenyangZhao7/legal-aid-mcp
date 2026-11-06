@@ -26,3 +26,7 @@ def test_interpretation_count_and_boundaries():
     assert arts[0]["article_number"] == 1
     assert arts[-1]["article_number"] == 69
     assert "合同条款" in arts[0]["text"]
+
+def test_source_url_has_no_highlight_markup():
+    arts = load("civil_code_contract.json")
+    assert all("<em" not in a["source_url"] and "%3Cem" not in a["source_url"] for a in arts)

@@ -62,6 +62,8 @@ def main() -> int:
                 _fail(f"{name} 第 {article['article_number']} 条正文过短")
             if not article.get("source_url", "").startswith("https://flk.npc.gov.cn/detail"):
                 _fail(f"{name} 第 {article['article_number']} 条 source_url 非法")
+            if "<em" in article.get("source_url", "") or "%3Cem" in article.get("source_url", ""):
+                _fail(f"{name} 第 {article['article_number']} 条 source_url 含高亮标签")
 
         entry = manifest.get("laws", {}).get(name)
         if not entry:

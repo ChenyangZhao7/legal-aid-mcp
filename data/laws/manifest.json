@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-06T10:29:13.079690+00:00",
+  "fetched_at": "2026-11-06T10:45:27.763381+00:00",
   "laws": {
     "民法典": {
       "file": "civil_code_contract.json",
@@ -16,7 +16,7 @@
       "effective_date": "2021-01-01",
       "status": "有效",
       "sxx": 3,
-      "source_url": "https://flk.npc.gov.cn/detail?id=ff808081729d1efe01729d50b5c500bf&type=%E6%B3%95%E5%BE%8B&title=%3Cem+class%3D%27highlight%27%3E%E4%B8%AD%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%8D%8E%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E4%BA%BA%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B0%91%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%85%B1%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%92%8C%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%9B%BD%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B0%91%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B3%95%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%85%B8%3C%2Fem%3E",
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff808081729d1efe01729d50b5c500bf&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8",
       "bbbs": "ff808081729d1efe01729d50b5c500bf",
       "source_sha256": "6926a597a66c5aad4803591ce9a51a8eebe847260f5ba2805210b608ded78353",
       "pdf_sha256": "27d3e78e67d3dca4bee729fd20d4ec5aad959b561d3c4d9e5efde721916fb93b"
@@ -36,7 +36,7 @@
       "effective_date": "2023-12-05",
       "status": "有效",
       "sxx": 3,
-      "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818c24e05b018c814e6de45ab5&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%3Cem+class%3D%27highlight%27%3E%E6%9C%80%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%AB%98%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E4%BA%BA%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B0%91%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B3%95%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%99%A2%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%85%B3%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E4%BA%8E%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%80%82%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E7%94%A8%3C%2Fem%3E%E3%80%8A%3Cem+class%3D%27highlight%27%3E%E4%B8%AD%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%8D%8E%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E4%BA%BA%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B0%91%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%85%B1%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%92%8C%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%9B%BD%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B0%91%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E6%B3%95%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%85%B8%3C%2Fem%3E%E3%80%8B%3Cem+class%3D%27highlight%27%3E%E5%90%88%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%90%8C%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E7%BC%96%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%80%9A%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%88%99%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E8%8B%A5%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E5%B9%B2%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%97%AE%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%A2%98%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E7%9A%84%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E8%A7%A3%3C%2Fem%3E%3Cem+class%3D%27highlight%27%3E%E9%87%8A%3C%2Fem%3E",
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818c24e05b018c814e6de45ab5&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E9%80%82%E7%94%A8%E3%80%8A%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8%E3%80%8B%E5%90%88%E5%90%8C%E7%BC%96%E9%80%9A%E5%88%99%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E9%87%8A",
       "bbbs": "ff8081818c24e05b018c814e6de45ab5",
       "source_sha256": "d0ca784f5f3178633d6e3ffd91acf1e88f068f672acc3fc22ac4ef928b377bd4",
       "pdf_sha256": "57e4a70daa8d0ab59df90c10a0cdcd511c090bfef3360fff87570673db32cf91"

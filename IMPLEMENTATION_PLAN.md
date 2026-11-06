@@ -1007,7 +1007,7 @@ git commit -m "feat: add law search and citation verification tools"
 **Interfaces:**
 - Consumes: `register_legal_service`、`register_route`、`register_law_search`、`register_citation`
 - Produces: stdio server 暴露 4 个工具
-- Produces: `python scripts/mcp_transcript.py > docs/mcp-transcript.json`
+- Produces: `python scripts/mcp_transcript.py --out docs/mcp-transcript.json`
 
 - [ ] **Step 1: 写失败测试**
 
@@ -1058,7 +1058,7 @@ Expected: FAIL，工具集合为空或不匹配
 Run:
 ```powershell
 python -m pytest tests/test_mcp_stdio.py -q
-python scripts/mcp_transcript.py > docs/mcp-transcript.json
+python scripts/mcp_transcript.py --out docs/mcp-transcript.json
 ```
 Expected: `1 passed`；transcript 文件包含 4 个工具和 4 次调用。
 

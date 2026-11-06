@@ -53,6 +53,16 @@ def _find(
     query = QUERY_MAP[keyword]
     region = district or city
     rows = ctx.baidu.place_search(query, region, limit)
+    if district:
+        name_matches = [row for row in rows if district in (row.get("name") or "")]
+        if name_matches:
+            rows = name_matches
+        else:
+            address_matches = [
+                row for row in rows if district in (row.get("address") or "")
+            ]
+            if address_matches:
+                rows = address_matches
     if not rows:
         raise ToolError(
             "NO_RESULTS",

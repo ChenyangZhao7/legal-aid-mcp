@@ -131,28 +131,61 @@ _ALIAS_TO_LAW: list[tuple[str, str]] = sorted(
     key=lambda item: len(item[0]),
     reverse=True,
 )
-_ALIAS_PATTERN = "|".join(re.escape(alias) for alias, _ in _ALIAS_TO_LAW)
-_CITATION_RE = re.compile(
-    rf"(?P<law>{_ALIAS_PATTERN})?\s*[》]?\s*第\s*(?P<num>[{_CN_NUM}\d]+)\s*条"
-)
+_CITATION_RE = re.compile(rf"第\s*(?P<num>[{_CN_NUM}\dXxＸｘ]+)\s*条")
+_BRACKETED_LAW_RE = re.compile(r"《([^》]{2,50})》$")
+_GENERIC_LAW_RE = re.compile(r"([^\s，。；：、]{1,20}(?:法|法典|解释))$")
+
+
+def _law_before(text: str, start: int) -> tuple[str, int] | None:
+    window_start = max(0, start - 80)
+    window = text[window_start:start]
+    trimmed = window.rstrip()
+    if not trimmed:
+        return None
+
+    if trimmed.endswith("》"):
+        match = _BRACKETED_LAW_RE.search(trimmed)
+        if match:
+            title = match.group(1)
+            for alias, law in _ALIAS_TO_LAW:
+                if title == alias or title.endswith(alias):
+                    return law, window_start + match.start()
+            return title, window_start + match.start() + 1
+
+    for alias, law in _ALIAS_TO_LAW:
+        if trimmed.endswith(alias):
+            return law, window_start + len(trimmed) - len(alias)
+
+    match = _GENERIC_LAW_RE.search(trimmed)
+    if match:
+        return match.group(1), window_start + match.start()
+    return None
 
 
 def parse_citations(text: str) -> list[Citation]:
     found: list[Citation] = []
     for match in _CITATION_RE.finditer(text):
-        raw_law = match.group("law")
-        law = "民法典"
-        if raw_law:
-            law = next(canon for alias, canon in _ALIAS_TO_LAW if alias == raw_law)
         num_text = match.group("num")
-        number = int(num_text) if num_text.isdigit() else cn_to_int(num_text)
+        if num_text in {"X", "x", "Ｘ", "ｘ"}:
+            number = 0
+        elif num_text.isdigit():
+            number = int(num_text)
+        else:
+            number = cn_to_int(num_text)
+
+        before = _law_before(text, match.start())
+        if before is None:
+            law, law_start = "民法典", match.start()
+        else:
+            law, law_start = before
+
         found.append(
             Citation(
-                raw=match.group(0),
+                raw=text[law_start : match.end()],
                 law=law,
                 article=f"第{num_text}条",
                 number=number,
-                start=match.start(),
+                start=law_start,
                 end=match.end(),
             )
         )
@@ -360,7 +393,7 @@ class LawCorpus:
 
         query_norm = normalize_text(query)
         grams = _bigrams(query_norm)
-        scored: list[tuple[int, int, Article]] = []
+        scored: list[tuple[int, int, int, Article]] = []
         for article in candidates:
             score = exact.get((article.short_name, article.article_number), 0)
             score += _prior_bonus(query_norm, article)
@@ -374,11 +407,12 @@ class LawCorpus:
                 if gram in section_norm:
                     score += 3
             if score > 0:
-                scored.append((score, article.article_number, article))
+                priority = 0 if article.short_name == "民法典" else 1
+                scored.append((score, priority, article.article_number, article))
 
         scored = [item for item in scored if item[0] >= _MIN_SCORE]
         if not scored:
             raise ToolError("NO_MATCH", "未找到匹配条文，请换关键词或指定法律")
-        scored.sort(key=lambda item: (-item[0], item[1]))
-        return [article for _, _, article in scored[:limit]]
+        scored.sort(key=lambda item: (-item[0], item[1], item[2]))
+        return [item[3] for item in scored[:limit]]
 

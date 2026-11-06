@@ -74,7 +74,8 @@ def register_citation(server: MCPServer, ctx: AppContext) -> None:
         description=(
             "核对一段文字中引用的法条是否存在、是否现行有效、原文是否一致。"
             "用户提供答辩状、合同、AI 回答，要求“核对法条”“看看引用对不对”时使用。"
-            "返回逐条核对结果；未找到的条文明确标为不存在，不猜测。"
+            "返回 status：exists（存在且有效）、not_found（该法律全文没有这个条号）、"
+            "amended（已修改/已废止）、out_of_scope（真实存在但不在 v1 收录范围，不代表不存在）。"
         ),
         structured_output=False,
     )

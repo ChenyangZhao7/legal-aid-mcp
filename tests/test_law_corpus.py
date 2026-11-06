@@ -38,3 +38,11 @@ def test_corpus_not_loaded(tmp_path):
     with pytest.raises(ToolError) as exc:
         corpus.search("违约金", limit=5)
     assert exc.value.code == "CORPUS_NOT_LOADED"
+
+def test_search_generic_prefers_civil_code(corpus):
+    hits = corpus.search("合同", limit=5)
+    assert hits[0].short_name == "民法典"
+
+def test_search_liability_prefers_civil_code(corpus):
+    hits = corpus.search("违约责任", limit=5)
+    assert hits[0].short_name == "民法典"

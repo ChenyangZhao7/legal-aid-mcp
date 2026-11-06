@@ -40,7 +40,7 @@ async def test_find_law_firm(server):
 
 async def test_find_lixia_court(server):
     data = await call(server, "find_legal_service", {"keyword": "法院", "district": "历下区", "limit": 5})
-    assert any("历下区人民法院" in r["name"] for r in data)
+    assert "历下区" in data[0]["name"]
 
 async def test_city_not_found(server):
     data = await call(server, "find_legal_service", {"keyword": "法院", "city": "火星"})
@@ -67,4 +67,4 @@ async def test_plan_route_with_addresses(server):
 
 async def test_plan_route_address_with_comma_is_not_coordinates(server):
     data = await call(server, "plan_route", {"origin": "济南市历下区,经十路", "destination": "济南市中级人民法院"})
-    assert "distance_m" in data or data["error"]["code"] == "GEOCODE_FAILED"
+    assert data["error"]["code"] == "GEOCODE_FAILED"

@@ -110,10 +110,10 @@ npx @modelcontextprotocol/inspector python server.py
 ```powershell
 .venv\Scripts\python -m pytest -q
 .venv\Scripts\python scripts\verify_laws.py --data-dir data\laws
-.venv\Scripts\python scripts\mcp_transcript.py > docs\mcp-transcript.json
+.venv\Scripts\python scripts\mcp_transcript.py --out docs\mcp-transcript.json
 ```
 
-当前结果：`68 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
+当前结果：`82 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
 
 ## 法条来源与范围
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import os
@@ -19,7 +20,7 @@ CALLS = [
 ]
 
 
-async def main() -> None:
+async def main(out_path: Path) -> None:
     env = {
         **os.environ,
         "USE_LIVE": "0",
@@ -52,8 +53,17 @@ async def main() -> None:
                 "tools": [tool.name for tool in tools.tools],
                 "calls": calls,
             }
-            print(json.dumps(transcript, ensure_ascii=False, indent=2))
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(
+        json.dumps(transcript, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"wrote {out_path}")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    parser = argparse.ArgumentParser(description="生成 stdio JSON-RPC 对话记录")
+    parser.add_argument("--out", default="docs/mcp-transcript.json")
+    args = parser.parse_args()
+    asyncio.run(main(ROOT / args.out))

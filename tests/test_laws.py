@@ -28,6 +28,25 @@ def test_parse_citations_full_interpretation_title():
     assert got[0].law == "合同编通则司法解释"
     assert got[0].number == 1
 
+def test_parse_citations_unknown_law_prefix():
+    got = parse_citations("刑法第585条")
+    assert got[0].law == "刑法"
+    assert got[0].number == 585
+
+def test_parse_citations_bracketed_unknown_law():
+    got = parse_citations("《中华人民共和国刑法》第585条")
+    assert got[0].law == "中华人民共和国刑法"
+    assert got[0].number == 585
+
+def test_parse_citations_partial_interpretation_title():
+    got = parse_citations("《中华人民共和国民法典》合同编通则若干问题的解释第585条")
+    assert got[0].law != "民法典"
+
+def test_parse_citations_placeholder():
+    got = parse_citations("民诉法第X条")
+    assert got[0].law == "民事诉讼法"
+    assert got[0].number == 0
+
 def test_split_articles_tracks_sections():
     paras = [
         "第三编　合　　同",

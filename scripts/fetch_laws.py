@@ -143,7 +143,7 @@ def fetch_target(target: dict, out_dir: Path, raw_dir: Path) -> dict:
         raise RuntimeError(f"{short_name} 没有解析出条文")
 
     status = SXX_LABELS.get(row.get("sxx"), "未知")
-    url = source_url(bbbs, target["flxz"], row["title"])
+    url = source_url(bbbs, target["flxz"], _strip_tags(row["title"]))
     records = []
     for article in articles:
         records.append(

@@ -23,7 +23,7 @@
 
 ```text
 .venv\Scripts\python -m pytest -q
-68 passed in 1.74s
+82 passed in 2.16s
 ```
 
 ```text
@@ -32,7 +32,7 @@ OK: 民法典合同编 526 条；司法解释 69 条
 ```
 
 ```text
-.venv\Scripts\python scripts\mcp_transcript.py > docs/mcp-transcript.json
+.venv\Scripts\python scripts\mcp_transcript.py --out docs/mcp-transcript.json
 tools = find_legal_service, plan_route, search_law, verify_citation
 calls = 4
 search_law -> 第五百八十五条

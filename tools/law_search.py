@@ -12,15 +12,23 @@ from laws import parse_citations
 
 
 def _search(ctx: AppContext, query: str, law: str | None, limit: int) -> list[dict]:
+    law_filter = ctx.corpus.resolve_law_name(law) if law is not None else None
+    if law is not None and law_filter is None:
+        raise ToolError("NO_MATCH", f"不支持的法律：{law}")
+
     citations = parse_citations(query)
     if citations:
         citation = citations[0]
+        if law_filter is not None and citation.law != law_filter:
+            raise ToolError("NO_MATCH", f"{citation.raw} 不属于指定法律 {law}")
         scope = ctx.corpus.scope_of(citation.law, citation.number)
-        if scope != "in_corpus":
+        if scope == "out_of_scope":
             raise ToolError(
                 "OUT_OF_SCOPE",
                 f"{citation.raw} 不在 v1 收录范围（仅民法典合同编 463–988 与合同编通则司法解释）",
             )
+        if scope == "not_found":
+            raise ToolError("NO_MATCH", f"{citation.raw}：该法律全文没有这个条号")
         article = ctx.corpus.get(citation.law, citation.number)
         if article is None:
             raise ToolError("NO_MATCH", f"未找到 {citation.raw}")

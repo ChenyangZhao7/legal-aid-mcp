@@ -94,3 +94,13 @@ def test_live_cache_hit_does_not_spend(tmp_path):
     c.place_search("人民法院", "济南", 5)
     c.place_search("人民法院", "济南", 5)
     assert calls["n"] == 1
+
+def test_live_message_redacts_ak(tmp_path):
+    def handler(request):
+        return httpx.Response(200, json={"status": 220, "message": "bad ak test-ak"})
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler))
+    with pytest.raises(ToolError) as exc:
+        c.place_search("人民法院", "济南", 5)
+    assert "test-ak" not in exc.value.message
+    assert "***" in exc.value.message
