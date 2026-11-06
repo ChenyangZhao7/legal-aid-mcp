@@ -1,0 +1,13 @@
+{
+  "status": 0,
+  "result": {
+    "location": {
+      "lng": 116.89899948123703,
+      "lat": 36.67519234317923
+    },
+    "precise": 0,
+    "confidence": 50,
+    "comprehension": 100,
+    "level": "火车站"
+  }
+}

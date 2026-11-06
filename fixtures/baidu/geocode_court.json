@@ -1,0 +1,13 @@
+{
+  "status": 0,
+  "result": {
+    "location": {
+      "lng": 117.01274714694634,
+      "lat": 36.67187927522267
+    },
+    "precise": 1,
+    "confidence": 70,
+    "comprehension": 100,
+    "level": "政府机构"
+  }
+}

@@ -1,0 +1,563 @@
+{
+  "status": 0,
+  "message": "ok",
+  "total": 83,
+  "result_type": "poi_type",
+  "query_type": "general",
+  "results": [
+    {
+      "name": "山东昌平律师事务所",
+      "location": {
+        "lat": 36.689938,
+        "lng": 117.103832
+      },
+      "address": "济南市历下区化纤厂路6-2号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "40f94fabc0079e395fd4fe19",
+      "telephone": "15555403995",
+      "detail": 1,
+      "uid": "40f94fabc0079e395fd4fe19",
+      "detail_info": {
+        "classified_poi_tag": "律师事务所",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.689927,
+          "lng": 117.10369
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=40f94fabc0079e395fd4fe19&output=html&source=placeapi_v3",
+        "overall_rating": "5.0",
+        "image_num": "92",
+        "comment_num": "33",
+        "shop_hours": "09:00-20:00",
+        "label": "律师事务所",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 20,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 20,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东舜达律师事务所",
+      "location": {
+        "lat": 36.600802,
+        "lng": 117.009162
+      },
+      "address": "山东舜达律师事务所",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "市中区",
+      "telephone": "(0531)81953258",
+      "detail": 1,
+      "uid": "67aba7380a870acd931fc9aa",
+      "detail_info": {
+        "classified_poi_tag": "律师事务所",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.601041,
+          "lng": 117.009072
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=67aba7380a870acd931fc9aa&output=html&source=placeapi_v3",
+        "overall_rating": "5.0",
+        "image_num": "3",
+        "shop_hours": "09:00-11:30,13:30-17:00",
+        "label": "律师事务所",
+        "children": [],
+        "parent_id": "e25f7d1c7d96395fc036449a",
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "北京市盈科(济南)律师事务所",
+      "location": {
+        "lat": 36.66435,
+        "lng": 117.105901
+      },
+      "address": "济南市历下区经十路11111号华润大厦39层",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "a888b2fb56835d3f2efaa702",
+      "telephone": "13021707607",
+      "detail": 1,
+      "uid": "a888b2fb56835d3f2efaa702",
+      "detail_info": {
+        "classified_poi_tag": "律师事务所",
+        "new_alias": "北京市盈科律师事务所",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.665262,
+          "lng": 117.10566
+        },
+        "brand": "盈科律师事务所",
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=a888b2fb56835d3f2efaa702&output=html&source=placeapi_v3",
+        "overall_rating": "4.8",
+        "image_num": "54",
+        "comment_num": "38",
+        "shop_hours": "00:00-24:00",
+        "label": "盈科律师事务所超级门店,,律师事务所",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 0,
+                "hour": 0,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东撼岳律师事务所",
+      "location": {
+        "lat": 37.292678,
+        "lng": 117.174999
+      },
+      "address": "山东省济南市商河县花园街铭晖创展中心一楼沿街",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "商河县",
+      "telephone": "13583189000",
+      "detail": 1,
+      "uid": "80eeb56e5f1e063615a190fc",
+      "detail_info": {
+        "classified_poi_tag": "律师事务所",
+        "new_alias": "藏岳律师事务所;撼岳律师所",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 37.292654,
+          "lng": 117.174885
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=80eeb56e5f1e063615a190fc&output=html&source=placeapi_v3",
+        "image_num": "16",
+        "comment_num": "1",
+        "shop_hours": "08:30-17:30",
+        "label": "律师事务所",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 30
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "上海汉盛(济南)律师事务所",
+      "location": {
+        "lat": 36.666111,
+        "lng": 117.157448
+      },
+      "address": "山东省济南市历城区舜华南路汉峪金谷a7区a7-5栋10层",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历城区",
+      "telephone": "17862997188",
+      "detail": 1,
+      "uid": "90eea4e0b9b41076aecb6652",
+      "detail_info": {
+        "classified_poi_tag": "律师事务所",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.66601,
+          "lng": 117.157956
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=90eea4e0b9b41076aecb6652&output=html&source=placeapi_v3",
+        "overall_rating": "5.0",
+        "image_num": "17",
+        "comment_num": "2",
+        "shop_hours": "09:00-21:00",
+        "label": "律师事务所",
+        "children": [],
+        "parent_id": "feb2e68277bd9beb9fec2b35",
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 21,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 21,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

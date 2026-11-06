@@ -1,0 +1,878 @@
+{
+  "status": 0,
+  "message": "ok",
+  "total": 22,
+  "result_type": "poi_type",
+  "query_type": "general",
+  "results": [
+    {
+      "name": "济南高新区人民法院",
+      "location": {
+        "lat": 36.682496,
+        "lng": 117.15415
+      },
+      "address": "山东省济南市历下区舜风路101号齐鲁文化创意10号楼",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "d3ac58d71ddcd5de4bcc4a69",
+      "telephone": "(0531)12368",
+      "detail": 1,
+      "uid": "d3ac58d71ddcd5de4bcc4a69",
+      "detail_info": {
+        "classified_poi_tag": "政府机构;公检法机构",
+        "new_alias": "济南高新技术产业开发区人民法院",
+        "tag": "政府机构;公检法机构",
+        "navi_location": {
+          "lat": 36.682199,
+          "lng": 117.154301
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=d3ac58d71ddcd5de4bcc4a69&output=html&source=placeapi_v3",
+        "image_num": "4",
+        "shop_hours": "09:00-11:30,13:30-17:30",
+        "label": "公检法机构",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 30
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "济南市历城区人民法院",
+      "location": {
+        "lat": 36.691893,
+        "lng": 117.102825
+      },
+      "address": "山东省济南市化纤厂路5号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "93df0dc3052f7028892fb59c",
+      "telephone": "(0531)12368",
+      "detail": 1,
+      "uid": "93df0dc3052f7028892fb59c",
+      "detail_info": {
+        "classified_poi_tag": "政府机构;公检法机构;法院",
+        "tag": "政府机构;公检法机构",
+        "navi_location": {
+          "lat": 36.691902,
+          "lng": 117.103463
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=93df0dc3052f7028892fb59c&output=html&source=placeapi_v3",
+        "overall_rating": "0",
+        "image_num": "13",
+        "shop_hours": "08:30-11:30,13:30-17:00",
+        "label": "法院,人民法院,智慧法院,法院",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "济南市历下区人民法院",
+      "location": {
+        "lat": 36.664454,
+        "lng": 117.04423
+      },
+      "address": "历山路147号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "dd94c4f848b7d406e6e96554",
+      "telephone": "(0531)12368",
+      "detail": 1,
+      "uid": "dd94c4f848b7d406e6e96554",
+      "detail_info": {
+        "classified_poi_tag": "政府机构;公检法机构;法院",
+        "tag": "政府机构;公检法机构",
+        "navi_location": {
+          "lat": 36.663945,
+          "lng": 117.044679
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=dd94c4f848b7d406e6e96554&output=html&source=placeapi_v3",
+        "overall_rating": "0",
+        "image_num": "12",
+        "comment_num": "0",
+        "shop_hours": "08:30-11:30,13:30-17:00",
+        "label": "法院,人民法院,智慧法院,法院",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 11,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东省高级人民法院",
+      "location": {
+        "lat": 36.668058,
+        "lng": 117.122326
+      },
+      "address": "济南市历下区经十路9977号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "33150892d65fa3c1a8f72915",
+      "telephone": "(0531)51797114",
+      "detail": 1,
+      "uid": "33150892d65fa3c1a8f72915",
+      "detail_info": {
+        "classified_poi_tag": "政府机构;公检法机构;法院",
+        "tag": "政府机构;公检法机构",
+        "navi_location": {
+          "lat": 36.669311,
+          "lng": 117.122347
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=33150892d65fa3c1a8f72915&output=html&source=placeapi_v3",
+        "overall_rating": "0",
+        "image_num": "6",
+        "comment_num": "0",
+        "shop_hours": "08:30-12:00,13:00-17:00",
+        "label": "法院,人民法院,智慧法院,法院",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "济南市历下区人民法院姚家人民法庭",
+      "location": {
+        "lat": 36.661513,
+        "lng": 117.09235
+      },
+      "address": "浆水泉路9号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "历下区",
+      "street_id": "1a1a4937749827a9260bd029",
+      "telephone": "(0531)12368",
+      "detail": 1,
+      "uid": "1a1a4937749827a9260bd029",
+      "detail_info": {
+        "classified_poi_tag": "政府机构;公检法机构;法院",
+        "tag": "政府机构;公检法机构",
+        "navi_location": {
+          "lat": 36.661494,
+          "lng": 117.09274
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=1a1a4937749827a9260bd029&output=html&source=placeapi_v3",
+        "overall_rating": "0",
+        "image_num": "16",
+        "comment_num": "0",
+        "shop_hours": "09:00-12:00,13:00-17:00",
+        "label": "法院,人民法院,智慧法院,法庭,人民法庭,法院",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

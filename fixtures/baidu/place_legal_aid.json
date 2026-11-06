@@ -1,0 +1,630 @@
+{
+  "status": 0,
+  "message": "ok",
+  "total": 10,
+  "result_type": "poi_type",
+  "query_type": "general",
+  "results": [
+    {
+      "name": "济南市法律援助中心",
+      "location": {
+        "lat": 36.661616,
+        "lng": 116.998843
+      },
+      "address": "经七纬四路117号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "市中区",
+      "street_id": "",
+      "telephone": "(0531)82717108",
+      "detail": 1,
+      "uid": "647185b4c42303378936ee38",
+      "detail_info": {
+        "classified_poi_tag": "生活服务;法律服务",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.661637,
+          "lng": 116.998883
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=647185b4c42303378936ee38&output=html&source=placeapi_v3",
+        "overall_rating": "4.7",
+        "image_num": "16",
+        "comment_num": "3",
+        "shop_hours": "09:00-12:00,13:00-17:00",
+        "label": "法律援助中心,法律援助管理局,法律援助处,法律援助局,法律援助,法援,法援中心,法律服务",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 1,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 12,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 13,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "章丘区法律援助中心",
+      "location": {
+        "lat": 36.719216,
+        "lng": 117.553517
+      },
+      "address": "汇泉路1166号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "章丘区",
+      "street_id": "34149a6d2a039ad2c9c3db57",
+      "telephone": "(0531)83238148",
+      "detail": 1,
+      "uid": "34149a6d2a039ad2c9c3db57",
+      "detail_info": {
+        "classified_poi_tag": "生活服务;法律服务",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.719336,
+          "lng": 117.553594
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=34149a6d2a039ad2c9c3db57&output=html&source=placeapi_v3",
+        "image_num": "12",
+        "shop_hours": "09:00-17:00",
+        "label": "法律援助中心,法律服务",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东省济南市法律援助中心",
+      "location": {
+        "lat": 36.233428,
+        "lng": 117.685675
+      },
+      "address": "龙潭东大街001号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "莱芜区",
+      "detail": 1,
+      "uid": "80ca8387310c1b45b7265576",
+      "detail_info": {
+        "classified_poi_tag": "生活服务;法律服务",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.23325,
+          "lng": 117.685673
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=80ca8387310c1b45b7265576&output=html&source=placeapi_v3",
+        "shop_hours": "09:00-17:00",
+        "label": "法律援助中心,法律服务",
+        "children": [],
+        "parent_id": "b5437e51e4015a6517c8f655",
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东省济南市莱城区法律援助中心",
+      "location": {
+        "lat": 36.227386,
+        "lng": 117.670314
+      },
+      "address": "汶源西大街69号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "莱芜区",
+      "street_id": "0b70926c19b6534d2bd7ab41",
+      "telephone": "(0531)75878148",
+      "detail": 1,
+      "uid": "0b70926c19b6534d2bd7ab41",
+      "detail_info": {
+        "classified_poi_tag": "生活服务;法律服务",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.227271,
+          "lng": 117.670326
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=0b70926c19b6534d2bd7ab41&output=html&source=placeapi_v3",
+        "shop_hours": "08:30-17:30",
+        "label": "法律援助,法律援助中心,法援,法援中心,法律服务",
+        "children": [],
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 30
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 8,
+                "minute": 30
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 30
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "山东省济南市长清区法律援助中心",
+      "location": {
+        "lat": 36.56163,
+        "lng": 116.762833
+      },
+      "address": "宾谷街588号",
+      "province": "山东省",
+      "city": "济南市",
+      "area": "长清区",
+      "street_id": "6108a3be791ea5c00d3dda4f",
+      "telephone": "(0531)87222148",
+      "detail": 1,
+      "uid": "6108a3be791ea5c00d3dda4f",
+      "detail_info": {
+        "classified_poi_tag": "生活服务;法律服务",
+        "tag": "生活服务;其他",
+        "navi_location": {
+          "lat": 36.561763,
+          "lng": 116.762859
+        },
+        "type": "life",
+        "detail_url": "http://api.map.baidu.com/place/detail?uid=6108a3be791ea5c00d3dda4f&output=html&source=placeapi_v3",
+        "image_num": "3",
+        "shop_hours": "09:00-17:00",
+        "label": "法律援助中心,法律服务",
+        "children": [],
+        "parent_id": "a3f21eeee2164f452fb17e50",
+        "regular_open_hour": {
+          "periods": [
+            {
+              "open": {
+                "day": 1,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 1,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 2,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 2,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 3,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 3,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 4,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 4,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 5,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 5,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 6,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 6,
+                "hour": 17,
+                "minute": 0
+              }
+            },
+            {
+              "open": {
+                "day": 0,
+                "hour": 9,
+                "minute": 0
+              },
+              "close": {
+                "day": 0,
+                "hour": 17,
+                "minute": 0
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
