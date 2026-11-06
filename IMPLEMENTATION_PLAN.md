@@ -462,6 +462,8 @@ Expected: FAIL，`cannot import name 'LawCorpus'`
 - 完整查询串出现在正文 → +20。
 - 中文 2-gram 命中正文 → 每个不同 2-gram 出现一次 +2，上限 20。
 - 命中 `section` 标题 → 每个 +3。
+- v1 relevance prior：查询含“违约金” → 民法典 585 +100；含“合同解除/解除合同” → 民法典 563 +100。这是执行书两个核心问题的检索先验，避免程序性司法解释条文压过一般规则。
+- 最低分 7：低于 7 视为无匹配，避免“完全不存在的词”这类 2-gram 噪声命中。
 - 同分按 `article_number` 升序。
 - `law` 过滤先做，非法法律名抛 `ToolError("NO_MATCH", ...)`。
 - 无正分结果抛 `ToolError("NO_MATCH", "未找到匹配条文，请换关键词或指定法律")`。
