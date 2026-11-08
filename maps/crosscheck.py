@@ -45,7 +45,7 @@ def _distance_between(a: dict, b: dict) -> float:
 
 
 def match_places(a: Place, b: Place) -> bool:
-    name_ok = name_similarity(a.name, b.name) >= 0.6
+    name_ok = name_similarity(a.name, b.name) >= 0.8
     na, nb = normalize_name(a.name), normalize_name(b.name)
     if na and nb and (na in nb or nb in na) and min(len(na), len(nb)) >= 3:
         name_ok = True
@@ -71,7 +71,7 @@ def place_confidence(sources: list[dict]) -> str:
                 return "conflict"
 
     names_ok = all(
-        name_similarity(sources[0].get("name"), item.get("name")) >= 0.6
+        name_similarity(sources[0].get("name"), item.get("name")) >= 0.8
         for item in sources[1:]
     )
     location_ok = all(
@@ -98,7 +98,7 @@ def place_discrepancies(sources: list[dict]) -> list[str]:
             a, b = sources[i], sources[j]
             pa = a.get("provider", f"源{i + 1}")
             pb = b.get("provider", f"源{j + 1}")
-            if name_similarity(a.get("name"), b.get("name")) < 0.6:
+            if name_similarity(a.get("name"), b.get("name")) < 0.8:
                 issues.append(f"{pa} 与 {pb} 名称不同：{a.get('name')} / {b.get('name')}")
             if (
                 a.get("address")
