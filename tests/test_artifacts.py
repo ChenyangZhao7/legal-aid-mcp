@@ -11,8 +11,9 @@ def test_transcript_is_utf8_json():
         "plan_route",
         "search_law",
         "verify_citation",
+        "legal_calculator",
     }
-    assert len(data["calls"]) == 4
+    assert len(data["calls"]) == 5
 
 
 def test_inspector_tools_artifact():
@@ -22,4 +23,5 @@ def test_inspector_tools_artifact():
         "plan_route",
         "search_law",
         "verify_citation",
+        "legal_calculator",
     }

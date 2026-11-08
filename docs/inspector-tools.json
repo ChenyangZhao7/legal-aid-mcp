@@ -2,7 +2,7 @@
   "tools": [
     {
       "name": "find_legal_service",
-      "description": "在指定城市搜索法院、律师事务所或法律援助中心，返回机构名称、地址、电话和经纬度。用户问“去哪个法院立案”“附近有没有法律援助”“找律师”时使用。只返回机构信息，不判断管辖，也不评价律师水平。",
+      "description": "在指定城市搜索法院、律师事务所或法律援助中心，返回机构名称、地址、电话和经纬度。用户问“去哪个法院立案”“附近有没有法律援助”“找律师”时使用。只返回机构信息，不判断管辖，也不评价律师水平。法律援助中心优先使用 12348 官方目录；地图结果会标注来源和置信度。",
       "inputSchema": {
         "properties": {
           "keyword": {
@@ -52,7 +52,7 @@
     },
     {
       "name": "plan_route",
-      "description": "规划从起点到终点的驾车或步行路线，返回距离、预计时间和主要路段。用户问“怎么去法院/律所/法律援助中心”时使用。起点和终点可以是地址或“纬度,经度”；如果只有机构名，先用 find_legal_service 查地址。",
+      "description": "规划从起点到终点的驾车或步行路线，返回距离、预计时间和主要路段。用户问“怎么去法院/律所/法律援助中心”时使用。起点和终点可以是地址或“纬度,经度”；坐标默认按 WGS-84 解释，可用 coord_system 指定 gcj02/bd09。如果只有机构名，先用 find_legal_service 查地址。",
       "inputSchema": {
         "properties": {
           "origin": {
@@ -73,6 +73,17 @@
               "walking"
             ],
             "title": "Mode",
+            "type": "string"
+          },
+          "coord_system": {
+            "default": "wgs84",
+            "description": "坐标输入使用的坐标系；默认 wgs84",
+            "enum": [
+              "wgs84",
+              "gcj02",
+              "bd09"
+            ],
+            "title": "Coord System",
             "type": "string"
           }
         },
@@ -99,7 +110,12 @@
               {
                 "enum": [
                   "民法典",
-                  "合同编通则司法解释"
+                  "合同编通则司法解释",
+                  "民事诉讼法",
+                  "民诉法解释",
+                  "证据规定",
+                  "诉讼费用交纳办法",
+                  "法律援助法"
                 ],
                 "type": "string"
               },
@@ -142,7 +158,12 @@
               {
                 "enum": [
                   "民法典",
-                  "合同编通则司法解释"
+                  "合同编通则司法解释",
+                  "民事诉讼法",
+                  "民诉法解释",
+                  "证据规定",
+                  "诉讼费用交纳办法",
+                  "法律援助法"
                 ],
                 "type": "string"
               },
@@ -159,6 +180,108 @@
           "text"
         ],
         "title": "verify_citationArguments",
+        "type": "object"
+      }
+    },
+    {
+      "name": "legal_calculator",
+      "description": "计算诉讼费、保全费或民事诉讼期间（上诉期/答辩期/自定义期间）。用户问“诉讼费多少”“保全费多少”“上诉期到哪天”“期间怎么算”时使用。所有结果附官方条文依据；期间计算的 start_date 是送达日/收到日/事件发生日，当天不计入，遇到法定休假日会顺延。",
+      "inputSchema": {
+        "properties": {
+          "action": {
+            "description": "计算类型：诉讼费、保全费或期间",
+            "enum": [
+              "litigation_fee",
+              "preservation_fee",
+              "deadline"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "minimum": 0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "诉讼请求金额或保全财产数额；非财产案件可不填",
+            "title": "Amount"
+          },
+          "case_type": {
+            "default": "财产案件",
+            "description": "案件类型，用于诉讼费标准",
+            "enum": [
+              "财产案件",
+              "离婚",
+              "人格权",
+              "知识产权",
+              "劳动争议",
+              "行政-商标专利海事",
+              "行政-其他",
+              "其他非财产"
+            ],
+            "title": "Case Type",
+            "type": "string"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "期间触发日，格式 YYYY-MM-DD，如判决书送达日",
+            "title": "Start Date"
+          },
+          "days": {
+            "anyOf": [
+              {
+                "minimum": 1,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "自定义期间天数；appeal/answer 类型可自动取值",
+            "title": "Days"
+          },
+          "deadline_type": {
+            "default": "custom",
+            "description": "上诉期（判决15日/裁定10日）、答辩期15日或自定义期间",
+            "enum": [
+              "appeal_judgment",
+              "appeal_ruling",
+              "answer",
+              "custom"
+            ],
+            "title": "Deadline Type",
+            "type": "string"
+          },
+          "day_type": {
+            "default": "natural",
+            "description": "自然日或工作日；默认自然日",
+            "enum": [
+              "natural",
+              "working"
+            ],
+            "title": "Day Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action"
+        ],
+        "title": "legal_calculatorArguments",
         "type": "object"
       }
     }

@@ -17,6 +17,7 @@ CALLS = [
     ("plan_route", {"origin": "济南西站", "destination": "济南市中级人民法院"}),
     ("search_law", {"query": "违约金过高", "limit": 3}),
     ("verify_citation", {"text": "依据《中华人民共和国民法典》第五百八十五条"}),
+    ("legal_calculator", {"action": "litigation_fee", "amount": 100000, "case_type": "财产案件"}),
 ]
 
 

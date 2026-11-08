@@ -14,6 +14,7 @@ from holidays import HolidayCalendar
 from laws import LawCorpus
 from legal_aid import LegalAidClient
 from maps.service import MapService
+from tools.calculator import register_calculator
 from tools.citation import register_citation
 from tools.law_search import register_law_search
 from tools.legal_service import register_legal_service
@@ -48,6 +49,7 @@ def create_server(
     register_route(server, ctx)
     register_law_search(server, ctx)
     register_citation(server, ctx)
+    register_calculator(server, ctx)
     return server
 
 

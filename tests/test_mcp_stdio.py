@@ -17,7 +17,11 @@ async def test_stdio_lists_four_tools():
             await session.initialize()
             tools = await session.list_tools()
             assert {t.name for t in tools.tools} == {
-                "find_legal_service", "plan_route", "search_law", "verify_citation"
+                "find_legal_service",
+                "plan_route",
+                "search_law",
+                "verify_citation",
+                "legal_calculator",
             }
             result = await session.call_tool("search_law", {"query": "违约金过高"})
             data = json.loads(result.content[0].text)
