@@ -1,0 +1,495 @@
+{
+  "year": 2025,
+  "source": "timor.tech",
+  "fetched_at": "2026-11-08T15:04:02.736318+00:00",
+  "days": {
+    "2025-01-01": {
+      "holiday": true,
+      "name": "元旦"
+    },
+    "2025-01-04": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-01-05": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-01-11": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-01-12": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-01-18": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-01-19": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-01-25": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-01-26": {
+      "holiday": false,
+      "name": "春节前补班"
+    },
+    "2025-01-28": {
+      "holiday": true,
+      "name": "除夕"
+    },
+    "2025-01-29": {
+      "holiday": true,
+      "name": "初一"
+    },
+    "2025-01-30": {
+      "holiday": true,
+      "name": "初二"
+    },
+    "2025-01-31": {
+      "holiday": true,
+      "name": "初三"
+    },
+    "2025-02-01": {
+      "holiday": true,
+      "name": "初四"
+    },
+    "2025-02-02": {
+      "holiday": true,
+      "name": "初五"
+    },
+    "2025-02-03": {
+      "holiday": true,
+      "name": "初六"
+    },
+    "2025-02-04": {
+      "holiday": true,
+      "name": "初七"
+    },
+    "2025-02-08": {
+      "holiday": false,
+      "name": "春节后补班"
+    },
+    "2025-02-09": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-02-15": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-02-16": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-02-22": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-02-23": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-03-01": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-03-02": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-03-08": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-03-09": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-03-15": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-03-16": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-03-22": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-03-23": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-03-29": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-03-30": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-04-04": {
+      "holiday": true,
+      "name": "清明节"
+    },
+    "2025-04-05": {
+      "holiday": true,
+      "name": "清明节"
+    },
+    "2025-04-06": {
+      "holiday": true,
+      "name": "清明节"
+    },
+    "2025-04-12": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-04-13": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-04-19": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-04-20": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-04-26": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-04-27": {
+      "holiday": false,
+      "name": "劳动节前补班"
+    },
+    "2025-05-01": {
+      "holiday": true,
+      "name": "劳动节"
+    },
+    "2025-05-02": {
+      "holiday": true,
+      "name": "劳动节"
+    },
+    "2025-05-03": {
+      "holiday": true,
+      "name": "劳动节"
+    },
+    "2025-05-04": {
+      "holiday": true,
+      "name": "劳动节"
+    },
+    "2025-05-05": {
+      "holiday": true,
+      "name": "劳动节"
+    },
+    "2025-05-10": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-05-11": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-05-17": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-05-18": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-05-24": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-05-25": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-05-31": {
+      "holiday": true,
+      "name": "端午节"
+    },
+    "2025-06-01": {
+      "holiday": true,
+      "name": "端午节"
+    },
+    "2025-06-02": {
+      "holiday": true,
+      "name": "端午节"
+    },
+    "2025-06-07": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-06-08": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-06-14": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-06-15": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-06-21": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-06-22": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-06-28": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-06-29": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-07-05": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-07-06": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-07-12": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-07-13": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-07-19": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-07-20": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-07-26": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-07-27": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-08-02": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-08-03": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-08-09": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-08-10": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-08-16": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-08-17": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-08-23": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-08-24": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-08-30": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-08-31": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-09-06": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-09-07": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-09-13": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-09-14": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-09-20": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-09-21": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-09-27": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-09-28": {
+      "holiday": false,
+      "name": "国庆节前补班"
+    },
+    "2025-10-01": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-02": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-03": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-04": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-05": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-06": {
+      "holiday": true,
+      "name": "中秋节"
+    },
+    "2025-10-07": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-08": {
+      "holiday": true,
+      "name": "国庆节"
+    },
+    "2025-10-11": {
+      "holiday": false,
+      "name": "国庆节后补班"
+    },
+    "2025-10-12": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-10-18": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-10-19": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-10-25": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-10-26": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-11-01": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-11-02": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-11-08": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-11-09": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-11-15": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-11-16": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-11-22": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-11-23": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-11-29": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-11-30": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-12-06": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-12-07": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-12-13": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-12-14": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-12-20": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-12-21": {
+      "holiday": true,
+      "name": "周日"
+    },
+    "2025-12-27": {
+      "holiday": true,
+      "name": "周六"
+    },
+    "2025-12-28": {
+      "holiday": true,
+      "name": "周日"
+    }
+  }
+}
