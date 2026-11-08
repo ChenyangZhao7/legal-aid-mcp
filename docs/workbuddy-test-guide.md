@@ -5,25 +5,33 @@
 
 ## 接入
 
-按 WorkBuddy 的 MCP 配置格式加入（字段名以实际版本为准）：
+本机已把 `legal-aid-mcp` 写入 WorkBuddy 的 MCP 配置：
+
+```text
+C:\Users\21165\.workbuddy\connectors\default\mcp.json
+```
+
+条目使用 `USE_MOCK=1`、`USE_LIVE=0`，不会消耗百度额度。原文件备份在同目录的 `mcp.json.bak-20261108-200348`。
+
+操作步骤：
+
+1. 完全退出 WorkBuddy（托盘图标也要退出），重新打开。
+2. 打开 WorkBuddy 的 MCP / Connectors 设置，确认出现 `legal-aid-mcp` 并启用。
+3. 第一次调用会弹出工具审批，批准 4 个工具（`find_legal_service`、`plan_route`、`search_law`、`verify_citation`）。
+4. 新建对话，先问“济南市中级人民法院在哪？”，确认能看到工具调用。
+5. 需要真实地图调用时，把 `mcp.json` 里该条目的 `env` 改成：
 
 ```json
-{
-  "mcpServers": {
-    "legal-aid": {
-      "command": "Z:\\project-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["Z:\\project-mcp\\server.py"],
-      "env": {
-        "BAIDU_AK": "你的百度服务端AK",
-        "USE_MOCK": "1",
-        "USE_LIVE": "0"
-      }
-    }
-  }
+"env": {
+  "USE_LIVE": "1",
+  "BAIDU_AK": "你的百度服务端AK"
 }
 ```
 
-先用 `USE_MOCK=1` 跑通流程；需要真实地图调用时再改 `USE_LIVE=1`，并确认 `cache/budget.json` 余量。
+然后重启 WorkBuddy。`USE_MOCK` 可以保留 1，`USE_LIVE=1` 会优先走真实调用。
+
+如果设置里看不到 `legal-aid-mcp`，先检查 JSON 是否合法，再看 `C:\Users\21165\.workbuddy\logs` 里的 MCP 日志。
+
 
 ## 8 条场景
 

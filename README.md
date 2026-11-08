@@ -85,25 +85,31 @@ npx @modelcontextprotocol/inspector python server.py
 
 ### WorkBuddy
 
-按 WorkBuddy 的 MCP 配置格式加入（字段名以实际版本为准）：
+本机已写入 WorkBuddy 的 MCP 配置：
+
+```text
+C:\Users\21165\.workbuddy\connectors\default\mcp.json
+```
+
+条目名 `legal-aid-mcp`，当前是 `USE_MOCK=1`、`USE_LIVE=0`，不消耗百度额度。重启 WorkBuddy 后在 MCP / Connectors 设置里启用，并批准 4 个工具。
+
+完整条目：
 
 ```json
-{
-  "mcpServers": {
-    "legal-aid": {
-      "command": "Z:\\project-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["Z:\\project-mcp\\server.py"],
-      "env": {
-        "BAIDU_AK": "你的百度服务端AK",
-        "USE_MOCK": "1",
-        "USE_LIVE": "0"
-      }
-    }
-  }
+"legal-aid-mcp": {
+  "type": "stdio",
+  "command": "Z:\\project-mcp\\.venv\\Scripts\\python.exe",
+  "args": ["Z:\\project-mcp\\server.py"],
+  "env": {
+    "USE_MOCK": "1",
+    "USE_LIVE": "0"
+  },
+  "timeout": 120000,
+  "disabled": false
 }
 ```
 
-如果 WorkBuddy 用自己的 Python 环境，把 `command` 换成该环境的 `python`，并确保已安装 `requirements.txt`。
+需要真实地图调用时，把 `env` 改成 `USE_LIVE=1` 并加 `BAIDU_AK`，然后重启 WorkBuddy。详细步骤见 `docs/workbuddy-test-guide.md`。
 
 ## 测试
 
