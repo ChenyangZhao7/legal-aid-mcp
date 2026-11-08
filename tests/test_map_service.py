@@ -148,3 +148,110 @@ def test_geocode_failover(tmp_path):
     result = service.geocode("济南市中级人民法院")
     assert result.point.system == "wgs84"
     assert result.sources[0]["provider"] == "tencent"
+
+
+def test_crosscheck_uses_wgs84_not_native(tmp_path):
+    baidu_place = place("baidu", "济南市中级人民法院")
+    baidu_place.native = GeoPoint(36.671, 117.012, "bd09")
+    tencent_place = place("tencent", "济南市中级人民法院")
+    tencent_place.native = GeoPoint(36.67, 117.0, "gcj02")
+    service = MapService(
+        settings(tmp_path),
+        providers=[
+            FakeProvider("baidu", [baidu_place]),
+            FakeProvider("tencent", [tencent_place]),
+        ],
+        cross_check=True,
+    )
+    places = service.place_search("法院", "济南", 5)
+    assert places[0].confidence == "high"
+    assert not any("距离" in item for item in places[0].discrepancies)
+
+
+def test_secondary_failure_is_surfaced(tmp_path):
+    service = MapService(
+        settings(tmp_path),
+        providers=[FakeProvider("baidu", [place("baidu", "A")]), FailingProvider()],
+        cross_check=True,
+    )
+    places = service.place_search("法院", "济南", 5)
+    assert places[0].name == "A"
+    assert places[0].warnings
+
+
+def test_non_tool_error_does_not_wipe_primary(tmp_path):
+    class BrokenProvider:
+        name = "tencent"
+        enabled = True
+
+        def place_search(self, query, region, limit):
+            raise ValueError("bad json")
+
+        def geocode(self, address):
+            raise ValueError("bad")
+
+        def route(self, origin, destination, mode):
+            raise ValueError("bad")
+
+    service = MapService(
+        settings(tmp_path),
+        providers=[FakeProvider("baidu", [place("baidu", "A")]), BrokenProvider()],
+        cross_check=True,
+    )
+    places = service.place_search("法院", "济南", 5)
+    assert places[0].name == "A"
+
+
+def test_all_empty_is_no_results(tmp_path):
+    service = MapService(
+        settings(tmp_path),
+        providers=[FakeProvider("baidu", []), FakeProvider("tencent", [])],
+        cross_check=True,
+    )
+    with pytest.raises(ToolError) as exc:
+        service.place_search("法院", "济南", 5)
+    assert exc.value.code == "NO_RESULTS"
+
+
+def test_fixtures_fallback_is_marked(tmp_path):
+    service = MapService(
+        settings(tmp_path),
+        providers=[FailingProvider()],
+        cross_check=False,
+        failure_mode="fixtures",
+    )
+    places = service.place_search("人民法院", "济南", 5)
+    assert places[0].mock is True
+    assert places[0].data_source == "fixtures"
+
+
+def test_cache_mode_returns_cached_result(tmp_path):
+    state = {"fail": False}
+
+    class FlakyProvider:
+        name = "baidu"
+        enabled = True
+
+        def place_search(self, query, region, limit):
+            if state["fail"]:
+                raise ToolError("UPSTREAM_TIMEOUT", "timeout")
+            return [place("baidu", "济南市中级人民法院")]
+
+        def geocode(self, address):
+            return GeoPoint(36.67, 117.0, "wgs84")
+
+        def route(self, origin, destination, mode):
+            return Route("baidu", 1000, 600)
+
+    service = MapService(
+        settings(tmp_path),
+        providers=[FlakyProvider()],
+        cross_check=False,
+        failure_mode="cache",
+    )
+    first = service.place_search("法院", "济南", 5)
+    assert first[0].cached is False
+    state["fail"] = True
+    second = service.place_search("法院", "济南", 5)
+    assert second[0].cached is True
+    assert second[0].name == "济南市中级人民法院"

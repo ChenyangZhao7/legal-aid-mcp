@@ -23,7 +23,10 @@ class Place:
     sources: list[dict] = field(default_factory=list)
     confidence: str = "low"
     discrepancies: list[str] = field(default_factory=list)
+    warnings: list[dict] = field(default_factory=list)
     data_source: str | None = None
+    cached: bool = False
+    mock: bool = False
     raw: dict = field(default_factory=dict, repr=False)
 
 
@@ -36,6 +39,10 @@ class Route:
     sources: list[dict] = field(default_factory=list)
     confidence: str = "low"
     discrepancies: list[str] = field(default_factory=list)
+    warnings: list[dict] = field(default_factory=list)
+    data_source: str = "map"
+    cached: bool = False
+    mock: bool = False
 
 
 @dataclass
@@ -44,6 +51,9 @@ class GeocodeResult:
     sources: list[dict] = field(default_factory=list)
     confidence: str = "low"
     discrepancies: list[str] = field(default_factory=list)
+    warnings: list[dict] = field(default_factory=list)
+    cached: bool = False
+    mock: bool = False
 
 
 class MapProvider(Protocol):

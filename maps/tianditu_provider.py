@@ -17,6 +17,14 @@ def _raise_status(data: dict) -> None:
         if key not in data:
             continue
         value = data.get(key)
+        if isinstance(value, dict):
+            code = value.get("infocode")
+            if code in (1000, "1000"):
+                return
+            message = value.get("cndesc") or value.get("message") or ""
+            raise ToolError(
+                "UPSTREAM_ERROR", f"天地图返回错误（infocode={code}）：{message}"
+            )
         if value in (0, "0", 100, "100", None, ""):
             return
         message = data.get("message") or data.get("msg") or ""

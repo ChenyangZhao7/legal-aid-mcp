@@ -36,3 +36,11 @@ def test_deadline_working_days():
     cal = HolidayCalendar.load(ROOT / "data" / "holidays", 2026)
     result = deadline(date(2026, 9, 30), 1, "working", cal)
     assert result["end_date"] == "2026-10-08"
+
+
+def test_deadline_cross_year_january_first():
+    cal = HolidayCalendar.load(ROOT / "data" / "holidays", 2026)
+    result = deadline(date(2026, 12, 17), 15, "natural", cal)
+    assert result["original_end_date"] == "2027-01-01"
+    assert result["end_date"] == "2027-01-04"
+    assert result["adjusted"] is True

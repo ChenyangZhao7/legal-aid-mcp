@@ -33,7 +33,7 @@ def create_server(
     holidays = HolidayCalendar.load(
         data_root / "holidays",
         datetime.now().year,
-        live=settings.use_live and settings.holiday_live,
+        live=False,
         transport=transport,
     )
     ctx = AppContext(
@@ -42,7 +42,9 @@ def create_server(
         corpus=LawCorpus.load(settings.law_data_dir),
         maps=MapService(settings, transport=transport),
         divisions=divisions,
-        legal_aid=LegalAidClient(settings, divisions) if divisions else None,
+        legal_aid=LegalAidClient(settings, divisions, transport=transport)
+        if divisions
+        else None,
         holidays=holidays,
     )
     register_legal_service(server, ctx)

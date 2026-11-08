@@ -67,9 +67,12 @@ def _source(place: Place) -> dict:
         "name": place.name,
         "address": place.address,
         "telephone": place.telephone,
-        "lat": place.native.lat,
-        "lng": place.native.lng,
-        "coord_system": place.native.system,
+        "lat": place.point.lat,
+        "lng": place.point.lng,
+        "coord_system": "wgs84",
+        "native_lat": place.native.lat,
+        "native_lng": place.native.lng,
+        "native_coord_system": place.native.system,
     }
 
 
@@ -85,7 +88,7 @@ def _official_places(result) -> list[Place]:
             point=point,
             native=point,
             adcode=center.adcode,
-            data_source="12348" if result.source == "12348" else "snapshot",
+            data_source=center.source,
         )
         place.sources = [_source(place)]
         place.confidence = "official"
@@ -124,6 +127,9 @@ def _to_dict(place: Place) -> dict:
         "confidence": place.confidence,
         "sources": sources,
         "discrepancies": place.discrepancies,
+        "warnings": place.warnings,
+        "cached": place.cached,
+        "mock": place.mock,
     }
 
 
@@ -133,7 +139,7 @@ def _find(
     city: str,
     district: str | None,
     limit: int,
-) -> list[dict]:
+) -> list[dict] | dict:
     if city not in CITY_WHITELIST:
         raise ToolError(
             "CITY_NOT_FOUND",
@@ -142,7 +148,8 @@ def _find(
 
     divisions = _divisions(ctx)
     if district is not None:
-        if divisions is not None and divisions.find(district) is None:
+        node = divisions.find(district) if divisions is not None else None
+        if divisions is not None and (node is None or node.level != 3):
             raise ToolError(
                 "CITY_NOT_FOUND",
                 f"未找到区县“{district}”，请提供济南市下属区县名称",
@@ -164,14 +171,16 @@ def _find(
         map_error = exc
 
     official: list[Place] = []
+    legal_aid_result = None
+    legal_aid_error: ToolError | None = None
     if keyword == "法律援助中心":
         client = _legal_aid(ctx, divisions)
         if client is not None:
             try:
-                result = client.search(district=district, limit=limit)
-                official = _official_places(result)
-            except ToolError:
-                official = []
+                legal_aid_result = client.search(district=district, limit=limit)
+                official = _official_places(legal_aid_result)
+            except ToolError as exc:
+                legal_aid_error = exc
 
     merged = _merge_official(official, mapped)
     if district:
@@ -179,19 +188,59 @@ def _find(
         if name_matches:
             merged = name_matches
         else:
-            address_matches = [
+            merged = [
                 place for place in merged if district in (place.address or "")
             ]
-            if address_matches:
-                merged = address_matches
+
     if not merged:
+        if keyword == "法律援助中心" and legal_aid_error is not None:
+            raise legal_aid_error
         if map_error is not None:
             raise map_error
+        if (
+            keyword == "法律援助中心"
+            and legal_aid_result is not None
+            and legal_aid_result.coverage.get("districts_failed")
+        ):
+            raise ToolError(
+                "LEGAL_AID_UNAVAILABLE",
+                "12348 与本地快照都不可用，无法确认法律援助中心",
+            )
         raise ToolError(
             "NO_RESULTS",
             f"在{region}未找到“{keyword}”相关机构，请换关键词或提供更具体的区县",
         )
-    return [_to_dict(place) for place in merged[:limit]]
+
+    results = [_to_dict(place) for place in merged[:limit]]
+    if keyword != "法律援助中心":
+        return results
+
+    if legal_aid_result is not None:
+        coverage = dict(legal_aid_result.coverage)
+        warnings = list(legal_aid_result.warnings)
+    else:
+        total = len(divisions.districts()) if divisions is not None else (1 if district else 1)
+        coverage = {
+            "districts_total": total,
+            "districts_live": 0,
+            "districts_snapshot": 0,
+            "districts_map": len(results),
+            "districts_failed": 1,
+        }
+        warnings = [
+            {
+                "code": "LEGAL_AID_UNAVAILABLE",
+                "message": legal_aid_error.message if legal_aid_error else "12348 不可用",
+            }
+        ]
+    if legal_aid_error is not None and not any(
+        warning.get("code") == "LEGAL_AID_UNAVAILABLE" for warning in warnings
+    ):
+        warnings.append(
+            {"code": "LEGAL_AID_UNAVAILABLE", "message": legal_aid_error.message}
+        )
+        coverage["districts_map"] = len(results)
+    return {"results": results, "coverage": coverage, "warnings": warnings}
 
 
 def register_legal_service(server: MCPServer, ctx: AppContext) -> None:
@@ -201,6 +250,7 @@ def register_legal_service(server: MCPServer, ctx: AppContext) -> None:
             "电话和经纬度。用户问“去哪个法院立案”“附近有没有法律援助”“找律师”时使用。"
             "只返回机构信息，不判断管辖，也不评价律师水平。"
             "法律援助中心优先使用 12348 官方目录；地图结果会标注来源和置信度。"
+            "法律援助中心查询返回 {results, coverage, warnings}；其他关键词返回结果列表。"
         ),
         structured_output=False,
     )

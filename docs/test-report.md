@@ -40,14 +40,14 @@
 
 ```text
 .venv\Scripts\python -m pytest -q
-184 passed in 4.41s
+196 passed in 5.46s
 ```
 
 v2 新增测试覆盖：坐标转换、地图 provider failover/并集/冲突、腾讯/天地图 mock、12348 签名与快照兜底、民政部区划、节假日/调休、诉讼费/保全费/期间、5 工具 stdio。
 
 ```text
 .venv\Scripts\python scripts\verify_laws.py --data-dir data/laws
-OK: 民法典合同编 526 条；司法解释 69 条
+OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验
 ```
 
 ```text
@@ -75,4 +75,4 @@ MCP Inspector：工具列表截图见 `docs/screenshots/inspector-tools.jpeg`；
 - mock 路线是 `route_west_station.json` 固定样本，所有 mock 路线都会返回 14205 m / 2462 s；真实调用会按实际起终点计算。
 - `place_court_lixia.json` 的前三条是高新区法院、历城区法院、历下区法院；模型需要按名称筛选“历下区人民法院”。
 - WorkBuddy 的 8 条人工场景、Inspector 截图待在有 GUI/WorkBuddy 的环境补；本仓库用 `docs/mcp-transcript.json` 记录 stdio 证据。
-- 高德 key 实测返回 `INVALID_USER_KEY`，未接入；百度当前可用。
+- 不接高德；腾讯/天地图 key 未配置时自动跳过，百度/mock/法条/计算器仍可工作。

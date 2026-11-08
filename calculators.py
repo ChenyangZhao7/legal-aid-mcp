@@ -57,6 +57,7 @@ def litigation_fee(amount: float | None, case_type: str) -> dict:
             "fee_min": fee,
             "fee_max": fee,
             "breakdown": breakdown,
+            "notes": ["按财产案件分段累计计算"],
         }
 
     if case_type == "劳动争议":

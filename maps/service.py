@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import replace
+import hashlib
+from dataclasses import asdict, replace
+from datetime import datetime, timezone
 
 import httpx
 
+from baidu import CacheStore
 from config import Settings
 from coord import haversine_m
 from errors import ToolError
@@ -26,10 +29,49 @@ def _source(place: Place) -> dict:
         "name": place.name,
         "address": place.address,
         "telephone": place.telephone,
-        "lat": place.native.lat,
-        "lng": place.native.lng,
-        "coord_system": place.native.system,
+        "lat": place.point.lat,
+        "lng": place.point.lng,
+        "coord_system": "wgs84",
+        "native_lat": place.native.lat,
+        "native_lng": place.native.lng,
+        "native_coord_system": place.native.system,
     }
+
+
+def _place_payload(place: Place) -> dict:
+    return {
+        "provider": place.provider,
+        "name": place.name,
+        "address": place.address,
+        "telephone": place.telephone,
+        "point": [place.point.lat, place.point.lng, place.point.system],
+        "native": [place.native.lat, place.native.lng, place.native.system],
+        "adcode": place.adcode,
+        "sources": place.sources,
+        "confidence": place.confidence,
+        "discrepancies": place.discrepancies,
+        "warnings": place.warnings,
+        "data_source": place.data_source,
+    }
+
+
+def _place_from_payload(payload: dict) -> Place:
+    point = payload["point"]
+    native = payload["native"]
+    return Place(
+        provider=payload["provider"],
+        name=payload["name"],
+        address=payload.get("address"),
+        telephone=payload.get("telephone"),
+        point=GeoPoint(point[0], point[1], point[2]),
+        native=GeoPoint(native[0], native[1], native[2]),
+        adcode=payload.get("adcode"),
+        sources=payload.get("sources") or [],
+        confidence=payload.get("confidence") or "low",
+        discrepancies=payload.get("discrepancies") or [],
+        warnings=payload.get("warnings") or [],
+        data_source=payload.get("data_source"),
+    )
 
 
 class MapService:
@@ -44,7 +86,10 @@ class MapService:
     ) -> None:
         self.settings = settings
         self.transport = transport
-        self.now = now
+        self.now = now or (lambda: datetime.now(timezone.utc))
+        self.result_cache = CacheStore(
+            settings.cache_dir, settings.cache_ttl_hours, self.now
+        )
         self.cross_check = (
             settings.map_cross_check if cross_check is None else cross_check
         )
@@ -86,7 +131,10 @@ class MapService:
             f"所有地图源都不可用（{detail or '无可用 provider'}），请检查 key/配额或改用缓存",
         )
 
-    def _merge_places(self, groups: list[Place]) -> list[Place]:
+    def _merge_places(self, groups: list[Place], errors: dict[str, str]) -> list[Place]:
+        warnings = [
+            {"provider": name, "code": code} for name, code in errors.items()
+        ]
         merged: list[Place] = []
         for place in groups:
             for existing in merged:
@@ -100,51 +148,90 @@ class MapService:
                 place.confidence = "low"
                 place.discrepancies = []
                 place.data_source = "map"
+                place.warnings = list(warnings)
                 merged.append(place)
+        for place in merged:
+            if not place.warnings:
+                place.warnings = list(warnings)
         return merged
 
     def place_search(self, query: str, region: str, limit: int) -> list[Place]:
         errors: dict[str, str] = {}
         successes: list[Place] = []
+        any_success = False
+        cache_key = hashlib.sha256(
+            f"map_place:{query}:{region}:{limit}".encode("utf-8")
+        ).hexdigest()
         for provider in self.providers:
             if not getattr(provider, "enabled", True):
                 continue
             try:
                 places = provider.place_search(query, region, limit)
-            except ToolError as exc:
-                errors[provider.name] = exc.code
+                any_success = True
+            except Exception as exc:  # isolate malformed providers
+                errors[provider.name] = getattr(exc, "code", "INTERNAL")
                 continue
-            if places:
-                successes.extend(places)
-            else:
-                errors[provider.name] = "NO_RESULTS"
+            successes.extend(places)
             if not self.cross_check and successes:
                 break
 
         if successes:
-            return self._merge_places(successes)[:limit]
+            merged = self._merge_places(successes, errors)[:limit]
+            self.result_cache.set(
+                cache_key, {"places": [_place_payload(place) for place in merged]}
+            )
+            return merged
 
         if self.failure_mode == "fixtures":
-            return self._mock_baidu().place_search(query, region, limit)[:limit]
-        if not self.settings.use_live and self.failure_mode == "cache":
+            places = self._mock_baidu().place_search(query, region, limit)[:limit]
+            for place in places:
+                place.mock = True
+                place.data_source = "fixtures"
+                place.warnings = list(place.warnings) + [
+                    {"code": "FIXTURE_FALLBACK", "message": "使用本地样本，不是实时地图结果"}
+                ]
+            return places
+
+        if self.failure_mode == "cache":
+            cached = self.result_cache.get(cache_key)
+            if cached:
+                places = [
+                    _place_from_payload(payload)
+                    for payload in cached.get("places") or []
+                ]
+                for place in places:
+                    place.cached = True
+                    place.data_source = "cache"
+                    place.warnings = list(place.warnings) + [
+                        {"code": "CACHED", "message": "所有地图源失败，返回最近缓存"}
+                    ]
+                return places[:limit]
+            if not self.settings.use_live:
+                raise ToolError("NO_RESULTS", "未找到匹配机构，请换关键词或区县")
+
+        if any_success:
             raise ToolError("NO_RESULTS", "未找到匹配机构，请换关键词或区县")
         raise self._all_failed(errors)
 
     def geocode(self, address: str) -> GeocodeResult:
         errors: dict[str, str] = {}
         collected: list[tuple[str, GeoPoint]] = []
+        cache_key = hashlib.sha256(
+            f"map_geocode:{address}".encode("utf-8")
+        ).hexdigest()
         for provider in self.providers:
             if not getattr(provider, "enabled", True):
                 continue
             try:
                 point = provider.geocode(address)
-            except ToolError as exc:
-                errors[provider.name] = exc.code
+            except Exception as exc:  # isolate malformed providers
+                errors[provider.name] = getattr(exc, "code", "INTERNAL")
                 continue
             collected.append((provider.name, point))
             if not self.cross_check:
                 break
 
+        warnings = [{"provider": name, "code": code} for name, code in errors.items()]
         if not collected:
             if self.failure_mode == "fixtures":
                 point = self._mock_baidu().geocode(address)
@@ -160,9 +247,23 @@ class MapService:
                     ],
                     confidence="low",
                     discrepancies=["fixtures"],
+                    warnings=[{"code": "FIXTURE_FALLBACK"}],
+                    mock=True,
                 )
-            if not self.settings.use_live and self.failure_mode == "cache":
-                raise ToolError("GEOCODE_FAILED", f"无法解析地址：{address}")
+            if self.failure_mode == "cache":
+                cached = self.result_cache.get(cache_key)
+                if cached:
+                    point = cached["point"]
+                    return GeocodeResult(
+                        point=GeoPoint(point[0], point[1], point[2]),
+                        sources=cached.get("sources") or [],
+                        confidence=cached.get("confidence") or "low",
+                        discrepancies=cached.get("discrepancies") or [],
+                        warnings=warnings + [{"code": "CACHED"}],
+                        cached=True,
+                    )
+                if not self.settings.use_live:
+                    raise ToolError("GEOCODE_FAILED", f"无法解析地址：{address}")
             raise self._all_failed(errors)
 
         primary = collected[0][1]
@@ -193,33 +294,62 @@ class MapService:
             for i, distance in enumerate(distances)
             if distance > 500
         ]
-        return GeocodeResult(
+        result = GeocodeResult(
             point=primary,
             sources=sources,
             confidence=confidence,
             discrepancies=discrepancies,
+            warnings=warnings,
         )
+        self.result_cache.set(
+            cache_key,
+            {
+                "point": [primary.lat, primary.lng, primary.system],
+                "sources": sources,
+                "confidence": confidence,
+                "discrepancies": discrepancies,
+            },
+        )
+        return result
 
     def route(self, origin: GeoPoint, destination: GeoPoint, mode: str) -> Route:
         errors: dict[str, str] = {}
         routes: list[Route] = []
+        cache_key = hashlib.sha256(
+            f"map_route:{origin.lat},{origin.lng}:{destination.lat},{destination.lng}:{mode}".encode(
+                "utf-8"
+            )
+        ).hexdigest()
         for provider in self.providers:
             if not getattr(provider, "enabled", True):
                 continue
             try:
                 route = provider.route(origin, destination, mode)
-            except ToolError as exc:
-                errors[provider.name] = exc.code
+            except Exception as exc:  # isolate malformed providers
+                errors[provider.name] = getattr(exc, "code", "INTERNAL")
                 continue
             routes.append(route)
             if not self.cross_check:
                 break
 
+        warnings = [{"provider": name, "code": code} for name, code in errors.items()]
         if not routes:
             if self.failure_mode == "fixtures":
-                return self._mock_baidu().route(origin, destination, mode)
-            if not self.settings.use_live and self.failure_mode == "cache":
-                raise ToolError("NO_ROUTE", "未找到可用路线，请检查起点和终点")
+                route = self._mock_baidu().route(origin, destination, mode)
+                route.mock = True
+                route.data_source = "fixtures"
+                route.warnings = [{"code": "FIXTURE_FALLBACK"}]
+                return route
+            if self.failure_mode == "cache":
+                cached = self.result_cache.get(cache_key)
+                if cached:
+                    route = Route(**cached["route"])
+                    route.cached = True
+                    route.data_source = "cache"
+                    route.warnings = route.warnings + [{"code": "CACHED"}]
+                    return route
+                if not self.settings.use_live:
+                    raise ToolError("NO_ROUTE", "未找到可用路线，请检查起点和终点")
             raise self._all_failed(errors)
 
         primary = routes[0]
@@ -233,4 +363,7 @@ class MapService:
         ]
         primary.confidence = route_confidence(primary.sources)
         primary.discrepancies = route_discrepancies(primary.sources)
+        primary.warnings = list(primary.warnings) + warnings
+        primary.data_source = "map"
+        self.result_cache.set(cache_key, {"route": asdict(primary)})
         return primary

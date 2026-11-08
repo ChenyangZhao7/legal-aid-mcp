@@ -74,6 +74,8 @@ class HolidayCalendar:
     def is_holiday(self, day: date) -> bool:
         if day in self.days:
             return self.days[day]
+        if (day.month, day.day) in {(1, 1), (5, 1), (10, 1), (10, 2), (10, 3)}:
+            return True
         return day.weekday() >= 5
 
     def is_workday(self, day: date) -> bool:

@@ -83,8 +83,27 @@ async def test_find_returns_confidence_and_sources(server):
 
 async def test_find_legal_aid_uses_official_or_snapshot(server):
     data = await call(server, "find_legal_service", {"keyword": "法律援助中心", "district": "历下区"})
-    assert any(r["source"] in {"12348", "snapshot"} for r in data)
-    assert any("历下区法律援助中心" in r["name"] for r in data)
+    assert "results" in data
+    assert "coverage" in data
+    assert any(r["source"] in {"12348", "snapshot"} for r in data["results"])
+    assert any("历下区法律援助中心" in r["name"] for r in data["results"])
+
+async def test_find_district_does_not_fall_through(server):
+    data = await call(server, "find_legal_service", {"keyword": "律师事务所", "district": "章丘区"})
+    assert data["error"]["code"] == "NO_RESULTS"
+
+async def test_find_legal_aid_unavailable_is_not_no_results(server, monkeypatch):
+    from errors import ToolError
+    from tools import legal_service
+
+    class BadClient:
+        def search(self, district=None, limit=5):
+            raise ToolError("LEGAL_AID_UNAVAILABLE", "12348 down")
+
+    monkeypatch.setattr(legal_service, "_legal_aid", lambda ctx, divisions: BadClient())
+    monkeypatch.setattr(legal_service.MapService, "place_search", lambda *a, **k: [])
+    data = await call(server, "find_legal_service", {"keyword": "法律援助中心", "district": "历下区"})
+    assert data["error"]["code"] == "LEGAL_AID_UNAVAILABLE"
 
 async def test_plan_route_accepts_wgs84(server):
     data = await call(server, "plan_route", {"origin": "36.67,117.0", "destination": "36.68,117.1"})

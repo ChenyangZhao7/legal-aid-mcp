@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import time
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
@@ -54,6 +55,7 @@ class LegalAidCenter:
     lng: float | None
     adcode: str | None = None
     id: str | None = None
+    source: str = "12348"
 
     @classmethod
     def from_row(cls, row: dict) -> "LegalAidCenter":
@@ -123,10 +125,13 @@ class LegalAidClient:
         transport: httpx.BaseTransport | None = None,
         now=None,
         snapshot_path: Path | None = None,
+        request_interval: float = 0.15,
     ) -> None:
         self.settings = settings
         self.divisions = divisions
         self.transport = transport
+        self.request_interval = request_interval
+        self._failed: set[str] = set()
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.cache = CacheStore(
             settings.cache_dir, settings.legal_aid_cache_hours, self.now
@@ -155,7 +160,10 @@ class LegalAidClient:
         entry = (self.snapshot.get("districts") or {}).get(code6)
         if not entry or entry.get("status") not in {"ok", "empty"}:
             return [], False
-        return [LegalAidCenter(**row) for row in entry.get("centers") or []], True
+        centers = [LegalAidCenter(**row) for row in entry.get("centers") or []]
+        for center in centers:
+            center.source = "snapshot"
+        return centers, True
 
     def _fetch_district(self, node: Division) -> list[LegalAidCenter]:
         code6 = node.code[:6]
@@ -164,6 +172,8 @@ class LegalAidClient:
         if cached is not None:
             return [LegalAidCenter(**row) for row in cached.get("centers") or []]
         centers = fetch_centers(code6, transport=self.transport)
+        for center in centers:
+            center.source = "12348"
         self.cache.set(
             cache_key, {"centers": [asdict(center) for center in centers]}
         )
@@ -186,15 +196,18 @@ class LegalAidClient:
             "districts_failed": 0,
         }
 
-        for node in nodes:
+        for index, node in enumerate(nodes):
             code6 = node.code[:6]
             live_centers = None
-            if self.live:
+            if self.live and code6 not in self._failed:
                 try:
                     live_centers = self._fetch_district(node)
                     coverage["districts_live"] += 1
                 except ToolError:
+                    self._failed.add(code6)
                     live_centers = None
+                if index < len(nodes) - 1:
+                    time.sleep(self.request_interval)
 
             if live_centers is not None:
                 centers.extend(live_centers)

@@ -63,6 +63,7 @@ def test_search_lixia_live(tmp_path):
     )
     result = client.search(district="历下区")
     assert result.centers[0].name == "山东省济南市历下区法律援助中心"
+    assert result.centers[0].source == "12348"
     assert result.source == "12348"
 
 
@@ -76,7 +77,26 @@ def test_411_falls_back_to_snapshot(tmp_path):
     result = client.search(district="历下区")
     assert result.source == "snapshot"
     assert result.centers
+    assert result.centers[0].source == "snapshot"
     assert any("PARTIAL" in warning.get("code", "") for warning in result.warnings)
+
+
+def test_failed_district_is_not_retried(tmp_path):
+    count = {"n": 0}
+
+    def failing(request):
+        count["n"] += 1
+        return failing_handler(request)
+
+    divisions = DivisionIndex.load(ROOT / "data" / "divisions" / "jinan.json")
+    client = LegalAidClient(
+        settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak", LEGAL_AID_LIVE="1"),
+        divisions,
+        transport=httpx.MockTransport(failing),
+    )
+    client.search(district="历下区")
+    client.search(district="历下区")
+    assert count["n"] == 1
 
 
 def test_search_offline_uses_snapshot(tmp_path):

@@ -31,12 +31,18 @@
               "name": "济南市中级人民法院",
               "address": "经二路1号",
               "telephone": "(0531)12368",
-              "lat": 36.671879,
-              "lng": 117.012747,
-              "coord_system": "bd09"
+              "lat": 36.665285584839985,
+              "lng": 117.00051270356683,
+              "coord_system": "wgs84",
+              "native_lat": 36.671879,
+              "native_lng": 117.012747,
+              "native_coord_system": "bd09"
             }
           ],
-          "discrepancies": []
+          "discrepancies": [],
+          "warnings": [],
+          "cached": false,
+          "mock": false
         },
         {
           "name": "济南市历城区人民法院",
@@ -54,12 +60,18 @@
               "name": "济南市历城区人民法院",
               "address": "山东省济南市化纤厂路5号",
               "telephone": "(0531)12368",
-              "lat": 36.691893,
-              "lng": 117.102825,
-              "coord_system": "bd09"
+              "lat": 36.68532544866426,
+              "lng": 117.09025361607988,
+              "coord_system": "wgs84",
+              "native_lat": 36.691893,
+              "native_lng": 117.102825,
+              "native_coord_system": "bd09"
             }
           ],
-          "discrepancies": []
+          "discrepancies": [],
+          "warnings": [],
+          "cached": false,
+          "mock": false
         },
         {
           "name": "济南高新区人民法院",
@@ -77,12 +89,18 @@
               "name": "济南高新区人民法院",
               "address": "山东省济南市历下区舜风路101号齐鲁文化创意10号楼",
               "telephone": "(0531)12368",
-              "lat": 36.682496,
-              "lng": 117.15415,
-              "coord_system": "bd09"
+              "lat": 36.676038628986504,
+              "lng": 117.14156848274848,
+              "coord_system": "wgs84",
+              "native_lat": 36.682496,
+              "native_lng": 117.15415,
+              "native_coord_system": "bd09"
             }
           ],
-          "discrepancies": []
+          "discrepancies": [],
+          "warnings": [],
+          "cached": false,
+          "mock": false
         }
       ]
     },
@@ -226,6 +244,10 @@
           }
         ],
         "discrepancies": [],
+        "warnings": [],
+        "cached": false,
+        "mock": false,
+        "source": "map",
         "coord_system": "wgs84"
       }
     },
@@ -299,6 +321,9 @@
             "rate": "2.5%",
             "fee": 2250.0
           }
+        ],
+        "notes": [
+          "按财产案件分段累计计算"
         ],
         "action": "litigation_fee",
         "legal_basis": {

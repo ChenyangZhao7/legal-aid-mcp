@@ -53,6 +53,8 @@ def _calculate(
             if not start_date:
                 raise ValueError("deadline 需要 start_date（送达日/收到日/事件发生日）")
             if deadline_type != "custom":
+                if day_type != "natural":
+                    raise ValueError("上诉期/答辩期按自然日计算，day_type 只能是 natural")
                 days = DEADLINE_DAYS[deadline_type]
             if days is None:
                 raise ValueError("deadline 需要 days 或 deadline_type")

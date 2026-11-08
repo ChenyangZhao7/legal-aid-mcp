@@ -67,6 +67,10 @@ def _plan(
         "confidence": route.confidence,
         "sources": route.sources,
         "discrepancies": route.discrepancies,
+        "warnings": route.warnings,
+        "cached": route.cached,
+        "mock": route.mock,
+        "source": route.data_source,
         "coord_system": "wgs84",
     }
 

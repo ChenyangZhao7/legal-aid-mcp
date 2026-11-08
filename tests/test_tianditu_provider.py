@@ -112,3 +112,27 @@ def test_error_maps(tmp_path):
     with pytest.raises(ToolError) as exc:
         provider.place_search("人民法院", "济南", 5)
     assert exc.value.code == "UPSTREAM_ERROR"
+
+
+def test_status_dict_success(tmp_path):
+    def dict_handler(request):
+        return httpx.Response(
+            200,
+            json={
+                "status": {"infocode": 1000, "cndesc": "服务正常"},
+                "count": 1,
+                "pois": [
+                    {
+                        "name": "济南市中级人民法院",
+                        "address": "经二路1号",
+                        "lonlat": "117.012747,36.671879",
+                    }
+                ],
+            },
+        )
+
+    provider = TiandituProvider(
+        settings(tmp_path), transport=httpx.MockTransport(dict_handler)
+    )
+    places = provider.place_search("人民法院", "济南", 5)
+    assert places[0].name == "济南市中级人民法院"

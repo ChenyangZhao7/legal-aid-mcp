@@ -9,7 +9,7 @@ from server import create_server
 ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.mark.asyncio
-async def test_stdio_lists_four_tools():
+async def test_stdio_lists_five_tools():
     env = {**os.environ, "USE_MOCK": "1", "USE_LIVE": "0", "LAW_DATA_DIR": str(ROOT / "data" / "laws")}
     params = StdioServerParameters(command=sys.executable, args=[str(ROOT / "server.py")], env=env, cwd=str(ROOT))
     async with stdio_client(params) as (read, write):

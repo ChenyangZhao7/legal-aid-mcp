@@ -185,7 +185,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 
 `--require-raw` 用于 CI 或干净 clone：`data/raw/` 不存在时直接失败，而不是只 WARN。
 
-当前结果：`184 passed`；语料校验输出 `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`。
+当前结果：`196 passed`；语料校验输出 `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`。
 
 ## 交付证据
 
@@ -229,7 +229,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 - 收录民法典合同编、合同编通则司法解释、民事诉讼法、民诉法解释、民事诉讼证据规定、诉讼费用交纳办法、法律援助法；其他法律（民法典其他编、旧合同法、刑法等）返回 `out_of_scope`，不会说成“不存在”。
 - `verify_citation` 对没有写法律名的引用（如“第585条”）返回 `ambiguous`；传 `law_hint` 或写明“民法典第585条”才会核对。这是为了避免刑法/合同混合文书误判。
 - 不判断管辖、不预测胜诉、不推荐“最好的律师”、不代写诉状。
-- 高德地图仅作为百度整体不可用时的备选；当前提供的 key 返回 `INVALID_USER_KEY`，v1 未实现高德适配器。
+- 不接高德；腾讯/天地图 key 未配置时自动跳过，百度/mock/法条/计算器仍可工作。
 - WorkBuddy 的 8 条人工测试待在有 WorkBuddy 的环境复测；本仓库提供 `docs/mcp-transcript.json` 作为 stdio 证据。
 
 ## 8 条场景
