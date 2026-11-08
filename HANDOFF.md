@@ -1,17 +1,16 @@
 # 法律援助一条龙 MCP · 交接与优化清单
 
 > 日期：2026-11-08
-> 当前 HEAD：`1fa4d58`
-> 分支：`master`，工作区干净
-> 状态：**WorkBuddy 已挂载成功**；`116 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
+> 当前分支：`v2`（基于 `master` 的 v1.2）
+> 状态：**v2 实现完成**；`184 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
 >
-> 2026-11-08 本轮：已修复 P0-1～P0-4，并补齐 4 个工具的参数 description（见 CHANGELOG v1.2）。
+> 2026-11-08 本轮：v1.2 修复 P0-1～P0-4 并补齐参数 description；v2 增加多源地图、民事诉讼语料、12348/区划/节假日/计算器（见 CHANGELOG）。
 
 ---
 
 ## 0. 一句话
 
-一个面向济南的 stdio MCP Server，提供 `find_legal_service`、`plan_route`、`search_law`、`verify_citation` 4 个工具。地图走百度，法条来自国家法律法规数据库官方 docx/PDF，默认 mock，真实调用有硬预算。
+一个面向济南的 stdio MCP Server，提供 `find_legal_service`、`plan_route`、`search_law`、`verify_citation`、`legal_calculator` 5 个工具。地图走百度/腾讯/天地图多源 failover + 交叉验证；法条来自国家法律法规数据库官方 docx/PDF；法律援助、区划、节假日来自免费官方/公共数据源；默认 mock，真实调用有硬预算。
 
 ---
 
@@ -19,10 +18,12 @@
 
 | 项 | 状态 |
 |---|---|
-| MCP 工具 | 4 个，stdio 可加载 |
+| MCP 工具 | 5 个，stdio 可加载 |
 | WorkBuddy | 已挂载，配置条目 `legal-aid-mcp` |
-| 自动化测试 | `116 passed` |
-| 语料 | 民法典合同编 463–988，526 条；合同编通则司法解释 1–69，69 条 |
+| 自动化测试 | `184 passed` |
+| 语料 | 1678 条：民法典合同编 526 + 合同编司法解释 69 + 民诉法 306 + 民诉法解释 550 + 证据规定 100 + 诉讼费办法 56 + 法律援助法 71 |
+| 地图 | 百度 primary；腾讯/天地图可选（无 key 自动跳过） |
+| 免费数据源 | 12348 法援目录、民政部区划、timor 节假日，均有本地快照 |
 | 真实百度调用 | 已用 10 次 / 上限 20 |
 | 默认模式 | `USE_MOCK=1`，不耗额度 |
 | 安全 | tracked files 无 AK；`.env` 已 gitignore |
@@ -41,8 +42,8 @@ cd Z:\project-mcp
 最近一次输出：
 
 ```text
-116 passed in 3.14s
-OK: 民法典合同编 526 条；司法解释 69 条
+184 passed in 4.41s
+OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验
 OK: no secrets in tracked files
 ```
 
@@ -55,7 +56,7 @@ OK: no secrets in tracked files
 - 配置备份：`C:\Users\21165\.workbuddy\connectors\default\mcp.json.bak-20261108-200348`
 - 条目名：`legal-aid-mcp`
 - 当前环境变量：`USE_MOCK=1`、`USE_LIVE=0`
-- 工具审批：第一次调用需批准 4 个工具
+- 工具审批：第一次调用需批准 5 个工具
 - 日志：
   - `C:\Users\21165\.workbuddy\logs`
   - `D:\workbuddy\debug.log`
@@ -113,14 +114,14 @@ tools/
   citation.py                 verify_citation
 scripts/
   fetch_laws.py               抓官方 docx/pdf 并生成语料
-  verify_laws.py              校验 526/69、条号、抽样、SHA256
+  verify_laws.py              校验 1678 条、条号、抽样、SHA256
   record_fixtures.py          录制百度样本
   mcp_transcript.py           生成 stdio JSON-RPC 记录
   check_secrets.py            扫描 tracked files 里的 AK
 data/laws/                    已提交的语料 JSON + manifest
 data/raw/                     原始 docx/pdf（gitignored）
 fixtures/baidu/               百度样本（默认 mock 使用）
-tests/                        116 条测试
+tests/                        184 条测试
 docs/                         设计、测试报告、学习笔记、WorkBuddy 指南
 ```
 
@@ -214,7 +215,7 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 ## 5. 下一 session 建议顺序
 
 1. 先跑 WorkBuddy 8 条场景，填 `docs/test-report.md`（当前唯一未完成的交付项）。
-2. P0 的 1–4 已在 v1.2 修复（TDD，116 passed）；P0-5（`amended` 合成测试）也已补。
+2. P0 的 1–4 已在 v1.2 修复；v2 已完成地图多源、民事诉讼语料、12348/区划/节假日/计算器（184 passed）。
 3. 做一次真实百度小流量验收：1 次机构 + 1 次路线，确认预算计数和缓存。
 4. 再考虑 IDF/BM25、Amap adapter、打包。
 
@@ -242,7 +243,7 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 | `docs/test-report.md` | 8 条场景、真实调用记录 |
 | `docs/learning-notes.md` | initialize → tools/list → tools/call 学习笔记 |
 | `docs/workbuddy-test-guide.md` | WorkBuddy 8 条人工测试步骤 |
-| `docs/mcp-transcript.json` | stdio 4 个工具调用记录 |
+| `docs/mcp-transcript.json` | stdio 5 个工具调用记录 |
 | `docs/inspector-tools.json` | Inspector `tools/list` JSON |
 | `docs/screenshots/inspector-tools.jpeg` | Inspector 工具列表截图 |
 | `.github/workflows/ci.yml` | pytest + verify_laws + secret scan |

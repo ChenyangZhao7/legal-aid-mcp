@@ -12,6 +12,13 @@ def test_defaults(tmp_path):
     assert s.cache_ttl_hours == 24
     assert s.law_data_dir == tmp_path / "data" / "laws"
     assert s.fixtures_dir == tmp_path / "fixtures" / "baidu"
+    assert s.tencent_map_key is None
+    assert s.tianditu_key is None
+    assert s.map_providers == ("baidu", "tencent", "tianditu")
+    assert s.map_cross_check is True
+    assert s.map_live_failure_mode == "cache"
+    assert s.legal_aid_live is True
+    assert s.holiday_live is True
 
 def test_live_requires_ak(tmp_path):
     with pytest.raises(ConfigError):
@@ -38,3 +45,8 @@ def test_invalid_float_raises_config_error(tmp_path):
 def test_mock_and_live_both_off_raises(tmp_path):
     with pytest.raises(ConfigError):
         load_settings(env={"USE_MOCK": "0", "USE_LIVE": "0"}, base_dir=tmp_path)
+
+
+def test_invalid_failure_mode_raises(tmp_path):
+    with pytest.raises(ConfigError):
+        load_settings(env={"MAP_LIVE_FAILURE_MODE": "boom"}, base_dir=tmp_path)

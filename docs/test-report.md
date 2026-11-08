@@ -40,8 +40,10 @@
 
 ```text
 .venv\Scripts\python -m pytest -q
-116 passed in 3.14s
+184 passed in 4.41s
 ```
+
+v2 新增测试覆盖：坐标转换、地图 provider failover/并集/冲突、腾讯/天地图 mock、12348 签名与快照兜底、民政部区划、节假日/调休、诉讼费/保全费/期间、5 工具 stdio。
 
 ```text
 .venv\Scripts\python scripts\verify_laws.py --data-dir data/laws
