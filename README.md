@@ -126,6 +126,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 
 ## 交付证据
 
+- `HANDOFF.md`：交接与优化清单（下一 session 先读这个）
 - `docs/screenshots/inspector-tools.jpeg`：MCP Inspector 工具列表
 - `docs/inspector-tools.json`：Inspector `tools/list` 的 JSON 输出
 - `docs/mcp-transcript.json`：stdio 4 个工具调用记录
