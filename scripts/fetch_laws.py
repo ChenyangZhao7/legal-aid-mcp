@@ -43,6 +43,61 @@ TARGETS = [
         "full_range": [1, 69],
         "in_scope": [1, 69],
     },
+    {
+        "law": "中华人民共和国民事诉讼法",
+        "short_name": "民事诉讼法",
+        "search_title": "中华人民共和国民事诉讼法",
+        "out_name": "civil_procedure_law.json",
+        "flxz": "法律",
+        "min_article": 1,
+        "max_article": 306,
+        "full_range": [1, 306],
+        "in_scope": [1, 306],
+    },
+    {
+        "law": "最高人民法院关于适用《中华人民共和国民事诉讼法》的解释",
+        "short_name": "民诉法解释",
+        "search_title": "最高人民法院关于适用《中华人民共和国民事诉讼法》的解释",
+        "out_name": "civil_procedure_interpretation.json",
+        "flxz": "司法解释",
+        "min_article": 1,
+        "max_article": 550,
+        "full_range": [1, 550],
+        "in_scope": [1, 550],
+    },
+    {
+        "law": "最高人民法院关于民事诉讼证据的若干规定",
+        "short_name": "证据规定",
+        "search_title": "最高人民法院关于民事诉讼证据的若干规定",
+        "out_name": "civil_evidence_rules.json",
+        "flxz": "司法解释",
+        "min_article": 1,
+        "max_article": 100,
+        "full_range": [1, 100],
+        "in_scope": [1, 100],
+    },
+    {
+        "law": "诉讼费用交纳办法",
+        "short_name": "诉讼费用交纳办法",
+        "search_title": "诉讼费用交纳办法",
+        "out_name": "litigation_fee_rules.json",
+        "flxz": "行政法规",
+        "min_article": 1,
+        "max_article": 56,
+        "full_range": [1, 56],
+        "in_scope": [1, 56],
+    },
+    {
+        "law": "中华人民共和国法律援助法",
+        "short_name": "法律援助法",
+        "search_title": "中华人民共和国法律援助法",
+        "out_name": "legal_aid_law.json",
+        "flxz": "法律",
+        "min_article": 1,
+        "max_article": 71,
+        "full_range": [1, 71],
+        "in_scope": [1, 71],
+    },
 ]
 
 SXX_LABELS = {1: "已废止", 2: "已修改", 3: "有效", 4: "尚未生效"}
@@ -126,12 +181,18 @@ def fetch_target(target: dict, out_dir: Path, raw_dir: Path) -> dict:
     row = search_law(target["search_title"])
     bbbs = row["bbbs"]
     docx_bytes = download_file(bbbs, "docx")
-    pdf_bytes = download_file(bbbs, "pdf")
     source_sha = _sha256(docx_bytes)
-    pdf_sha = _sha256(pdf_bytes)
+    try:
+        pdf_bytes = download_file(bbbs, "pdf")
+        pdf_sha = _sha256(pdf_bytes)
+    except RuntimeError as exc:
+        print(f"WARN: {short_name} 公报 PDF 不可用：{exc}")
+        pdf_bytes = b""
+        pdf_sha = ""
 
     (raw_dir / f"{short_name}.docx").write_bytes(docx_bytes)
-    (raw_dir / f"{short_name}.pdf").write_bytes(pdf_bytes)
+    if pdf_bytes:
+        (raw_dir / f"{short_name}.pdf").write_bytes(pdf_bytes)
 
     all_articles = split_articles(docx_paragraphs(docx_bytes))
     articles = [

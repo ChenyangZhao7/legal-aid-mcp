@@ -81,7 +81,16 @@ def register_law_search(server: MCPServer, ctx: AppContext) -> None:
             ),
         ],
         law: Annotated[
-            Literal["民法典", "合同编通则司法解释"] | None,
+            Literal[
+                "民法典",
+                "合同编通则司法解释",
+                "民事诉讼法",
+                "民诉法解释",
+                "证据规定",
+                "诉讼费用交纳办法",
+                "法律援助法",
+            ]
+            | None,
             Field(description="限定法律；不填则检索收录范围内的全部法律"),
         ] = None,
         limit: Annotated[

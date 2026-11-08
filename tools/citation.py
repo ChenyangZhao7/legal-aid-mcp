@@ -113,7 +113,16 @@ def register_citation(server: MCPServer, ctx: AppContext) -> None:
             Field(description="包含法条引用的文字，如答辩状、合同或 AI 回答"),
         ],
         law_hint: Annotated[
-            Literal["民法典", "合同编通则司法解释"] | None,
+            Literal[
+                "民法典",
+                "合同编通则司法解释",
+                "民事诉讼法",
+                "民诉法解释",
+                "证据规定",
+                "诉讼费用交纳办法",
+                "法律援助法",
+            ]
+            | None,
             Field(description="引用没写法律名时用它指定法律；引用里已写法律名时忽略"),
         ] = None,
     ) -> str:

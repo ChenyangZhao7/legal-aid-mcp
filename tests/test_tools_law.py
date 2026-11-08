@@ -79,8 +79,10 @@ async def test_verify_unknown_law_is_out_of_scope(server):
     assert data[0]["status"] == "out_of_scope"
 
 async def test_verify_literal_placeholder(server):
+    # “X” is a placeholder, not a real article number; the law is now in corpus.
     data = await call(server, "verify_citation", {"text": "民诉法第X条"})
-    assert data[0]["status"] == "out_of_scope"
+    assert data[0]["status"] == "not_found"
+    assert data[0]["official_text"] is None
 
 async def test_verify_no_prefix_is_ambiguous(server):
     data = await call(server, "verify_citation", {"text": "第585条"})
@@ -121,6 +123,21 @@ async def test_search_fake_article_is_no_match(server):
 async def test_search_law_filter_conflict(server):
     data = await call(server, "search_law", {"query": "民法典第585条", "law": "合同编通则司法解释"})
     assert data["error"]["code"] == "NO_MATCH"
+
+async def test_search_civil_procedure_period(server):
+    data = await call(server, "search_law", {"query": "民诉法第85条"})
+    assert data[0]["article"] == "第八十五条"
+    assert "期间" in data[0]["text"]
+
+async def test_search_civil_procedure_law_filter(server):
+    data = await call(server, "search_law", {"query": "第85条", "law": "民事诉讼法"})
+    assert data[0]["law"] == "中华人民共和国民事诉讼法"
+    assert data[0]["article"] == "第八十五条"
+
+async def test_verify_civil_procedure_citation(server):
+    data = await call(server, "verify_citation", {"text": "民诉法第85条"})
+    assert data[0]["status"] == "exists"
+    assert "期间" in data[0]["official_text"]
 
 async def test_search_multiple_citations_returns_all(server):
     data = await call(server, "search_law", {"query": "民法典第585条和民法典第563条"})

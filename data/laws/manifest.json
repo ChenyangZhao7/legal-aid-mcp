@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-08T11:55:22.888007+00:00",
+  "fetched_at": "2026-11-08T15:01:30.725682+00:00",
   "laws": {
     "民法典": {
       "file": "civil_code_contract.json",
@@ -40,6 +40,106 @@
       "bbbs": "ff8081818c24e05b018c814e6de45ab5",
       "source_sha256": "d0ca784f5f3178633d6e3ffd91acf1e88f068f672acc3fc22ac4ef928b377bd4",
       "pdf_sha256": "57e4a70daa8d0ab59df90c10a0cdcd511c090bfef3360fff87570673db32cf91"
+    },
+    "民事诉讼法": {
+      "file": "civil_procedure_law.json",
+      "full_article_range": [
+        1,
+        306
+      ],
+      "in_scope": [
+        1,
+        306
+      ],
+      "count": 306,
+      "promulgation_date": "2023-09-01",
+      "effective_date": "2024-01-01",
+      "status": "有效",
+      "sxx": 3,
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818a21dc13018b425303b7086d&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E4%BA%8B%E8%AF%89%E8%AE%BC%E6%B3%95",
+      "bbbs": "ff8081818a21dc13018b425303b7086d",
+      "source_sha256": "063e6b6228c44feef7aec32fe4c088012a272c6e5e05b67f6ae0cce6c2e87ed6",
+      "pdf_sha256": "dc46ad25f6910b35894360bfe5393675fd7c50c3c72dbec8ba553f80d9d1da5c"
+    },
+    "民诉法解释": {
+      "file": "civil_procedure_interpretation.json",
+      "full_article_range": [
+        1,
+        550
+      ],
+      "in_scope": [
+        1,
+        550
+      ],
+      "count": 550,
+      "promulgation_date": "2022-04-01",
+      "effective_date": "2022-04-10",
+      "status": "有效",
+      "sxx": 3,
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff80818181cdceb30181d801c31c4070&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E9%80%82%E7%94%A8%E3%80%8A%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E4%BA%8B%E8%AF%89%E8%AE%BC%E6%B3%95%E3%80%8B%E7%9A%84%E8%A7%A3%E9%87%8A",
+      "bbbs": "ff80818181cdceb30181d801c31c4070",
+      "source_sha256": "a8dcb7894aa019b5acd3c5f8341cde6118548cd61e6149025831265fb9917698",
+      "pdf_sha256": ""
+    },
+    "证据规定": {
+      "file": "civil_evidence_rules.json",
+      "full_article_range": [
+        1,
+        100
+      ],
+      "in_scope": [
+        1,
+        100
+      ],
+      "count": 100,
+      "promulgation_date": "2019-12-25",
+      "effective_date": "2020-05-01",
+      "status": "有效",
+      "sxx": 3,
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff808081777d0c940177ccd29d894ded&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E6%B0%91%E4%BA%8B%E8%AF%89%E8%AE%BC%E8%AF%81%E6%8D%AE%E7%9A%84%E8%8B%A5%E5%B9%B2%E8%A7%84%E5%AE%9A",
+      "bbbs": "ff808081777d0c940177ccd29d894ded",
+      "source_sha256": "8f63b932acc91ef8ac357285c0b06d767139ce19915ce872f250630703c1ff17",
+      "pdf_sha256": "523e6b09147ff9734991c83e65d0bbdc00084103a4ec1ac1659bcef3ac7f2b67"
+    },
+    "诉讼费用交纳办法": {
+      "file": "litigation_fee_rules.json",
+      "full_article_range": [
+        1,
+        56
+      ],
+      "in_scope": [
+        1,
+        56
+      ],
+      "count": 56,
+      "promulgation_date": "2006-12-19",
+      "effective_date": null,
+      "status": "有效",
+      "sxx": 3,
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff8080816f3e98bd016f41e1395a015f&type=%E8%A1%8C%E6%94%BF%E6%B3%95%E8%A7%84&title=%E8%AF%89%E8%AE%BC%E8%B4%B9%E7%94%A8%E4%BA%A4%E7%BA%B3%E5%8A%9E%E6%B3%95",
+      "bbbs": "ff8080816f3e98bd016f41e1395a015f",
+      "source_sha256": "88156f8af8ef6c890f313f59980e12fd4d25899eaf18354b6fb711cc93a7a7aa",
+      "pdf_sha256": "c898c0ccca8c28bfc717c08199ecf466ac3601b5da087aea4a4fd11f73963e5d"
+    },
+    "法律援助法": {
+      "file": "legal_aid_law.json",
+      "full_article_range": [
+        1,
+        71
+      ],
+      "in_scope": [
+        1,
+        71
+      ],
+      "count": 71,
+      "promulgation_date": "2021-08-20",
+      "effective_date": "2022-01-01",
+      "status": "有效",
+      "sxx": 3,
+      "source_url": "https://flk.npc.gov.cn/detail?id=ff8081817b6472a3017b6577820f0061&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B3%95%E5%BE%8B%E6%8F%B4%E5%8A%A9%E6%B3%95",
+      "bbbs": "ff8081817b6472a3017b6577820f0061",
+      "source_sha256": "b9c881cc128064d127084227055bff5247b8d52102e9459dff5929ba1b9b170e",
+      "pdf_sha256": "53236c6acee8373f96e7b923eff314836e9bfa35f722b1241562f0c0a7c7a312"
     }
   }
 }
