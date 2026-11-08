@@ -1,0 +1,1235 @@
+{
+  "fetched_at": "2026-11-08T15:02:42.785200+00:00",
+  "source": "https://dmfw.mca.gov.cn/9095/xzqh/getList?code=370100000000&maxLevel=3",
+  "data": {
+    "code": "370100000000",
+    "name": "济南市",
+    "level": 2,
+    "type": "地级市",
+    "children": [
+      {
+        "code": "370102000000",
+        "name": "历下区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370102001000",
+            "name": "解放路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102002000",
+            "name": "千佛山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102003000",
+            "name": "趵突泉街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102004000",
+            "name": "泉城路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102005000",
+            "name": "大明湖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102006000",
+            "name": "东关街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102007000",
+            "name": "文化东路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102008000",
+            "name": "建筑新村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102009000",
+            "name": "甸柳新村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102011000",
+            "name": "燕山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102013000",
+            "name": "姚家街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102014000",
+            "name": "智远街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102015000",
+            "name": "龙洞街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370102016000",
+            "name": "舜华路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370103000000",
+        "name": "市中区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370103002000",
+            "name": "大观园街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103003000",
+            "name": "杆石桥街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103004000",
+            "name": "四里村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103006000",
+            "name": "魏家庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103008000",
+            "name": "二七新村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103009000",
+            "name": "七里山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103010000",
+            "name": "六里山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103012000",
+            "name": "舜玉路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103014000",
+            "name": "泺源街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103015000",
+            "name": "王官庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103016000",
+            "name": "舜耕街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103017000",
+            "name": "白马山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103018000",
+            "name": "七贤街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103019000",
+            "name": "十六里河街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103020000",
+            "name": "兴隆街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103021000",
+            "name": "党家街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370103022000",
+            "name": "陡沟街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370104000000",
+        "name": "槐荫区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370104001000",
+            "name": "振兴街街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104002000",
+            "name": "中大槐树街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104003000",
+            "name": "道德街街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104004000",
+            "name": "西市场街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104005000",
+            "name": "五里沟街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104006000",
+            "name": "营市街街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104007000",
+            "name": "青年公园街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104008000",
+            "name": "南辛庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104009000",
+            "name": "段店北路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104010000",
+            "name": "张庄路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104011000",
+            "name": "匡山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104012000",
+            "name": "美里湖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104013000",
+            "name": "兴福街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104014000",
+            "name": "玉清湖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104015000",
+            "name": "腊山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370104016000",
+            "name": "吴家堡街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370105000000",
+        "name": "天桥区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370105001000",
+            "name": "无影山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105003000",
+            "name": "天桥东街街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105004000",
+            "name": "工人新村北村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105005000",
+            "name": "工人新村南村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105006000",
+            "name": "堤口路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105007000",
+            "name": "北坦街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105009000",
+            "name": "制锦市街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105010000",
+            "name": "宝华街街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105011000",
+            "name": "官扎营街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105012000",
+            "name": "纬北路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105013000",
+            "name": "药山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105014000",
+            "name": "北园街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105015000",
+            "name": "泺口街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105016000",
+            "name": "桑梓店街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370105017000",
+            "name": "大桥街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370112000000",
+        "name": "历城区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370112001000",
+            "name": "山大路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112002000",
+            "name": "洪家楼街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112003000",
+            "name": "东风街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112004000",
+            "name": "全福街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112005000",
+            "name": "荷花路街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112006000",
+            "name": "鲍山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112007000",
+            "name": "唐冶街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112008000",
+            "name": "临港街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112009000",
+            "name": "华山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112010000",
+            "name": "王舍人街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112011000",
+            "name": "郭店街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112012000",
+            "name": "港沟街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112013000",
+            "name": "遥墙街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112014000",
+            "name": "巨野河街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112015000",
+            "name": "孙村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112016000",
+            "name": "仲宫街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112017000",
+            "name": "彩石街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112018000",
+            "name": "董家街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112019000",
+            "name": "柳埠街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112020000",
+            "name": "唐王街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370112021000",
+            "name": "西营街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370113000000",
+        "name": "长清区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370113001000",
+            "name": "文昌街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113002000",
+            "name": "崮云湖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113003000",
+            "name": "平安街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113004000",
+            "name": "五峰山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113005000",
+            "name": "归德街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113006000",
+            "name": "张夏街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113007000",
+            "name": "万德街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113008000",
+            "name": "孝里街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370113107000",
+            "name": "马山镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370113108000",
+            "name": "双泉镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370114000000",
+        "name": "章丘区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370114001000",
+            "name": "明水街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114002000",
+            "name": "双山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114003000",
+            "name": "枣园街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114004000",
+            "name": "龙山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114005000",
+            "name": "埠村街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114006000",
+            "name": "圣井街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114007000",
+            "name": "普集街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114008000",
+            "name": "绣惠街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114009000",
+            "name": "相公庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114010000",
+            "name": "文祖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114011000",
+            "name": "官庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114012000",
+            "name": "曹范街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114013000",
+            "name": "宁家埠街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114014000",
+            "name": "高官寨街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114015000",
+            "name": "白云湖街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114016000",
+            "name": "刁镇街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114017000",
+            "name": "黄河街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370114105000",
+            "name": "垛庄镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370115000000",
+        "name": "济阳区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370115001000",
+            "name": "济阳街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115002000",
+            "name": "济北街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115003000",
+            "name": "孙耿街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115004000",
+            "name": "回河街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115005000",
+            "name": "崔寨街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115006000",
+            "name": "太平街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115007000",
+            "name": "垛石街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115008000",
+            "name": "曲堤街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370115103000",
+            "name": "仁风镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370115104000",
+            "name": "新市镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370116000000",
+        "name": "莱芜区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370116001000",
+            "name": "凤城街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116002000",
+            "name": "张家洼街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116003000",
+            "name": "高庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116004000",
+            "name": "鹏泉街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116005000",
+            "name": "口镇街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116006000",
+            "name": "羊里街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116007000",
+            "name": "方下街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116008000",
+            "name": "雪野街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370116103000",
+            "name": "牛泉镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116104000",
+            "name": "苗山镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116106000",
+            "name": "大王庄镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116107000",
+            "name": "寨里镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116108000",
+            "name": "杨庄镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116109000",
+            "name": "茶业口镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370116110000",
+            "name": "和庄镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370117000000",
+        "name": "钢城区",
+        "level": 3,
+        "type": "市辖区",
+        "children": [
+          {
+            "code": "370117001000",
+            "name": "艾山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370117002000",
+            "name": "里辛街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370117003000",
+            "name": "汶源街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370117004000",
+            "name": "颜庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370117005000",
+            "name": "辛庄街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370124000000",
+        "name": "平阴县",
+        "level": 3,
+        "type": "县",
+        "children": [
+          {
+            "code": "370124001000",
+            "name": "榆山街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370124002000",
+            "name": "锦水街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370124102000",
+            "name": "东阿镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370124103000",
+            "name": "孝直镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370124104000",
+            "name": "孔村镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370124105000",
+            "name": "洪范池镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370124106000",
+            "name": "玫瑰镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370124107000",
+            "name": "安城镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      },
+      {
+        "code": "370126000000",
+        "name": "商河县",
+        "level": 3,
+        "type": "县",
+        "children": [
+          {
+            "code": "370126001000",
+            "name": "许商街道",
+            "level": 4,
+            "type": "街道",
+            "children": []
+          },
+          {
+            "code": "370126101000",
+            "name": "殷巷镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126102000",
+            "name": "怀仁镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126103000",
+            "name": "玉皇庙镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126104000",
+            "name": "龙桑寺镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126105000",
+            "name": "郑路镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126106000",
+            "name": "贾庄镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126108000",
+            "name": "白桥镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126109000",
+            "name": "孙集镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126110000",
+            "name": "韩庙镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126111000",
+            "name": "沙河镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          },
+          {
+            "code": "370126112000",
+            "name": "张坊镇",
+            "level": 4,
+            "type": "镇",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}
