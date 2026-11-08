@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from typing import Literal
 
 from mcp.server.mcpserver import MCPServer
 
@@ -25,7 +26,11 @@ def _mismatch(text: str, citation: Citation, official_text: str) -> bool | None:
     return normalize_text(quote) not in normalize_text(official_text)
 
 
-def _verify(ctx: AppContext, text: str) -> list[dict]:
+def _verify(ctx: AppContext, text: str, law_hint: str | None) -> list[dict]:
+    hint = ctx.corpus.resolve_law_name(law_hint) if law_hint is not None else None
+    if law_hint is not None and hint is None:
+        raise ToolError("NO_MATCH", f"不支持的法律提示：{law_hint}")
+
     citations = parse_citations(text)
     if not citations:
         raise ToolError("NO_CITATION_FOUND", "未识别到法条引用，请提供“民法典第 X 条”这类文字")
@@ -33,14 +38,30 @@ def _verify(ctx: AppContext, text: str) -> list[dict]:
     seen: set[tuple[str, int]] = set()
     results: list[dict] = []
     for citation in citations:
-        key = (citation.law, citation.number)
+        if not citation.explicit:
+            if hint is None:
+                results.append(
+                    {
+                        "citation": citation.raw,
+                        "status": "ambiguous",
+                        "official_text": None,
+                        "mismatch": None,
+                        "candidates": list(ctx.corpus.manifest.get("laws", {}).keys()),
+                    }
+                )
+                continue
+            law = hint
+        else:
+            law = citation.law
+
+        key = (law, citation.number)
         if key in seen:
             continue
         seen.add(key)
 
-        scope = ctx.corpus.scope_of(citation.law, citation.number)
+        scope = ctx.corpus.scope_of(law, citation.number)
         if scope == "in_corpus":
-            article = ctx.corpus.get(citation.law, citation.number)
+            article = ctx.corpus.get(law, citation.number)
             if article is None:
                 status = "not_found"
                 official_text = None
@@ -75,9 +96,16 @@ def register_citation(server: MCPServer, ctx: AppContext) -> None:
             "核对一段文字中引用的法条是否存在、是否现行有效、原文是否一致。"
             "用户提供答辩状、合同、AI 回答，要求“核对法条”“看看引用对不对”时使用。"
             "返回 status：exists（存在且有效）、not_found（该法律全文没有这个条号）、"
-            "amended（已修改/已废止）、out_of_scope（真实存在但不在 v1 收录范围，不代表不存在）。"
+            "amended（已修改/已废止）、out_of_scope（真实存在但不在 v1 收录范围，不代表不存在）、"
+            "ambiguous（引用没写法律名，需要 law_hint 才能判断）。"
         ),
         structured_output=False,
     )
-    def verify_citation(text: str) -> str:
-        return json.dumps(run_tool(lambda: _verify(ctx, text)), ensure_ascii=False)
+    def verify_citation(
+        text: str,
+        law_hint: Literal["民法典", "合同编通则司法解释"] | None = None,
+    ) -> str:
+        return json.dumps(
+            run_tool(lambda: _verify(ctx, text, law_hint)),
+            ensure_ascii=False,
+        )

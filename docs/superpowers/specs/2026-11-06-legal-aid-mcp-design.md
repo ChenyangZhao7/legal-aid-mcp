@@ -135,7 +135,7 @@ WorkBuddy / MCP Inspector
   - `destination`: 必填，地址或 `lat,lng`
   - `mode`: `driving` / `walking`，默认 `driving`
 - **百度调用**：地址先走 `/geocoding/v3/`，再走 `/direction/v2/{mode}`；`lat,lng` 直接用。
-- **返回**：`{"distance_m": int, "duration_s": int, "steps": [{"instruction": str, "distance_m": int, "duration_s": int}]}`。
+- **返回**：`{"distance_m": int, "duration_s": int, "steps": [{"instruction": str, "road_name": str, "distance_m": int, "duration_s": int}]}`。百度 step 没有 `instruction` 时，用 `road_name` 生成“沿<道路>”的提示。
 - **错误**：`GEOCODE_FAILED` / `NO_ROUTE` / `AK_INVALID` / `QUOTA_EXCEEDED` / `UPSTREAM_TIMEOUT`。
 
 ### 7.3 `search_law`
@@ -157,14 +157,15 @@ WorkBuddy / MCP Inspector
 ### 7.4 `verify_citation`
 
 - **描述**：核对一段文字中引用的法条是否存在、是否现行有效、原文是否一致。用户提供答辩状、合同、AI 回答，要求“核对法条”“看看引用对不对”时使用。返回逐条核对结果；未找到的条文明确标为不存在，不猜测。
-- **参数**：`text`: 必填。
+- **参数**：`text`: 必填；`law_hint`: 可选，`民法典` / `合同编通则司法解释`，用于没有写法律名的引用。
 - **引用识别**：正则匹配 `民法典` / `中华人民共和国民法典` / `合同编通则司法解释` 等前缀 + `第[中文数字或阿拉伯数字]+条`；支持“第 585 条”“第五百八十五条”。
 - **返回**：`[{"citation","status","official_text","mismatch"}]`
-  - `status`: `exists` / `not_found` / `amended` / `out_of_scope`
+  - `status`: `exists` / `not_found` / `amended` / `out_of_scope` / `ambiguous`
     - `exists`：在 v1 语料内且现行有效；
     - `not_found`：属于 v1 收录的法律，但条号超出该法律全文范围（如民法典第 9999 条 > 1260）；
     - `amended`：该条存在但时效性为“已修改/已废止”（v1 语料当前均为有效，保留字段）；
-    - `out_of_scope`：真实存在但不在 v1 收录范围（民法典合同编以外的条文、民诉法、旧合同法等），**不能**标成 `not_found`。
+    - `out_of_scope`：真实存在但不在 v1 收录范围（民法典合同编以外的条文、民诉法、旧合同法等），**不能**标成 `not_found`；
+    - `ambiguous`：引用没有写法律名且没传 `law_hint`，返回候选法律列表，不猜测。
   - `mismatch`: 输入里带引号原文时做归一化比对，返回 `true/false/null`；没带原文时 `null`
 - **错误**：`NO_CITATION_FOUND` / `CORPUS_NOT_LOADED`。
 

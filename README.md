@@ -113,7 +113,7 @@ npx @modelcontextprotocol/inspector python server.py
 .venv\Scripts\python scripts\mcp_transcript.py --out docs\mcp-transcript.json
 ```
 
-当前结果：`82 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
+当前结果：`88 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
 
 ## 法条来源与范围
 
@@ -140,6 +140,7 @@ npx @modelcontextprotocol/inspector python server.py
 
 - 只覆盖济南及下属区县；其他城市返回 `CITY_NOT_FOUND`。
 - 只收录民法典合同编和合同编通则司法解释；民法典其他编、民诉法、旧合同法等返回 `out_of_scope`，不会说成“不存在”。
+- `verify_citation` 对没有写法律名的引用（如“第585条”）返回 `ambiguous`；传 `law_hint` 或写明“民法典第585条”才会核对。这是为了避免刑法/合同混合文书误判。
 - 不判断管辖、不预测胜诉、不推荐“最好的律师”、不代写诉状。
 - 高德地图仅作为百度整体不可用时的备选；当前提供的 key 返回 `INVALID_USER_KEY`，v1 未实现高德适配器。
 - WorkBuddy 的 8 条人工测试待在有 WorkBuddy 的环境复测；本仓库提供 `docs/mcp-transcript.json` 作为 stdio 证据。

@@ -34,6 +34,7 @@ class Citation:
     number: int
     start: int
     end: int
+    explicit: bool = True
 
 
 @dataclass(frozen=True)
@@ -175,9 +176,10 @@ def parse_citations(text: str) -> list[Citation]:
 
         before = _law_before(text, match.start())
         if before is None:
-            law, law_start = "民法典", match.start()
+            law, law_start, explicit = "民法典", match.start(), False
         else:
             law, law_start = before
+            explicit = True
 
         found.append(
             Citation(
@@ -187,6 +189,7 @@ def parse_citations(text: str) -> list[Citation]:
                 number=number,
                 start=law_start,
                 end=match.end(),
+                explicit=explicit,
             )
         )
     return found

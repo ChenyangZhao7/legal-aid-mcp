@@ -47,6 +47,11 @@ def test_parse_citations_placeholder():
     assert got[0].law == "民事诉讼法"
     assert got[0].number == 0
 
+def test_parse_citations_no_prefix_is_not_explicit():
+    got = parse_citations("第585条")
+    assert got[0].law == "民法典"
+    assert got[0].explicit is False
+
 def test_split_articles_tracks_sections():
     paras = [
         "第三编　合　　同",

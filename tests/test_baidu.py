@@ -104,3 +104,17 @@ def test_live_message_redacts_ak(tmp_path):
         c.place_search("人民法院", "济南", 5)
     assert "test-ak" not in exc.value.message
     assert "***" in exc.value.message
+
+def test_corrupt_budget_fails_closed(tmp_path):
+    (tmp_path / "cache").mkdir()
+    (tmp_path / "cache" / "budget.json").write_text("not-json", encoding="utf-8")
+    calls = {"n": 0}
+    def handler(request):
+        calls["n"] += 1
+        return httpx.Response(200, json={"status": 0, "results": []})
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak", LIVE_BUDGET="5")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler))
+    with pytest.raises(ToolError) as exc:
+        c.place_search("人民法院", "济南", 5)
+    assert exc.value.code == "BUDGET_EXHAUSTED"
+    assert calls["n"] == 0

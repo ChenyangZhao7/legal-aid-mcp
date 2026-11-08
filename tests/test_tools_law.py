@@ -81,6 +81,19 @@ async def test_verify_literal_placeholder(server):
     data = await call(server, "verify_citation", {"text": "民诉法第X条"})
     assert data[0]["status"] == "out_of_scope"
 
+async def test_verify_no_prefix_is_ambiguous(server):
+    data = await call(server, "verify_citation", {"text": "第585条"})
+    assert data[0]["status"] == "ambiguous"
+
+async def test_verify_no_prefix_with_hint(server):
+    data = await call(server, "verify_citation", {"text": "第585条", "law_hint": "民法典"})
+    assert data[0]["status"] == "exists"
+    assert "违约金" in data[0]["official_text"]
+
+async def test_verify_explicit_law_ignores_hint(server):
+    data = await call(server, "verify_citation", {"text": "民法典第585条", "law_hint": "合同编通则司法解释"})
+    assert data[0]["status"] == "exists"
+
 async def test_search_unknown_law_out_of_scope(server):
     data = await call(server, "search_law", {"query": "刑法第585条"})
     assert data["error"]["code"] == "OUT_OF_SCOPE"

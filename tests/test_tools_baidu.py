@@ -65,6 +65,12 @@ async def test_plan_route_with_addresses(server):
     data = await call(server, "plan_route", {"origin": "济南西站", "destination": "济南市中级人民法院"})
     assert data["distance_m"] > 0
 
+async def test_plan_route_steps_include_road_name(server):
+    data = await call(server, "plan_route", {"origin": "济南西站", "destination": "济南市中级人民法院"})
+    first = data["steps"][0]
+    assert first["instruction"]
+    assert first["road_name"]
+
 async def test_plan_route_address_with_comma_is_not_coordinates(server):
     data = await call(server, "plan_route", {"origin": "济南市历下区,经十路", "destination": "济南市中级人民法院"})
     assert data["error"]["code"] == "GEOCODE_FAILED"

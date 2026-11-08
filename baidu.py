@@ -33,7 +33,10 @@ class BudgetStore:
         try:
             return json.loads(self.path.read_text(encoding="utf-8"))
         except (json.JSONDecodeError, OSError):
-            return {"used": 0, "limit": self.limit}
+            raise ToolError(
+                "BUDGET_EXHAUSTED",
+                f"预算文件损坏或不可读：{self.path}；为避免超额调用，已停止真实请求",
+            )
 
     def check_and_increment(self) -> None:
         data = self._read()
@@ -231,14 +234,20 @@ class BaiduClient:
 
         try:
             route = data["result"]["routes"][0]
-            steps = [
-                {
-                    "instruction": step.get("instruction", ""),
-                    "distance_m": int(step.get("distance", 0)),
-                    "duration_s": int(step.get("duration", 0)),
-                }
-                for step in route.get("steps", [])
-            ]
+            steps = []
+            for step in route.get("steps", []):
+                road_name = step.get("road_name") or ""
+                instruction = step.get("instruction") or (
+                    f"沿{road_name}" if road_name else "继续行驶"
+                )
+                steps.append(
+                    {
+                        "instruction": instruction,
+                        "road_name": road_name,
+                        "distance_m": int(step.get("distance", 0)),
+                        "duration_s": int(step.get("duration", 0)),
+                    }
+                )
             return {
                 "distance_m": int(route["distance"]),
                 "duration_s": int(route["duration"]),

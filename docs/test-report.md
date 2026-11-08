@@ -19,11 +19,13 @@
 | 7 | 无需工具 | 什么是违约金？ | 不调用工具，直接回答 | 解释违约金的定义和常见调整规则 | 待复测 | 属于模型行为，需在 WorkBuddy 里人工确认 |
 | 8 | 伪造引用 | 民法典第 9999 条怎么说？ | `verify_citation(text="民法典第9999条怎么说？")` | `status: not_found`，`official_text: null` | 是 | 民法典全文 1260 条，9999 条不存在 |
 
+补充：`verify_citation("第585条")` 现在返回 `ambiguous`；传 `law_hint="民法典"` 返回 `exists`。这样不会在刑法/合同混合文书里把无前缀引用误判成民法典。
+
 ## 自动化结果
 
 ```text
 .venv\Scripts\python -m pytest -q
-82 passed in 2.16s
+88 passed in 2.29s
 ```
 
 ```text
