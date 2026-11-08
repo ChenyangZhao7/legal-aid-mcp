@@ -39,6 +39,21 @@ def test_corpus_not_loaded(tmp_path):
         corpus.search("违约金", limit=5)
     assert exc.value.code == "CORPUS_NOT_LOADED"
 
+def test_corpus_load_oserror(tmp_path):
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "manifest.json").mkdir()
+    corpus = LawCorpus.load(data)
+    with pytest.raises(ToolError) as exc:
+        corpus.search("违约金", limit=5)
+    assert exc.value.code == "CORPUS_NOT_LOADED"
+
+def test_gram_score_caps_text_contribution():
+    from laws import _gram_score
+    grams = {f"a{i}" for i in range(15)}
+    text = " ".join(grams)
+    assert _gram_score(text, "", grams) == 20
+
 def test_search_generic_prefers_civil_code(corpus):
     hits = corpus.search("合同", limit=5)
     assert hits[0].short_name == "民法典"

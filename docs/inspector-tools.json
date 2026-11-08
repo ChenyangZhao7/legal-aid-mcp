@@ -1,0 +1,154 @@
+{
+  "tools": [
+    {
+      "name": "find_legal_service",
+      "description": "在指定城市搜索法院、律师事务所或法律援助中心，返回机构名称、地址、电话和经纬度。用户问“去哪个法院立案”“附近有没有法律援助”“找律师”时使用。只返回机构信息，不判断管辖，也不评价律师水平。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "enum": [
+              "法院",
+              "律师事务所",
+              "法律援助中心"
+            ],
+            "title": "Keyword",
+            "type": "string"
+          },
+          "city": {
+            "default": "济南",
+            "title": "City",
+            "type": "string"
+          },
+          "district": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "District"
+          },
+          "limit": {
+            "default": 5,
+            "maximum": 10,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "keyword"
+        ],
+        "title": "find_legal_serviceArguments"
+      }
+    },
+    {
+      "name": "plan_route",
+      "description": "规划从起点到终点的驾车或步行路线，返回距离、预计时间和主要路段。用户问“怎么去法院/律所/法律援助中心”时使用。起点和终点可以是地址或“纬度,经度”；如果只有机构名，先用 find_legal_service 查地址。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "destination": {
+            "title": "Destination",
+            "type": "string"
+          },
+          "mode": {
+            "default": "driving",
+            "enum": [
+              "driving",
+              "walking"
+            ],
+            "title": "Mode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "origin",
+          "destination"
+        ],
+        "title": "plan_routeArguments"
+      }
+    },
+    {
+      "name": "search_law",
+      "description": "在本地民法典合同编和合同编通则司法解释中检索条文，返回条文号、原文、生效日期和出处。用户问“法律怎么规定”“违约金能不能调”“合同解除条件”时使用。只返回检索到的原文，不编造；没有匹配时明确说未找到。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "law": {
+            "anyOf": [
+              {
+                "enum": [
+                  "民法典",
+                  "合同编通则司法解释"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Law"
+          },
+          "limit": {
+            "default": 5,
+            "maximum": 10,
+            "minimum": 1,
+            "title": "Limit",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_lawArguments"
+      }
+    },
+    {
+      "name": "verify_citation",
+      "description": "核对一段文字中引用的法条是否存在、是否现行有效、原文是否一致。用户提供答辩状、合同、AI 回答，要求“核对法条”“看看引用对不对”时使用。返回 status：exists（存在且有效）、not_found（该法律全文没有这个条号）、amended（已修改/已废止）、out_of_scope（真实存在但不在 v1 收录范围，不代表不存在）、ambiguous（引用没写法律名，需要 law_hint 才能判断）。",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "law_hint": {
+            "anyOf": [
+              {
+                "enum": [
+                  "民法典",
+                  "合同编通则司法解释"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Law Hint"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "verify_citationArguments"
+      }
+    }
+  ]
+}

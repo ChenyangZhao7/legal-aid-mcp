@@ -94,6 +94,21 @@ async def test_verify_explicit_law_ignores_hint(server):
     data = await call(server, "verify_citation", {"text": "民法典第585条", "law_hint": "合同编通则司法解释"})
     assert data[0]["status"] == "exists"
 
+async def test_verify_mismatch_false(server):
+    data = await call(server, "verify_citation", {
+        "text": "民法典第585条：“当事人可以约定一方违约时应当根据违约情况向对方支付一定数额的违约金”"
+    })
+    assert data[0]["mismatch"] is False
+
+async def test_verify_duplicate_citations(server):
+    data = await call(server, "verify_citation", {"text": "民法典第585条，民法典第585条"})
+    assert len(data) == 1
+
+async def test_search_interpretation_filter(server):
+    data = await call(server, "search_law", {"query": "格式条款", "law": "合同编通则司法解释"})
+    assert data
+    assert all(r["law"].startswith("最高人民法院") for r in data)
+
 async def test_search_unknown_law_out_of_scope(server):
     data = await call(server, "search_law", {"query": "刑法第585条"})
     assert data["error"]["code"] == "OUT_OF_SCOPE"

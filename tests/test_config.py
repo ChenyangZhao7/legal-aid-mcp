@@ -26,3 +26,15 @@ def test_create_server_factory():
     from server import create_server
     s = load_settings(env={}, base_dir=ROOT)
     assert create_server(s).name == "legal-aid-mcp"
+
+def test_invalid_int_raises_config_error(tmp_path):
+    with pytest.raises(ConfigError):
+        load_settings(env={"LIVE_BUDGET": "abc"}, base_dir=tmp_path)
+
+def test_invalid_float_raises_config_error(tmp_path):
+    with pytest.raises(ConfigError):
+        load_settings(env={"REQUEST_TIMEOUT_S": "abc"}, base_dir=tmp_path)
+
+def test_mock_and_live_both_off_raises(tmp_path):
+    with pytest.raises(ConfigError):
+        load_settings(env={"USE_MOCK": "0", "USE_LIVE": "0"}, base_dir=tmp_path)

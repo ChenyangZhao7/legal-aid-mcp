@@ -65,7 +65,7 @@ BAIDU_AK=你的百度服务端AK
 USE_LIVE=1
 ```
 
-`LIVE_BUDGET=20` 是项目生命周期真实调用硬上限，不按日重置。相同请求会走 `cache/`，不重复花预算。
+`USE_MOCK=0` 且 `USE_LIVE=0` 会启动失败，避免“关掉 mock 却仍在读样本”。`LIVE_BUDGET=20` 是项目生命周期真实调用硬上限，不按日重置。相同请求会走 `cache/`，不重复花预算。
 
 ## 运行
 
@@ -110,10 +110,21 @@ npx @modelcontextprotocol/inspector python server.py
 ```powershell
 .venv\Scripts\python -m pytest -q
 .venv\Scripts\python scripts\verify_laws.py --data-dir data\laws
+.venv\Scripts\python scripts\verify_laws.py --data-dir data\laws --require-raw
 .venv\Scripts\python scripts\mcp_transcript.py --out docs\mcp-transcript.json
 ```
 
-当前结果：`88 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
+`--require-raw` 用于 CI 或干净 clone：`data/raw/` 不存在时直接失败，而不是只 WARN。
+
+当前结果：`106 passed`；语料校验输出 `OK: 民法典合同编 526 条；司法解释 69 条`。
+
+## 交付证据
+
+- `docs/screenshots/inspector-tools.jpeg`：MCP Inspector 工具列表
+- `docs/inspector-tools.json`：Inspector `tools/list` 的 JSON 输出
+- `docs/mcp-transcript.json`：stdio 4 个工具调用记录
+- `docs/workbuddy-test-guide.md`：WorkBuddy 8 条人工测试步骤
+- `docs/test-report.md`：8 条场景与真实调用记录
 
 ## 法条来源与范围
 

@@ -3,7 +3,7 @@
 - 日期：2026-11-06
 - 环境：Windows、Python 3.14.7、`mcp==2.3.0`
 - 模式：自动化测试全部 `USE_MOCK=1`；百度 fixtures 和法条语料在 2026-11-06 用真实接口录制/抓取
-- 证据：`docs/mcp-transcript.json`、`pytest` 输出、`scripts/verify_laws.py` 输出
+- 证据：`docs/mcp-transcript.json`、`docs/inspector-tools.json`、`docs/screenshots/inspector-tools.jpeg`、`pytest` 输出、`scripts/verify_laws.py` 输出
 - WorkBuddy：当前环境没有 WorkBuddy，8 条人工场景待在有 WorkBuddy 的环境复测；本报告用 MCP Inspector/stdio transcript 代替
 
 ## 8 条场景
@@ -25,7 +25,7 @@
 
 ```text
 .venv\Scripts\python -m pytest -q
-88 passed in 2.29s
+106 passed in 2.34s
 ```
 
 ```text
@@ -39,6 +39,8 @@ tools = find_legal_service, plan_route, search_law, verify_citation
 calls = 4
 search_law -> 第五百八十五条
 ```
+
+MCP Inspector：工具列表截图见 `docs/screenshots/inspector-tools.jpeg`；工具列表 JSON 见 `docs/inspector-tools.json`。在 Inspector 里执行 `search_law(query="违约金过高")` 也返回了民法典第五百八十五条。
 
 ## 真实调用记录
 

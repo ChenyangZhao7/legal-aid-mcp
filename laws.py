@@ -262,6 +262,12 @@ def _bigrams(text: str) -> set[str]:
     return {text[i : i + 2] for i in range(len(text) - 1)}
 
 
+def _gram_score(text_norm: str, section_norm: str, grams: set[str]) -> int:
+    text_hits = sum(2 for gram in grams if gram in text_norm)
+    section_hits = sum(3 for gram in grams if gram in section_norm)
+    return min(text_hits, 20) + section_hits
+
+
 # v1 relevance priors for the canonical questions in the task book. Raw 2-gram
 # TF otherwise ties procedural interpretation articles with the general rule.
 _PRIORS = (
@@ -327,7 +333,7 @@ class LawCorpus:
                             pdf_sha256=row.get("pdf_sha256") or "",
                         )
                     )
-        except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError) as exc:
+        except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError, OSError) as exc:
             return cls([], {}, load_error=str(exc))
         return cls(articles, manifest)
 
@@ -404,11 +410,7 @@ class LawCorpus:
             if query_norm and query_norm in text_norm:
                 score += 20
             section_norm = normalize_text(" ".join(article.section))
-            for gram in grams:
-                if gram in text_norm:
-                    score += 2
-                if gram in section_norm:
-                    score += 3
+            score += _gram_score(text_norm, section_norm, grams)
             if score > 0:
                 priority = 0 if article.short_name == "民法典" else 1
                 scored.append((score, priority, article.article_number, article))

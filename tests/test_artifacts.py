@@ -13,3 +13,13 @@ def test_transcript_is_utf8_json():
         "verify_citation",
     }
     assert len(data["calls"]) == 4
+
+
+def test_inspector_tools_artifact():
+    data = json.loads((ROOT / "docs" / "inspector-tools.json").read_text(encoding="utf-8"))
+    assert {tool["name"] for tool in data["tools"]} == {
+        "find_legal_service",
+        "plan_route",
+        "search_law",
+        "verify_citation",
+    }

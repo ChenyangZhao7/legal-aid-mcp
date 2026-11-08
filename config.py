@@ -33,10 +33,22 @@ def _as_bool(value: str | None, default: bool) -> bool:
     return value.strip().lower() in {"1", "true", "yes", "on"}
 
 
-def _as_int(value: str | None, default: int) -> int:
+def _as_int(name: str, value: str | None, default: int) -> int:
     if value is None or value == "":
         return default
-    return int(value)
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        raise ConfigError(f"{name} 必须是整数，当前值：{value!r}")
+
+
+def _as_float(name: str, value: str | None, default: float) -> float:
+    if value is None or value == "":
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        raise ConfigError(f"{name} 必须是数字，当前值：{value!r}")
 
 
 def _resolve(base_dir: Path, value: str | None, default: str) -> Path:
@@ -59,6 +71,8 @@ def load_settings(
 
     if use_live and not baidu_ak:
         raise ConfigError("USE_LIVE=1 需要设置 BAIDU_AK")
+    if not use_live and not use_mock:
+        raise ConfigError("USE_MOCK=0 且 USE_LIVE=0：至少启用 mock 或 live")
     if use_live and use_mock:
         print("warning: USE_LIVE=1 优先于 USE_MOCK=1，将进行真实调用", file=sys.stderr)
 
@@ -67,10 +81,10 @@ def load_settings(
         baidu_ak=baidu_ak,
         use_mock=use_mock,
         use_live=use_live,
-        live_budget=_as_int(env.get("LIVE_BUDGET"), 20),
+        live_budget=_as_int("LIVE_BUDGET", env.get("LIVE_BUDGET"), 20),
         cache_dir=_resolve(base, env.get("CACHE_DIR"), "cache"),
-        cache_ttl_hours=_as_int(env.get("CACHE_TTL_HOURS"), 24),
+        cache_ttl_hours=_as_int("CACHE_TTL_HOURS", env.get("CACHE_TTL_HOURS"), 24),
         law_data_dir=_resolve(base, env.get("LAW_DATA_DIR"), "data/laws"),
         fixtures_dir=_resolve(base, env.get("FIXTURES_DIR"), "fixtures/baidu"),
-        request_timeout_s=float(env.get("REQUEST_TIMEOUT_S") or 10.0),
+        request_timeout_s=_as_float("REQUEST_TIMEOUT_S", env.get("REQUEST_TIMEOUT_S"), 10.0),
     )

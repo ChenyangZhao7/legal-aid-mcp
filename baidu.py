@@ -44,7 +44,7 @@ class BudgetStore:
         if used >= self.limit:
             raise ToolError(
                 "BUDGET_EXHAUSTED",
-                "真实调用额度已用完，已切换到缓存/样本",
+                "真实调用额度已用完，本次请求未发送；请改用缓存/样本或调高 LIVE_BUDGET",
             )
         data["used"] = used + 1
         data["limit"] = self.limit

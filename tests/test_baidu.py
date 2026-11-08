@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import httpx
 import pytest
@@ -82,6 +83,7 @@ def test_live_budget_exhausted(tmp_path):
     with pytest.raises(ToolError) as exc:
         c.place_search("人民法院", "济南", 6)
     assert exc.value.code == "BUDGET_EXHAUSTED"
+    assert "未发送" in exc.value.message
     assert calls["n"] == 1
 
 def test_live_cache_hit_does_not_spend(tmp_path):
@@ -118,3 +120,45 @@ def test_corrupt_budget_fails_closed(tmp_path):
         c.place_search("人民法院", "济南", 5)
     assert exc.value.code == "BUDGET_EXHAUSTED"
     assert calls["n"] == 0
+
+def test_live_cache_expires(tmp_path):
+    clock = [datetime(2026, 1, 1, tzinfo=timezone.utc)]
+    calls = {"n": 0}
+    def handler(request):
+        calls["n"] += 1
+        return httpx.Response(200, json={"status": 0, "results": [{"name": "x"}]})
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak", LIVE_BUDGET="5")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler), now=lambda: clock[0])
+    c.place_search("人民法院", "济南", 5)
+    c.place_search("人民法院", "济南", 5)
+    assert calls["n"] == 1
+    clock[0] += timedelta(hours=25)
+    c.place_search("人民法院", "济南", 5)
+    assert calls["n"] == 2
+
+def test_budget_persists_across_clients(tmp_path):
+    def handler1(request):
+        return httpx.Response(200, json={"status": 0, "results": []})
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak", LIVE_BUDGET="1")
+    c1 = BaiduClient(s, transport=httpx.MockTransport(handler1))
+    c1.place_search("人民法院", "济南", 5)
+
+    calls = {"n": 0}
+    def handler2(request):
+        calls["n"] += 1
+        return httpx.Response(200, json={"status": 0, "results": []})
+    c2 = BaiduClient(s, transport=httpx.MockTransport(handler2))
+    with pytest.raises(ToolError) as exc:
+        c2.place_search("人民法院", "济南", 6)
+    assert exc.value.code == "BUDGET_EXHAUSTED"
+    assert calls["n"] == 0
+
+@pytest.mark.parametrize("status", [210, 211, 302])
+def test_live_permission_statuses_map(tmp_path, status):
+    def handler(request):
+        return httpx.Response(200, json={"status": status, "message": "permission"})
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler))
+    with pytest.raises(ToolError) as exc:
+        c.place_search("人民法院", "济南", 5)
+    assert exc.value.code == "AK_INVALID"

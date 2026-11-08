@@ -123,7 +123,7 @@ WorkBuddy / MCP Inspector
   - `district`: 可选，如 `历下区`
   - `limit`: 1–10，默认 5
 - **百度调用**：`/place/v2/search`，`query` 按关键词映射（`法院`→`人民法院`，`法律援助中心`→`法律援助` 作为降级），`region=city`，`scope=2`，`page_size=limit`；单次请求，不翻页。
-- **城市校验**：v1 维护济南市及区县白名单；`city` 明显不在白名单时直接返回 `CITY_NOT_FOUND`，不发请求。白名单外的城市仍允许尝试，空结果返回 `NO_RESULTS`，不臆断“城市不存在”。
+- **城市校验**：v1 严格只支持济南市及区县白名单；`city` 不在白名单时直接返回 `CITY_NOT_FOUND`，不发请求。其他城市留到后续版本，避免把“未支持”说成“查不到”。
 - **返回**：`[{"name","address","telephone","lat","lng"}]`；地址或电话缺失时保留 `null`，不编造。
 - **错误**：`CITY_NOT_FOUND` / `NO_RESULTS` / `AK_INVALID` / `QUOTA_EXCEEDED` / `UPSTREAM_TIMEOUT` / `BUDGET_EXHAUSTED`。
 
@@ -241,10 +241,10 @@ WorkBuddy / MCP Inspector
 | `CACHE_TTL_HOURS` | `24` | 缓存有效期 |
 | `LAW_DATA_DIR` | `data/laws/` | 语料目录 |
 
-- **mock**：`USE_LIVE=0` 时按“关键词 + 城市 + 区县”读 fixture；找不到就返回 `NO_RESULTS`，不偷偷发真实请求。
+- **mock**：`USE_LIVE=0` 时按“关键词 + 城市 + 区县”读 fixture；找不到就返回 `NO_RESULTS`，不偷偷发真实请求。`USE_LIVE=0` 且 `USE_MOCK=0` 时启动失败，避免“关掉 mock 却仍在读样本”。
 - **live**：`USE_LIVE=1` 即进入真实调用（不要求同时改 `USE_MOCK`）；每次请求前检查预算；成功后写缓存并计数。
 - **缓存键**：规范化后的完整 URL 的 SHA256；缓存文件含 `fetched_at` 和原始响应。
-- **预算**：`cache/budget.json` 记录 `{used, limit, updated_at}`，跨天不重置；`LIVE_BUDGET=20` 是项目生命周期硬上限。超限返回 `BUDGET_EXHAUSTED`，提示“真实调用额度已用完，已切换到缓存/样本”，不会因为跨天自动解锁。
+- **预算**：`cache/budget.json` 记录 `{used, limit, updated_at}`，跨天不重置；`LIVE_BUDGET=20` 是项目生命周期硬上限。超限返回 `BUDGET_EXHAUSTED`，提示“真实调用额度已用完，本次请求未发送”，不会因为跨天自动解锁。
 - **安全**：AK 只从环境变量读；日志只写 stderr；错误信息里不出现 AK；`.env` 在 `.gitignore` 里；提交前用脚本扫描仓库确认没有密钥。
 
 ## 10. 测试策略

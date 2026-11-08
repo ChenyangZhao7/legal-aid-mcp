@@ -36,6 +36,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="校验本地法条语料")
     parser.add_argument("--data-dir", default="data/laws")
     parser.add_argument("--raw-dir", default="data/raw")
+    parser.add_argument("--require-raw", action="store_true", help="原始 docx/pdf 不存在时直接失败")
     args = parser.parse_args()
 
     data_dir = ROOT / args.data_dir
@@ -75,6 +76,8 @@ def main() -> int:
                 if _sha256(raw_file) != entry[key]:
                     _fail(f"{name} 的 {raw_file.name} SHA256 不匹配")
             else:
+                if args.require_raw:
+                    _fail(f"{raw_file} 不存在；--require-raw 要求原始文件必须存在")
                 print(f"WARN: {raw_file} 不存在（已 gitignore），跳过原始文件校验")
 
     by_number = {a["article_number"]: a for a in json.loads(
