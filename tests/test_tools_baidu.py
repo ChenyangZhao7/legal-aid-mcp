@@ -75,6 +75,30 @@ async def test_find_limit_slices(server):
     data = await call(server, "find_legal_service", {"keyword": "法院", "limit": 2})
     assert len(data) == 2
 
+async def test_find_returns_confidence_and_sources(server):
+    data = await call(server, "find_legal_service", {"keyword": "法院"})
+    assert "confidence" in data[0]
+    assert data[0]["sources"]
+    assert data[0]["coord_system"] == "wgs84"
+
+async def test_find_legal_aid_uses_official_or_snapshot(server):
+    data = await call(server, "find_legal_service", {"keyword": "法律援助中心", "district": "历下区"})
+    assert any(r["source"] in {"12348", "snapshot"} for r in data)
+    assert any("历下区法律援助中心" in r["name"] for r in data)
+
+async def test_plan_route_accepts_wgs84(server):
+    data = await call(server, "plan_route", {"origin": "36.67,117.0", "destination": "36.68,117.1"})
+    assert data["distance_m"] > 0
+    assert data["coord_system"] == "wgs84"
+
+async def test_plan_route_accepts_bd09(server):
+    data = await call(server, "plan_route", {
+        "origin": "36.67,117.0",
+        "destination": "36.68,117.1",
+        "coord_system": "bd09",
+    })
+    assert "distance_m" in data or data["error"]["code"] == "GEOCODE_FAILED"
+
 async def test_plan_route_coordinates(server):
     data = await call(server, "plan_route", {"origin": "36.67,117.0", "destination": "36.68,117.1"})
     assert data["distance_m"] > 0

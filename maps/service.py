@@ -126,6 +126,8 @@ class MapService:
 
         if self.failure_mode == "fixtures":
             return self._mock_baidu().place_search(query, region, limit)[:limit]
+        if not self.settings.use_live and self.failure_mode == "cache":
+            raise ToolError("NO_RESULTS", "未找到匹配机构，请换关键词或区县")
         raise self._all_failed(errors)
 
     def geocode(self, address: str) -> GeocodeResult:
@@ -159,6 +161,8 @@ class MapService:
                     confidence="low",
                     discrepancies=["fixtures"],
                 )
+            if not self.settings.use_live and self.failure_mode == "cache":
+                raise ToolError("GEOCODE_FAILED", f"无法解析地址：{address}")
             raise self._all_failed(errors)
 
         primary = collected[0][1]
@@ -214,6 +218,8 @@ class MapService:
         if not routes:
             if self.failure_mode == "fixtures":
                 return self._mock_baidu().route(origin, destination, mode)
+            if not self.settings.use_live and self.failure_mode == "cache":
+                raise ToolError("NO_ROUTE", "未找到可用路线，请检查起点和终点")
             raise self._all_failed(errors)
 
         primary = routes[0]
