@@ -194,6 +194,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 - `docs/inspector-tools.json`：Inspector `tools/list` 的 JSON 输出
 - `docs/mcp-transcript.json`：stdio 5 个工具调用记录
 - `docs/workbuddy-test-guide.md`：WorkBuddy 8 条人工测试步骤
+- `docs/workbuddy-prompts.md`：可直接复制到 WorkBuddy 的 8 条核心 + 4 条 v2 prompt
 - `docs/test-report.md`：8 条场景与真实调用记录
 
 ## 法条来源与范围
