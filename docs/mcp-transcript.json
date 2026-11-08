@@ -23,7 +23,7 @@
           "lng": 117.00051270356683,
           "coord_system": "wgs84",
           "adcode": null,
-          "source": "map",
+          "source": "mock",
           "confidence": "low",
           "sources": [
             {
@@ -42,7 +42,7 @@
           "discrepancies": [],
           "warnings": [],
           "cached": false,
-          "mock": false
+          "mock": true
         },
         {
           "name": "济南市历城区人民法院",
@@ -52,7 +52,7 @@
           "lng": 117.09025361607988,
           "coord_system": "wgs84",
           "adcode": null,
-          "source": "map",
+          "source": "mock",
           "confidence": "low",
           "sources": [
             {
@@ -71,7 +71,7 @@
           "discrepancies": [],
           "warnings": [],
           "cached": false,
-          "mock": false
+          "mock": true
         },
         {
           "name": "济南高新区人民法院",
@@ -81,7 +81,7 @@
           "lng": 117.14156848274848,
           "coord_system": "wgs84",
           "adcode": null,
-          "source": "map",
+          "source": "mock",
           "confidence": "low",
           "sources": [
             {
@@ -100,7 +100,7 @@
           "discrepancies": [],
           "warnings": [],
           "cached": false,
-          "mock": false
+          "mock": true
         }
       ]
     },
@@ -246,8 +246,8 @@
         "discrepancies": [],
         "warnings": [],
         "cached": false,
-        "mock": false,
-        "source": "map",
+        "mock": true,
+        "source": "mock",
         "coord_system": "wgs84"
       }
     },

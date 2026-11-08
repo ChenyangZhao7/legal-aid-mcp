@@ -17,7 +17,7 @@
           },
           "city": {
             "default": "济南",
-            "description": "城市名称；v1 只支持济南及下属区县",
+            "description": "城市名称；当前只支持济南及下属区县",
             "title": "City",
             "type": "string"
           },

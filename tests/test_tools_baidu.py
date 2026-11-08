@@ -45,6 +45,20 @@ async def test_find_lixia_court(server):
 async def test_city_not_found(server):
     data = await call(server, "find_legal_service", {"keyword": "法院", "city": "火星"})
     assert data["error"]["code"] == "CITY_NOT_FOUND"
+    assert "v1" not in data["error"]["message"]
+
+
+async def test_duplicate_address_is_cleared(server):
+    data = await call(server, "find_legal_service", {"keyword": "律师事务所"})
+    firm = next(row for row in data if "舜达" in row["name"])
+    assert firm["address"] is None
+    assert any(warning.get("code") == "ADDRESS_MISSING" for warning in firm["warnings"])
+
+
+async def test_mock_results_are_marked(server):
+    data = await call(server, "find_legal_service", {"keyword": "法院"})
+    assert data[0]["mock"] is True
+    assert data[0]["source"] == "mock"
 
 async def test_limit_schema_rejects_11(server):
     with pytest.raises(MCPToolError):
@@ -117,6 +131,15 @@ async def test_plan_route_accepts_bd09(server):
         "coord_system": "bd09",
     })
     assert "distance_m" in data or data["error"]["code"] == "GEOCODE_FAILED"
+
+
+async def test_plan_route_mock_is_marked(server):
+    data = await call(server, "plan_route", {
+        "origin": "济南西站",
+        "destination": "济南市中级人民法院",
+    })
+    assert data["mock"] is True
+    assert data["source"] == "mock"
 
 async def test_plan_route_coordinates(server):
     data = await call(server, "plan_route", {"origin": "36.67,117.0", "destination": "36.68,117.1"})

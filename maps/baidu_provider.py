@@ -19,6 +19,7 @@ class BaiduProvider:
         now=None,
     ) -> None:
         self.settings = settings
+        self.mock = not settings.use_live
         self.client = BaiduClient(settings, transport=transport, now=now)
 
     def place_search(self, query: str, region: str, limit: int) -> list[Place]:
@@ -37,6 +38,8 @@ class BaiduProvider:
                     point=GeoPoint(wgs_lat, wgs_lng, "wgs84"),
                     native=GeoPoint(lat, lng, "bd09"),
                     raw=row,
+                    mock=self.mock,
+                    data_source="mock" if self.mock else "map",
                 )
             )
         return places
@@ -57,4 +60,6 @@ class BaiduProvider:
             distance_m=data["distance_m"],
             duration_s=data["duration_s"],
             steps=data.get("steps") or [],
+            mock=self.mock,
+            data_source="mock" if self.mock else "map",
         )

@@ -147,7 +147,7 @@ class MapService:
                 place.sources = [_source(place)]
                 place.confidence = "low"
                 place.discrepancies = []
-                place.data_source = "map"
+                place.data_source = "mock" if not self.settings.use_live else "map"
                 place.warnings = list(warnings)
                 merged.append(place)
         for place in merged:
@@ -300,6 +300,7 @@ class MapService:
             confidence=confidence,
             discrepancies=discrepancies,
             warnings=warnings,
+            mock=not self.settings.use_live,
         )
         self.result_cache.set(
             cache_key,
@@ -364,6 +365,6 @@ class MapService:
         primary.confidence = route_confidence(primary.sources)
         primary.discrepancies = route_discrepancies(primary.sources)
         primary.warnings = list(primary.warnings) + warnings
-        primary.data_source = "map"
+        primary.data_source = "mock" if not self.settings.use_live else "map"
         self.result_cache.set(cache_key, {"route": asdict(primary)})
         return primary

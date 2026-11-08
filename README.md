@@ -185,7 +185,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 
 `--require-raw` 用于 CI 或干净 clone：`data/raw/` 不存在时直接失败，而不是只 WARN。
 
-当前结果：`196 passed`；语料校验输出 `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`。
+当前结果：`200 passed`；语料校验输出 `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`。
 
 ## 交付证据
 

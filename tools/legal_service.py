@@ -115,9 +115,19 @@ def _merge_official(official: list[Place], mapped: list[Place]) -> list[Place]:
 def _to_dict(place: Place) -> dict:
     has_location = bool(place.point.lat or place.point.lng)
     sources = place.sources or [_source(place)]
+    address = place.address
+    warnings = list(place.warnings)
+    if address and address.strip() == place.name.strip():
+        address = None
+        warnings.append(
+            {
+                "code": "ADDRESS_MISSING",
+                "message": "地图返回的地址与机构名相同，已置空，请电话确认",
+            }
+        )
     return {
         "name": place.name,
-        "address": place.address,
+        "address": address,
         "telephone": place.telephone,
         "lat": place.point.lat if has_location else None,
         "lng": place.point.lng if has_location else None,
@@ -127,7 +137,7 @@ def _to_dict(place: Place) -> dict:
         "confidence": place.confidence,
         "sources": sources,
         "discrepancies": place.discrepancies,
-        "warnings": place.warnings,
+        "warnings": warnings,
         "cached": place.cached,
         "mock": place.mock,
     }
@@ -143,7 +153,7 @@ def _find(
     if city not in CITY_WHITELIST:
         raise ToolError(
             "CITY_NOT_FOUND",
-            f"暂不支持城市“{city}”，v1 只覆盖济南及下属区县",
+            f"暂不支持城市“{city}”，当前只覆盖济南及下属区县",
         )
 
     divisions = _divisions(ctx)
@@ -261,7 +271,7 @@ def register_legal_service(server: MCPServer, ctx: AppContext) -> None:
         ],
         city: Annotated[
             str,
-            Field(description="城市名称；v1 只支持济南及下属区县"),
+            Field(description="城市名称；当前只支持济南及下属区县"),
         ] = "济南",
         district: Annotated[
             str | None,

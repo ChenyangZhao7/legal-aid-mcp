@@ -2,7 +2,7 @@
 
 > 日期：2026-11-08
 > 当前分支：`v2`（基于 `master` 的 v1.2）
-> 状态：**v2 实现完成**；`196 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
+> 状态：**v2 实现完成**；`200 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
 >
 > 2026-11-08 本轮：v1.2 修复 P0-1～P0-4 并补齐参数 description；v2 增加多源地图、民事诉讼语料、12348/区划/节假日/计算器（见 CHANGELOG）。
 
@@ -20,7 +20,7 @@
 |---|---|
 | MCP 工具 | 5 个，stdio 可加载 |
 | WorkBuddy | 已挂载，配置条目 `legal-aid-mcp` |
-| 自动化测试 | `196 passed` |
+| 自动化测试 | `200 passed` |
 | 语料 | 1678 条：民法典合同编 526 + 合同编司法解释 69 + 民诉法 306 + 民诉法解释 550 + 证据规定 100 + 诉讼费办法 56 + 法律援助法 71 |
 | 地图 | 百度 primary；腾讯/天地图可选（无 key 自动跳过） |
 | 免费数据源 | 12348 法援目录、民政部区划、timor 节假日，均有本地快照 |
@@ -42,7 +42,7 @@ cd Z:\project-mcp
 最近一次输出：
 
 ```text
-196 passed in 5.46s
+200 passed in 4.69s
 OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验
 OK: no secrets in tracked files
 ```
@@ -121,7 +121,7 @@ scripts/
 data/laws/                    已提交的语料 JSON + manifest
 data/raw/                     原始 docx/pdf（gitignored）
 fixtures/baidu/               百度样本（默认 mock 使用）
-tests/                        196 条测试
+tests/                        200 条测试
 docs/                         设计、测试报告、学习笔记、WorkBuddy 指南
 ```
 
@@ -215,7 +215,7 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 ## 5. 下一 session 建议顺序
 
 1. 先跑 WorkBuddy 8 条场景，填 `docs/test-report.md`（当前唯一未完成的交付项）。
-2. P0 的 1–4 已在 v1.2 修复；v2 已完成地图多源、民事诉讼语料、12348/区划/节假日/计算器（196 passed）。
+2. P0 的 1–4 已在 v1.2 修复；v2 已完成地图多源、民事诉讼语料、12348/区划/节假日/计算器（200 passed）。
 3. 做一次真实百度小流量验收：1 次机构 + 1 次路线，确认预算计数和缓存。
 4. 再考虑 IDF/BM25、Amap adapter、打包。
 

@@ -29,6 +29,17 @@ def test_mock_place_is_wgs84(tmp_path):
     assert places[0].name
     assert places[0].point.system == "wgs84"
     assert places[0].native.system == "bd09"
+    assert places[0].mock is True
+
+
+def test_mock_route_is_marked(tmp_path):
+    provider = BaiduProvider(settings(tmp_path))
+    route = provider.route(
+        provider.geocode("济南西站"),
+        provider.geocode("济南市中级人民法院"),
+        "driving",
+    )
+    assert route.mock is True
 
 
 def test_mock_geocode_is_wgs84(tmp_path):
