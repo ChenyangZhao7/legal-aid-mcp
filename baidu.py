@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import threading
+from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Iterator
 from urllib.parse import urlencode
 
 import httpx
@@ -14,6 +17,45 @@ from config import Settings
 from errors import ToolError
 
 BASE = "https://api.map.baidu.com"
+
+_LOCKS_GUARD = threading.Lock()
+_LOCKS: dict[str, threading.Lock] = {}
+
+
+def _thread_lock(path: Path) -> threading.Lock:
+    key = str(path.resolve())
+    with _LOCKS_GUARD:
+        return _LOCKS.setdefault(key, threading.Lock())
+
+
+@contextmanager
+def _file_lock(path: Path) -> Iterator[None]:
+    """Serialize read-modify-write across threads and processes."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = path.with_name(path.name + ".lock")
+    with _thread_lock(lock_path):
+        with lock_path.open("a+b") as handle:
+            if os.name == "nt":
+                import msvcrt
+
+                handle.seek(0)
+                handle.write(b"\0")
+                handle.flush()
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+                try:
+                    yield
+                finally:
+                    handle.seek(0)
+                    msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+                try:
+                    yield
+                finally:
+                    fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 class BudgetStore:
@@ -39,20 +81,21 @@ class BudgetStore:
             )
 
     def check_and_increment(self) -> None:
-        data = self._read()
-        used = int(data.get("used", 0))
-        if used >= self.limit:
-            raise ToolError(
-                "BUDGET_EXHAUSTED",
-                "真实调用额度已用完，本次请求未发送；请改用缓存/样本或调高 LIVE_BUDGET",
-            )
-        data["used"] = used + 1
-        data["limit"] = self.limit
-        data["updated_at"] = self.now().isoformat()
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        temp = self.path.with_suffix(".tmp")
-        temp.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-        temp.replace(self.path)
+        with _file_lock(self.path):
+            data = self._read()
+            used = int(data.get("used", 0))
+            if used >= self.limit:
+                raise ToolError(
+                    "BUDGET_EXHAUSTED",
+                    "真实调用额度已用完，本次请求未发送；请改用缓存/样本或调高 LIVE_BUDGET",
+                )
+            data["used"] = used + 1
+            data["limit"] = self.limit
+            data["updated_at"] = self.now().isoformat()
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            temp = self.path.with_suffix(".tmp")
+            temp.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+            temp.replace(self.path)
 
 
 class CacheStore:
@@ -136,11 +179,20 @@ class BaiduClient:
             ) as client:
                 response = client.get(BASE + path, params=request_params)
                 response.raise_for_status()
-                data = response.json()
         except httpx.TimeoutException:
             raise ToolError("UPSTREAM_TIMEOUT", "地图服务超时，请稍后重试")
         except httpx.HTTPError:
             raise ToolError("UPSTREAM_ERROR", "地图服务请求失败，请稍后重试")
+
+        try:
+            data = response.json()
+        except ValueError:
+            raise ToolError(
+                "UPSTREAM_ERROR",
+                "地图服务返回了非 JSON 响应，请稍后重试",
+            )
+        if not isinstance(data, dict):
+            raise ToolError("UPSTREAM_ERROR", "地图服务返回格式异常，请稍后重试")
 
         try:
             status = int(data.get("status", -1))

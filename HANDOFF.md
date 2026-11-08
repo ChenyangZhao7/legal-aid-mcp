@@ -3,7 +3,9 @@
 > 日期：2026-11-08
 > 当前 HEAD：`1fa4d58`
 > 分支：`master`，工作区干净
-> 状态：**WorkBuddy 已挂载成功**；`106 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
+> 状态：**WorkBuddy 已挂载成功**；`116 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
+>
+> 2026-11-08 本轮：已修复 P0-1～P0-4，并补齐 4 个工具的参数 description（见 CHANGELOG v1.2）。
 
 ---
 
@@ -19,7 +21,7 @@
 |---|---|
 | MCP 工具 | 4 个，stdio 可加载 |
 | WorkBuddy | 已挂载，配置条目 `legal-aid-mcp` |
-| 自动化测试 | `106 passed` |
+| 自动化测试 | `116 passed` |
 | 语料 | 民法典合同编 463–988，526 条；合同编通则司法解释 1–69，69 条 |
 | 真实百度调用 | 已用 10 次 / 上限 20 |
 | 默认模式 | `USE_MOCK=1`，不耗额度 |
@@ -39,7 +41,7 @@ cd Z:\project-mcp
 最近一次输出：
 
 ```text
-106 passed in 2.43s
+116 passed in 3.14s
 OK: 民法典合同编 526 条；司法解释 69 条
 OK: no secrets in tracked files
 ```
@@ -118,7 +120,7 @@ scripts/
 data/laws/                    已提交的语料 JSON + manifest
 data/raw/                     原始 docx/pdf（gitignored）
 fixtures/baidu/               百度样本（默认 mock 使用）
-tests/                        106 条测试
+tests/                        116 条测试
 docs/                         设计、测试报告、学习笔记、WorkBuddy 指南
 ```
 
@@ -128,23 +130,23 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 
 ### P0 · 正确性 / 安全
 
-1. **`BaiduClient` 非 JSON 响应未映射**
+1. **`BaiduClient` 非 JSON 响应未映射**（v1.2 已修复）
    - 位置：`baidu.py` 的 `response.json()`
    - 问题：上游返回 HTML/空响应时抛 `JSONDecodeError`，最终变成 `INTERNAL`。
    - 建议：捕获 `json.JSONDecodeError` / `ValueError`，映射 `UPSTREAM_ERROR`；加测试。
 
-2. **预算文件并发写没有锁**
+2. **预算文件并发写没有锁**（v1.2 已修复）
    - 位置：`baidu.py::BudgetStore`
    - 问题：两个 WorkBuddy 会话/进程同时读 `used`，可能都认为没超限。
    - 建议：文件锁或 SQLite 原子更新；或用 `msvcrt.locking`/`portalocker`；加双进程测试。
    - 当前单进程 stdio 下风险较低，但 WorkBuddy 可能开多个会话。
 
-3. **`mismatch` 匹配窗口太窄**
+3. **`mismatch` 匹配窗口太窄**（v1.2 已修复）
    - 位置：`tools/citation.py::_mismatch`
    - 问题：只检查引用后 200 字符内的引号文本；引文在引用前、或引文很长会漏。
    - 建议：双向查找、窗口放宽到 500、或让工具接受“被引原文”参数；加测试。
 
-4. **`search_law` 多引用只取第一个**
+4. **`search_law` 多引用只取第一个**（v1.2 已修复）
    - 位置：`tools/law_search.py::_search`
    - 问题：`民法典第585条和合同法第114条` 只处理第一个引用。
    - 建议：返回全部 in-corpus 引用，或明确“一次只核对一个”；需要产品决定。
@@ -154,7 +156,7 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
    - 问题：语料全是 `sxx=3`，`amended` 没有真实数据。
    - 建议：加一个合成 `Article(status="已修改")` 的集成测试，或明确文档写“保留字段”。
 
-6. **`search_law` 无前缀引用仍默认民法典**
+6. **`search_law` 无前缀引用仍默认民法典**（v1.2 已补：传 `law` 时按 `law` 解释；不传仍默认民法典，且已写进工具描述）
    - 位置：`tools/law_search.py`
    - 问题：`verify_citation` 已改为 `ambiguous` + `law_hint`，但 `search_law("第585条")` 仍默认民法典。
    - 建议：给 `search_law` 也加 `law_hint`，或明确 v1 行为。
@@ -211,8 +213,8 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 
 ## 5. 下一 session 建议顺序
 
-1. 先跑 WorkBuddy 8 条场景，填 `docs/test-report.md`。
-2. 修 P0 的 1–4：非 JSON 响应、预算并发、mismatch 窗口、多引用；每项 TDD。
+1. 先跑 WorkBuddy 8 条场景，填 `docs/test-report.md`（当前唯一未完成的交付项）。
+2. P0 的 1–4 已在 v1.2 修复（TDD，116 passed）；P0-5（`amended` 合成测试）也已补。
 3. 做一次真实百度小流量验收：1 次机构 + 1 次路线，确认预算计数和缓存。
 4. 再考虑 IDF/BM25、Amap adapter、打包。
 

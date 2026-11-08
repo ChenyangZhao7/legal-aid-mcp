@@ -2,9 +2,10 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Literal
+from typing import Annotated, Literal
 
 from mcp.server.mcpserver import MCPServer
+from pydantic import Field
 
 from context import AppContext
 from errors import run_tool
@@ -45,9 +46,18 @@ def register_route(server: MCPServer, ctx: AppContext) -> None:
         structured_output=False,
     )
     def plan_route(
-        origin: str,
-        destination: str,
-        mode: Literal["driving", "walking"] = "driving",
+        origin: Annotated[
+            str,
+            Field(description="起点地址，或“纬度,经度”坐标，如 36.67,117.0"),
+        ],
+        destination: Annotated[
+            str,
+            Field(description="终点地址，或“纬度,经度”坐标"),
+        ],
+        mode: Annotated[
+            Literal["driving", "walking"],
+            Field(description="出行方式：driving 驾车（默认）或 walking 步行"),
+        ] = "driving",
     ) -> str:
         return json.dumps(
             run_tool(lambda: _plan(ctx, origin, destination, mode)),

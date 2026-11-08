@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 from pathlib import Path
 import pytest
 from mcp.server.mcpserver import MCPServer
@@ -120,3 +121,48 @@ async def test_search_fake_article_is_no_match(server):
 async def test_search_law_filter_conflict(server):
     data = await call(server, "search_law", {"query": "民法典第585条", "law": "合同编通则司法解释"})
     assert data["error"]["code"] == "NO_MATCH"
+
+async def test_search_multiple_citations_returns_all(server):
+    data = await call(server, "search_law", {"query": "民法典第585条和民法典第563条"})
+    assert [r["article"] for r in data] == ["第五百八十五条", "第五百六十三条"]
+
+async def test_search_multiple_citations_keeps_in_corpus(server):
+    data = await call(server, "search_law", {"query": "合同法第114条和民法典第585条"})
+    assert [r["article"] for r in data] == ["第五百八十五条"]
+
+async def test_search_no_prefix_uses_law_param_as_hint(server):
+    data = await call(server, "search_law", {"query": "第1条", "law": "合同编通则司法解释"})
+    assert data[0]["article"] == "第一条"
+    assert data[0]["law"].startswith("最高人民法院")
+
+async def test_verify_mismatch_quote_before_citation(server):
+    data = await call(server, "verify_citation", {"text": "“这是一段完全错误的引文”，见民法典第585条"})
+    assert data[0]["mismatch"] is True
+
+async def test_verify_mismatch_quote_after_long_prefix(server):
+    filler = "这是很长的说明文字。" * 30
+    data = await call(server, "verify_citation", {
+        "text": f"民法典第585条：{filler}“这是一段完全错误的引文”"
+    })
+    assert data[0]["mismatch"] is True
+
+@pytest.fixture
+def amended_server(tmp_path):
+    s = load_settings(env={
+        "USE_LIVE": "0",
+        "USE_MOCK": "1",
+        "CACHE_DIR": str(tmp_path / "cache"),
+        "FIXTURES_DIR": str(ROOT / "fixtures" / "baidu"),
+    }, base_dir=tmp_path)
+    corpus = LawCorpus.load(ROOT / "data" / "laws")
+    corpus._by_law_number[("民法典", 585)] = replace(
+        corpus._by_law_number[("民法典", 585)], status="已修改"
+    )
+    ctx = AppContext(settings=s, baidu=BaiduClient(s), corpus=corpus)
+    mcp = MCPServer("test")
+    register_citation(mcp, ctx)
+    return mcp
+
+async def test_verify_amended_when_article_modified(amended_server):
+    data = await call(amended_server, "verify_citation", {"text": "民法典第585条"})
+    assert data[0]["status"] == "amended"

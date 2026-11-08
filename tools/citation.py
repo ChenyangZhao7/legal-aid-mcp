@@ -2,15 +2,17 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Literal
+from typing import Annotated, Literal
 
 from mcp.server.mcpserver import MCPServer
+from pydantic import Field
 
 from context import AppContext
 from errors import ToolError, run_tool
 from laws import Citation, normalize_text, parse_citations
 
 _QUOTE_RE = re.compile(r"[“\"](.{2,200}?)[”\"]")
+_MISMATCH_WINDOW = 500
 
 
 def citation_status(article) -> str:
@@ -18,10 +20,14 @@ def citation_status(article) -> str:
 
 
 def _mismatch(text: str, citation: Citation, official_text: str) -> bool | None:
-    tail = text[citation.end : citation.end + 200]
+    tail = text[citation.end : citation.end + _MISMATCH_WINDOW]
     match = _QUOTE_RE.search(tail)
     if not match:
-        return None
+        head = text[max(0, citation.start - _MISMATCH_WINDOW) : citation.start]
+        matches = list(_QUOTE_RE.finditer(head))
+        if not matches:
+            return None
+        match = matches[-1]
     quote = match.group(1)
     return normalize_text(quote) not in normalize_text(official_text)
 
@@ -102,8 +108,14 @@ def register_citation(server: MCPServer, ctx: AppContext) -> None:
         structured_output=False,
     )
     def verify_citation(
-        text: str,
-        law_hint: Literal["民法典", "合同编通则司法解释"] | None = None,
+        text: Annotated[
+            str,
+            Field(description="包含法条引用的文字，如答辩状、合同或 AI 回答"),
+        ],
+        law_hint: Annotated[
+            Literal["民法典", "合同编通则司法解释"] | None,
+            Field(description="引用没写法律名时用它指定法律；引用里已写法律名时忽略"),
+        ] = None,
     ) -> str:
         return json.dumps(
             run_tool(lambda: _verify(ctx, text, law_hint)),

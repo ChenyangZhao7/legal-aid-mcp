@@ -4,9 +4,9 @@
       "name": "find_legal_service",
       "description": "在指定城市搜索法院、律师事务所或法律援助中心，返回机构名称、地址、电话和经纬度。用户问“去哪个法院立案”“附近有没有法律援助”“找律师”时使用。只返回机构信息，不判断管辖，也不评价律师水平。",
       "inputSchema": {
-        "type": "object",
         "properties": {
           "keyword": {
+            "description": "要查找的机构类型：法院、律师事务所或法律援助中心",
             "enum": [
               "法院",
               "律师事务所",
@@ -17,6 +17,7 @@
           },
           "city": {
             "default": "济南",
+            "description": "城市名称；v1 只支持济南及下属区县",
             "title": "City",
             "type": "string"
           },
@@ -30,10 +31,12 @@
               }
             ],
             "default": null,
+            "description": "济南下属区县，如“历下区”；不填则在全市范围搜索",
             "title": "District"
           },
           "limit": {
             "default": 5,
+            "description": "返回条数上限，1–10，默认 5",
             "maximum": 10,
             "minimum": 1,
             "title": "Limit",
@@ -43,25 +46,28 @@
         "required": [
           "keyword"
         ],
-        "title": "find_legal_serviceArguments"
+        "title": "find_legal_serviceArguments",
+        "type": "object"
       }
     },
     {
       "name": "plan_route",
       "description": "规划从起点到终点的驾车或步行路线，返回距离、预计时间和主要路段。用户问“怎么去法院/律所/法律援助中心”时使用。起点和终点可以是地址或“纬度,经度”；如果只有机构名，先用 find_legal_service 查地址。",
       "inputSchema": {
-        "type": "object",
         "properties": {
           "origin": {
+            "description": "起点地址，或“纬度,经度”坐标，如 36.67,117.0",
             "title": "Origin",
             "type": "string"
           },
           "destination": {
+            "description": "终点地址，或“纬度,经度”坐标",
             "title": "Destination",
             "type": "string"
           },
           "mode": {
             "default": "driving",
+            "description": "出行方式：driving 驾车（默认）或 walking 步行",
             "enum": [
               "driving",
               "walking"
@@ -74,16 +80,17 @@
           "origin",
           "destination"
         ],
-        "title": "plan_routeArguments"
+        "title": "plan_routeArguments",
+        "type": "object"
       }
     },
     {
       "name": "search_law",
-      "description": "在本地民法典合同编和合同编通则司法解释中检索条文，返回条文号、原文、生效日期和出处。用户问“法律怎么规定”“违约金能不能调”“合同解除条件”时使用。只返回检索到的原文，不编造；没有匹配时明确说未找到。",
+      "description": "在本地民法典合同编和合同编通则司法解释中检索条文，返回条文号、原文、生效日期和出处。用户问“法律怎么规定”“违约金能不能调”“合同解除条件”时使用。query 可以同时包含多个法条引用，会返回所有在收录范围内的条文；没写法律名的“第 X 条”默认按民法典处理，也可用 law 参数指定。只返回检索到的原文，不编造；没有匹配时明确说未找到。",
       "inputSchema": {
-        "type": "object",
         "properties": {
           "query": {
+            "description": "检索关键词或法条引用，如“违约金过高”或“民法典第585条”；可以同时包含多个引用",
             "title": "Query",
             "type": "string"
           },
@@ -101,10 +108,12 @@
               }
             ],
             "default": null,
+            "description": "限定法律；不填则检索收录范围内的全部法律",
             "title": "Law"
           },
           "limit": {
             "default": 5,
+            "description": "返回条数上限，1–10，默认 5",
             "maximum": 10,
             "minimum": 1,
             "title": "Limit",
@@ -114,16 +123,17 @@
         "required": [
           "query"
         ],
-        "title": "search_lawArguments"
+        "title": "search_lawArguments",
+        "type": "object"
       }
     },
     {
       "name": "verify_citation",
       "description": "核对一段文字中引用的法条是否存在、是否现行有效、原文是否一致。用户提供答辩状、合同、AI 回答，要求“核对法条”“看看引用对不对”时使用。返回 status：exists（存在且有效）、not_found（该法律全文没有这个条号）、amended（已修改/已废止）、out_of_scope（真实存在但不在 v1 收录范围，不代表不存在）、ambiguous（引用没写法律名，需要 law_hint 才能判断）。",
       "inputSchema": {
-        "type": "object",
         "properties": {
           "text": {
+            "description": "包含法条引用的文字，如答辩状、合同或 AI 回答",
             "title": "Text",
             "type": "string"
           },
@@ -141,13 +151,15 @@
               }
             ],
             "default": null,
+            "description": "引用没写法律名时用它指定法律；引用里已写法律名时忽略",
             "title": "Law Hint"
           }
         },
         "required": [
           "text"
         ],
-        "title": "verify_citationArguments"
+        "title": "verify_citationArguments",
+        "type": "object"
       }
     }
   ]

@@ -3,6 +3,8 @@ from pathlib import Path
 import pytest
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
+from config import load_settings
+from server import create_server
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,3 +22,21 @@ async def test_stdio_lists_four_tools():
             result = await session.call_tool("search_law", {"query": "违约金过高"})
             data = json.loads(result.content[0].text)
             assert data[0]["article"] == "第五百八十五条"
+
+@pytest.mark.asyncio
+async def test_every_tool_parameter_has_description(tmp_path):
+    settings = load_settings(env={
+        "USE_MOCK": "1",
+        "USE_LIVE": "0",
+        "CACHE_DIR": str(tmp_path / "cache"),
+        "LAW_DATA_DIR": str(ROOT / "data" / "laws"),
+        "FIXTURES_DIR": str(ROOT / "fixtures" / "baidu"),
+    }, base_dir=tmp_path)
+    tools = await create_server(settings).list_tools()
+    missing = [
+        (tool.name, name)
+        for tool in tools
+        for name, schema in tool.input_schema.get("properties", {}).items()
+        if not schema.get("description")
+    ]
+    assert missing == []

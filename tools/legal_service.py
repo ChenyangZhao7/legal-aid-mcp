@@ -94,10 +94,22 @@ def register_legal_service(server: MCPServer, ctx: AppContext) -> None:
         structured_output=False,
     )
     def find_legal_service(
-        keyword: Literal["法院", "律师事务所", "法律援助中心"],
-        city: str = "济南",
-        district: str | None = None,
-        limit: Annotated[int, Field(ge=1, le=10)] = 5,
+        keyword: Annotated[
+            Literal["法院", "律师事务所", "法律援助中心"],
+            Field(description="要查找的机构类型：法院、律师事务所或法律援助中心"),
+        ],
+        city: Annotated[
+            str,
+            Field(description="城市名称；v1 只支持济南及下属区县"),
+        ] = "济南",
+        district: Annotated[
+            str | None,
+            Field(description="济南下属区县，如“历下区”；不填则在全市范围搜索"),
+        ] = None,
+        limit: Annotated[
+            int,
+            Field(ge=1, le=10, description="返回条数上限，1–10，默认 5"),
+        ] = 5,
     ) -> str:
         return json.dumps(
             run_tool(lambda: _find(ctx, keyword, city, district, limit)),

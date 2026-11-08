@@ -21,11 +21,26 @@
 
 补充：`verify_citation("第585条")` 现在返回 `ambiguous`；传 `law_hint="民法典"` 返回 `exists`。这样不会在刑法/合同混合文书里把无前缀引用误判成民法典。
 
+## 工具描述改进记录（参数级）
+
+任务书要求记录“修改工具描述前后的对比”。本轮把参数说明补进工具的 JSON Schema：改动前模型只能看到参数名、类型、枚举和默认值；改动后可以直接看到参数含义与使用时机。`docs/inspector-tools.json` 已按新 Schema 重新导出。
+
+| 工具.参数 | 改动前 | 改动后 |
+|---|---|---|
+| `find_legal_service.keyword` | 只有枚举，无说明 | “要查找的机构类型：法院、律师事务所或法律援助中心” |
+| `find_legal_service.district` | 只有类型，无说明 | “济南下属区县，如‘历下区’；不填则在全市范围搜索” |
+| `plan_route.origin` | 只有类型，无说明 | “起点地址，或‘纬度,经度’坐标，如 36.67,117.0” |
+| `plan_route.mode` | 只有枚举，无说明 | “出行方式：driving 驾车（默认）或 walking 步行” |
+| `search_law.query` | 只有类型，无说明 | “检索关键词或法条引用……可以同时包含多个引用” |
+| `verify_citation.text` | 只有类型，无说明 | “包含法条引用的文字，如答辩状、合同或 AI 回答” |
+
+自动化测试 `test_every_tool_parameter_has_description` 会检查 4 个工具的所有参数都带 description。模型行为层面的前后对比仍需在 WorkBuddy 里复测后补充。
+
 ## 自动化结果
 
 ```text
 .venv\Scripts\python -m pytest -q
-106 passed in 2.34s
+116 passed in 3.14s
 ```
 
 ```text

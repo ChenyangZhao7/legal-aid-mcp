@@ -1,9 +1,11 @@
 import json
+import threading
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import httpx
 import pytest
-from baidu import BaiduClient
+from baidu import BaiduClient, BudgetStore
 from config import load_settings
 from errors import ToolError
 
@@ -152,6 +154,55 @@ def test_budget_persists_across_clients(tmp_path):
         c2.place_search("人民法院", "济南", 6)
     assert exc.value.code == "BUDGET_EXHAUSTED"
     assert calls["n"] == 0
+
+def test_live_non_json_maps_to_upstream_error(tmp_path):
+    def handler(request):
+        return httpx.Response(200, text="<html>bad gateway</html>")
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler))
+    with pytest.raises(ToolError) as exc:
+        c.place_search("人民法院", "济南", 5)
+    assert exc.value.code == "UPSTREAM_ERROR"
+
+def test_live_json_list_maps_to_upstream_error(tmp_path):
+    def handler(request):
+        return httpx.Response(200, json=[1, 2, 3])
+    s = settings(tmp_path, USE_LIVE="1", USE_MOCK="1", BAIDU_AK="test-ak")
+    c = BaiduClient(s, transport=httpx.MockTransport(handler))
+    with pytest.raises(ToolError) as exc:
+        c.place_search("人民法院", "济南", 5)
+    assert exc.value.code == "UPSTREAM_ERROR"
+
+def test_budget_concurrent_increments_are_serialized(tmp_path, monkeypatch):
+    path = tmp_path / "cache" / "budget.json"
+    original_read = BudgetStore._read
+
+    def slow_read(self):
+        data = original_read(self)
+        time.sleep(0.05)
+        return data
+
+    monkeypatch.setattr(BudgetStore, "_read", slow_read)
+    outcomes = []
+    barrier = threading.Barrier(10)
+
+    def worker():
+        store = BudgetStore(path, 5)
+        barrier.wait()
+        try:
+            store.check_and_increment()
+            outcomes.append("ok")
+        except ToolError:
+            outcomes.append("blocked")
+
+    threads = [threading.Thread(target=worker) for _ in range(10)]
+    for thread in threads:
+        thread.start()
+    for thread in threads:
+        thread.join()
+
+    assert outcomes.count("ok") == 5
+    assert json.loads(path.read_text(encoding="utf-8"))["used"] == 5
 
 @pytest.mark.parametrize("status", [210, 211, 302])
 def test_live_permission_statuses_map(tmp_path, status):
