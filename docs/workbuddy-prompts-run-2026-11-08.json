@@ -1,0 +1,1080 @@
+[
+  {
+    "id": 1,
+    "prompt": "济南市中级人民法院在哪？",
+    "calls": [
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "法院",
+          "city": "济南"
+        },
+        "result": [
+          {
+            "name": "济南市中级人民法院",
+            "address": "经二路1号",
+            "telephone": "(0531)12368",
+            "lat": 36.665285584839985,
+            "lng": 117.00051270356683,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市中级人民法院",
+                "address": "经二路1号",
+                "telephone": "(0531)12368",
+                "lat": 36.665285584839985,
+                "lng": 117.00051270356683,
+                "coord_system": "wgs84",
+                "native_lat": 36.671879,
+                "native_lng": 117.012747,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "济南市历城区人民法院",
+            "address": "山东省济南市化纤厂路5号",
+            "telephone": "(0531)12368",
+            "lat": 36.68532544866426,
+            "lng": 117.09025361607988,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市历城区人民法院",
+                "address": "山东省济南市化纤厂路5号",
+                "telephone": "(0531)12368",
+                "lat": 36.68532544866426,
+                "lng": 117.09025361607988,
+                "coord_system": "wgs84",
+                "native_lat": 36.691893,
+                "native_lng": 117.102825,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "济南高新区人民法院",
+            "address": "山东省济南市历下区舜风路101号齐鲁文化创意10号楼",
+            "telephone": "(0531)12368",
+            "lat": 36.676038628986504,
+            "lng": 117.14156848274848,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南高新区人民法院",
+                "address": "山东省济南市历下区舜风路101号齐鲁文化创意10号楼",
+                "telephone": "(0531)12368",
+                "lat": 36.676038628986504,
+                "lng": 117.14156848274848,
+                "coord_system": "wgs84",
+                "native_lat": 36.682496,
+                "native_lng": 117.15415,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "济南市章丘区人民法院",
+            "address": "山东省济南市章丘区开先大道929号",
+            "telephone": "(0531)12368",
+            "lat": 36.680461790888664,
+            "lng": 117.51319518604966,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市章丘区人民法院",
+                "address": "山东省济南市章丘区开先大道929号",
+                "telephone": "(0531)12368",
+                "lat": 36.680461790888664,
+                "lng": 117.51319518604966,
+                "coord_system": "wgs84",
+                "native_lat": 36.686534,
+                "native_lng": 117.525731,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "济南市济阳区人民法院",
+            "address": "新元大街9号",
+            "telephone": "(0531)12368",
+            "lat": 36.96388344381804,
+            "lng": 117.16983360407052,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市济阳区人民法院",
+                "address": "新元大街9号",
+                "telephone": "(0531)12368",
+                "lat": 36.96388344381804,
+                "lng": 117.16983360407052,
+                "coord_system": "wgs84",
+                "native_lat": 36.970109,
+                "native_lng": 117.182542,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "prompt": "违约金过高，法律怎么规定？",
+    "calls": [
+      {
+        "tool": "search_law",
+        "arguments": {
+          "query": "违约金过高"
+        },
+        "result": [
+          {
+            "law": "中华人民共和国民法典",
+            "article": "第五百八十五条",
+            "text": "第五百八十五条　当事人可以约定一方违约时应当根据违约情况向对方支付一定数额的违约金，也可以约定因违约产生的损失赔偿额的计算方法。\n约定的违约金低于造成的损失的，人民法院或者仲裁机构可以根据当事人的请求予以增加；约定的违约金过分高于造成的损失的，人民法院或者仲裁机构可以根据当事人的请求予以适当减少。\n当事人就迟延履行约定违约金的，违约方支付违约金后，还应当履行债务。",
+            "effective_date": "2021-01-01",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff808081729d1efe01729d50b5c500bf&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8",
+            "status": "有效"
+          },
+          {
+            "law": "最高人民法院关于适用《中华人民共和国民法典》合同编通则若干问题的解释",
+            "article": "第六十四条",
+            "text": "第六十四条　当事人一方通过反诉或者抗辩的方式，请求调整违约金的，人民法院依法予以支持。\n违约方主张约定的违约金过分高于违约造成的损失，请求予以适当减少的，应当承担举证责任。非违约方主张约定的违约金合理的，也应当提供相应的证据。\n当事人仅以合同约定不得对违约金进行调整为由主张不予调整违约金的，人民法院不予支持。",
+            "effective_date": "2023-12-05",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818c24e05b018c814e6de45ab5&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E9%80%82%E7%94%A8%E3%80%8A%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8%E3%80%8B%E5%90%88%E5%90%8C%E7%BC%96%E9%80%9A%E5%88%99%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E9%87%8A",
+            "status": "有效"
+          },
+          {
+            "law": "最高人民法院关于适用《中华人民共和国民法典》合同编通则若干问题的解释",
+            "article": "第六十五条",
+            "text": "第六十五条　当事人主张约定的违约金过分高于违约造成的损失，请求予以适当减少的，人民法院应当以民法典第五百八十四条规定的损失为基础，兼顾合同主体、交易类型、合同的履行情况、当事人的过错程度、履约背景等因素，遵循公平原则和诚信原则进行衡量，并作出裁判。\n约定的违约金超过造成损失的百分之三十的，人民法院一般可以认定为过分高于造成的损失。\n恶意违约的当事人一方请求减少违约金的，人民法院一般不予支持。",
+            "effective_date": "2023-12-05",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818c24e05b018c814e6de45ab5&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E9%80%82%E7%94%A8%E3%80%8A%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8%E3%80%8B%E5%90%88%E5%90%8C%E7%BC%96%E9%80%9A%E5%88%99%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E9%87%8A",
+            "status": "有效"
+          },
+          {
+            "law": "最高人民法院关于适用《中华人民共和国民法典》合同编通则若干问题的解释",
+            "article": "第六十六条",
+            "text": "第六十六条　当事人一方请求对方支付违约金，对方以合同不成立、无效、被撤销、确定不发生效力、不构成违约或者非违约方不存在损失等为由抗辩，未主张调整过高的违约金的，人民法院应当就若不支持该抗辩，当事人是否请求调整违约金进行释明。第一审人民法院认为抗辩成立且未予释明，第二审人民法院认为应当判决支付违约金的，可以直接释明，并根据当事人的请求，在当事人就是否应当调整违约金充分举证、质证、辩论后，依法判决适当减少违约金。\n被告因客观原因在第一审程序中未到庭参加诉讼，但是在第二审程序中到庭参加诉讼并请求减少违约金的，第二审人民法院可以在当事人就是否应当调整违约金充分举证、质证、辩论后，依法判决适当减少违约金。",
+            "effective_date": "2023-12-05",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818c24e05b018c814e6de45ab5&type=%E5%8F%B8%E6%B3%95%E8%A7%A3%E9%87%8A&title=%E6%9C%80%E9%AB%98%E4%BA%BA%E6%B0%91%E6%B3%95%E9%99%A2%E5%85%B3%E4%BA%8E%E9%80%82%E7%94%A8%E3%80%8A%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8%E3%80%8B%E5%90%88%E5%90%8C%E7%BC%96%E9%80%9A%E5%88%99%E8%8B%A5%E5%B9%B2%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E9%87%8A",
+            "status": "有效"
+          },
+          {
+            "law": "中华人民共和国民法典",
+            "article": "第五百八十条",
+            "text": "第五百八十条　当事人一方不履行非金钱债务或者履行非金钱债务不符合约定的，对方可以请求履行，但是有下列情形之一的除外：\n（一）法律上或者事实上不能履行；\n（二）债务的标的不适于强制履行或者履行费用过高；\n（三）债权人在合理期限内未请求履行。\n有前款规定的除外情形之一，致使不能实现合同目的的，人民法院或者仲裁机构可以根据当事人的请求终止合同权利义务关系，但是不影响违约责任的承担。",
+            "effective_date": "2021-01-01",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff808081729d1efe01729d50b5c500bf&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E6%B3%95%E5%85%B8",
+            "status": "有效"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "prompt": "我在济南西站，要去济南中院立案，附近有法律援助吗？帮我规划路线。",
+    "calls": [
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "法律援助中心",
+          "city": "济南"
+        },
+        "result": {
+          "results": [
+            {
+              "name": "山东省济南市历下区法律援助中心",
+              "address": "济南市历下区历山路151号",
+              "telephone": "0531-88580775",
+              "lat": 36.677819,
+              "lng": 117.041801,
+              "coord_system": "wgs84",
+              "adcode": "370102",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市历下区法律援助中心",
+                  "address": "济南市历下区历山路151号",
+                  "telephone": "0531-88580775",
+                  "lat": 36.677819,
+                  "lng": 117.041801,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.677819,
+                  "native_lng": 117.041801,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            },
+            {
+              "name": "山东省济南市市中区法律援助中心",
+              "address": "济南市市中区英雄山路8号政务中心3楼311",
+              "telephone": "0531-82900148",
+              "lat": 36.644109,
+              "lng": 116.99184,
+              "coord_system": "wgs84",
+              "adcode": "370103",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市市中区法律援助中心",
+                  "address": "济南市市中区英雄山路8号政务中心3楼311",
+                  "telephone": "0531-82900148",
+                  "lat": 36.644109,
+                  "lng": 116.99184,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.644109,
+                  "native_lng": 116.99184,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            },
+            {
+              "name": "山东省济南市槐荫区法律援助中心",
+              "address": "济南市槐荫区经十路29851号槐荫政务中心14楼1420",
+              "telephone": "0531-87566148",
+              "lat": 36.6521,
+              "lng": 116.89557,
+              "coord_system": "wgs84",
+              "adcode": "370104",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市槐荫区法律援助中心",
+                  "address": "济南市槐荫区经十路29851号槐荫政务中心14楼1420",
+                  "telephone": "0531-87566148",
+                  "lat": 36.6521,
+                  "lng": 116.89557,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.6521,
+                  "native_lng": 116.89557,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            },
+            {
+              "name": "山东省济南市天桥区法律援助中心",
+              "address": "济南市天桥区无影山中路112号",
+              "telephone": "0531-85604342",
+              "lat": 36.68291,
+              "lng": 116.9614,
+              "coord_system": "wgs84",
+              "adcode": "370105",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市天桥区法律援助中心",
+                  "address": "济南市天桥区无影山中路112号",
+                  "telephone": "0531-85604342",
+                  "lat": 36.68291,
+                  "lng": 116.9614,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.68291,
+                  "native_lng": 116.9614,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            },
+            {
+              "name": "山东省济南市历城区法律援助中心",
+              "address": "济南市历城区辛祝路68号",
+              "telephone": "0531-88115078",
+              "lat": 36.68975,
+              "lng": 117.07835,
+              "coord_system": "wgs84",
+              "adcode": "370112",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市历城区法律援助中心",
+                  "address": "济南市历城区辛祝路68号",
+                  "telephone": "0531-88115078",
+                  "lat": 36.68975,
+                  "lng": 117.07835,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.68975,
+                  "native_lng": 117.07835,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            }
+          ],
+          "coverage": {
+            "districts_total": 12,
+            "districts_live": 0,
+            "districts_snapshot": 12,
+            "districts_map": 0,
+            "districts_failed": 0
+          },
+          "warnings": [
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "历下区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "市中区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "槐荫区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "天桥区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "历城区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "长清区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "章丘区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "济阳区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "莱芜区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "钢城区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "平阴县",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            },
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "商河县",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            }
+          ]
+        }
+      },
+      {
+        "tool": "plan_route",
+        "arguments": {
+          "origin": "济南西站",
+          "destination": "济南市中级人民法院"
+        },
+        "result": {
+          "distance_m": 14205,
+          "duration_s": 2462,
+          "steps": [
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 790,
+              "duration_s": 232
+            },
+            {
+              "instruction": "沿日照路",
+              "road_name": "日照路",
+              "distance_m": 185,
+              "duration_s": 49
+            },
+            {
+              "instruction": "沿齐州路",
+              "road_name": "齐州路",
+              "distance_m": 1507,
+              "duration_s": 285
+            },
+            {
+              "instruction": "沿青岛路",
+              "road_name": "青岛路",
+              "distance_m": 60,
+              "duration_s": 8
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 380,
+              "duration_s": 44
+            },
+            {
+              "instruction": "沿北园高架路",
+              "road_name": "北园高架路",
+              "distance_m": 7301,
+              "duration_s": 923
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 351,
+              "duration_s": 25
+            },
+            {
+              "instruction": "沿无影山中路辅路",
+              "road_name": "无影山中路辅路",
+              "distance_m": 479,
+              "duration_s": 117
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 8,
+              "duration_s": 2
+            },
+            {
+              "instruction": "沿济泺路",
+              "road_name": "济泺路",
+              "distance_m": 758,
+              "duration_s": 140
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 6,
+              "duration_s": 1
+            },
+            {
+              "instruction": "沿天成路",
+              "road_name": "天成路",
+              "distance_m": 999,
+              "duration_s": 257
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 12,
+              "duration_s": 2
+            },
+            {
+              "instruction": "沿经一路",
+              "road_name": "经一路",
+              "distance_m": 13,
+              "duration_s": 2
+            },
+            {
+              "instruction": "沿明湖西路",
+              "road_name": "明湖西路",
+              "distance_m": 176,
+              "duration_s": 43
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 28,
+              "duration_s": 15
+            },
+            {
+              "instruction": "沿纬一路",
+              "road_name": "纬一路",
+              "distance_m": 80,
+              "duration_s": 39
+            },
+            {
+              "instruction": "沿馆驿街",
+              "road_name": "馆驿街",
+              "distance_m": 790,
+              "duration_s": 228
+            },
+            {
+              "instruction": "沿顺河西街",
+              "road_name": "顺河西街",
+              "distance_m": 200,
+              "duration_s": 26
+            },
+            {
+              "instruction": "沿无名路",
+              "road_name": "无名路",
+              "distance_m": 82,
+              "duration_s": 24
+            }
+          ],
+          "confidence": "low",
+          "sources": [
+            {
+              "provider": "baidu",
+              "distance_m": 14205,
+              "duration_s": 2462
+            }
+          ],
+          "discrepancies": [],
+          "warnings": [],
+          "cached": false,
+          "mock": false,
+          "source": "map",
+          "coord_system": "wgs84"
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "prompt": "这份答辩状引用了民法典第 585 条，帮我核对，并找济南的律所。",
+    "calls": [
+      {
+        "tool": "verify_citation",
+        "arguments": {
+          "text": "这份答辩状引用了民法典第585条"
+        },
+        "result": [
+          {
+            "citation": "民法典第585条",
+            "status": "exists",
+            "official_text": "第五百八十五条　当事人可以约定一方违约时应当根据违约情况向对方支付一定数额的违约金，也可以约定因违约产生的损失赔偿额的计算方法。\n约定的违约金低于造成的损失的，人民法院或者仲裁机构可以根据当事人的请求予以增加；约定的违约金过分高于造成的损失的，人民法院或者仲裁机构可以根据当事人的请求予以适当减少。\n当事人就迟延履行约定违约金的，违约方支付违约金后，还应当履行债务。",
+            "mismatch": null
+          }
+        ]
+      },
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "律师事务所",
+          "city": "济南"
+        },
+        "result": [
+          {
+            "name": "山东昌平律师事务所",
+            "address": "济南市历下区化纤厂路6-2号",
+            "telephone": "15555403995",
+            "lat": 36.683353832443075,
+            "lng": 117.09126477663487,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "山东昌平律师事务所",
+                "address": "济南市历下区化纤厂路6-2号",
+                "telephone": "15555403995",
+                "lat": 36.683353832443075,
+                "lng": 117.09126477663487,
+                "coord_system": "wgs84",
+                "native_lat": 36.689938,
+                "native_lng": 117.103832,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "山东舜达律师事务所",
+            "address": "山东舜达律师事务所",
+            "telephone": "(0531)81953258",
+            "lat": 36.594245649569366,
+            "lng": 116.99695496105369,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "山东舜达律师事务所",
+                "address": "山东舜达律师事务所",
+                "telephone": "(0531)81953258",
+                "lat": 36.594245649569366,
+                "lng": 116.99695496105369,
+                "coord_system": "wgs84",
+                "native_lat": 36.600802,
+                "native_lng": 117.009162,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "北京市盈科(济南)律师事务所",
+            "address": "济南市历下区经十路11111号华润大厦39层",
+            "telephone": "13021707607",
+            "lat": 36.65774045948495,
+            "lng": 117.09332587007628,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "北京市盈科(济南)律师事务所",
+                "address": "济南市历下区经十路11111号华润大厦39层",
+                "telephone": "13021707607",
+                "lat": 36.65774045948495,
+                "lng": 117.09332587007628,
+                "coord_system": "wgs84",
+                "native_lat": 36.66435,
+                "native_lng": 117.105901,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "山东撼岳律师事务所",
+            "address": "山东省济南市商河县花园街铭晖创展中心一楼沿街",
+            "telephone": "13583189000",
+            "lat": 37.28618599450263,
+            "lng": 117.16227843239015,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "山东撼岳律师事务所",
+                "address": "山东省济南市商河县花园街铭晖创展中心一楼沿街",
+                "telephone": "13583189000",
+                "lat": 37.28618599450263,
+                "lng": 117.16227843239015,
+                "coord_system": "wgs84",
+                "native_lat": 37.292678,
+                "native_lng": 117.174999,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "上海汉盛(济南)律师事务所",
+            "address": "山东省济南市历城区舜华南路汉峪金谷a7区a7-5栋10层",
+            "telephone": "17862997188",
+            "lat": 36.65972483902749,
+            "lng": 117.14483960972487,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "上海汉盛(济南)律师事务所",
+                "address": "山东省济南市历城区舜华南路汉峪金谷a7区a7-5栋10层",
+                "telephone": "17862997188",
+                "lat": 36.65972483902749,
+                "lng": 117.14483960972487,
+                "coord_system": "wgs84",
+                "native_lat": 36.666111,
+                "native_lng": 117.157448,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "prompt": "历下法院怎么走？",
+    "calls": [
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "法院",
+          "city": "济南",
+          "district": "历下区"
+        },
+        "result": [
+          {
+            "name": "济南市历下区人民法院",
+            "address": "历山路147号",
+            "telephone": "(0531)12368",
+            "lat": 36.65824279814486,
+            "lng": 117.03171147408166,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市历下区人民法院",
+                "address": "历山路147号",
+                "telephone": "(0531)12368",
+                "lat": 36.65824279814486,
+                "lng": 117.03171147408166,
+                "coord_system": "wgs84",
+                "native_lat": 36.664454,
+                "native_lng": 117.04423,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          },
+          {
+            "name": "济南市历下区人民法院姚家人民法庭",
+            "address": "浆水泉路9号",
+            "telephone": "(0531)12368",
+            "lat": 36.65515312141185,
+            "lng": 117.07971320993244,
+            "coord_system": "wgs84",
+            "adcode": null,
+            "source": "map",
+            "confidence": "low",
+            "sources": [
+              {
+                "provider": "baidu",
+                "name": "济南市历下区人民法院姚家人民法庭",
+                "address": "浆水泉路9号",
+                "telephone": "(0531)12368",
+                "lat": 36.65515312141185,
+                "lng": 117.07971320993244,
+                "coord_system": "wgs84",
+                "native_lat": 36.661513,
+                "native_lng": 117.09235,
+                "native_coord_system": "bd09"
+              }
+            ],
+            "discrepancies": [],
+            "warnings": [],
+            "cached": false,
+            "mock": false
+          }
+        ]
+      },
+      {
+        "tool": "plan_route",
+        "arguments": {
+          "origin": "济南西站",
+          "destination": "历山路147号"
+        },
+        "result": {
+          "error": {
+            "code": "GEOCODE_FAILED",
+            "message": "无法解析地址：历山路147号"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "prompt": "火星上有法院吗？",
+    "calls": [
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "法院",
+          "city": "火星"
+        },
+        "result": {
+          "error": {
+            "code": "CITY_NOT_FOUND",
+            "message": "暂不支持城市“火星”，v1 只覆盖济南及下属区县"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "prompt": "什么是违约金？",
+    "calls": [],
+    "note": "按要求不调用任何工具，直接解释概念"
+  },
+  {
+    "id": 8,
+    "prompt": "民法典第 9999 条怎么说？",
+    "calls": [
+      {
+        "tool": "verify_citation",
+        "arguments": {
+          "text": "民法典第9999条"
+        },
+        "result": [
+          {
+            "citation": "民法典第9999条",
+            "status": "not_found",
+            "official_text": null,
+            "mismatch": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "prompt": "民诉法第 85 条怎么规定期间计算？",
+    "calls": [
+      {
+        "tool": "search_law",
+        "arguments": {
+          "query": "民诉法第85条"
+        },
+        "result": [
+          {
+            "law": "中华人民共和国民事诉讼法",
+            "article": "第八十五条",
+            "text": "第八十五条　期间包括法定期间和人民法院指定的期间。\n期间以时、日、月、年计算。期间开始的时和日，不计算在期间内。\n期间届满的最后一日是法定休假日的，以法定休假日后的第一日为期间届满的日期。\n期间不包括在途时间，诉讼文书在期满前交邮的，不算过期。",
+            "effective_date": "2024-01-01",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818a21dc13018b425303b7086d&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E4%BA%8B%E8%AF%89%E8%AE%BC%E6%B3%95",
+            "status": "有效"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "prompt": "历下区法律援助中心在哪？电话多少？",
+    "calls": [
+      {
+        "tool": "find_legal_service",
+        "arguments": {
+          "keyword": "法律援助中心",
+          "city": "济南",
+          "district": "历下区"
+        },
+        "result": {
+          "results": [
+            {
+              "name": "山东省济南市历下区法律援助中心",
+              "address": "济南市历下区历山路151号",
+              "telephone": "0531-88580775",
+              "lat": 36.677819,
+              "lng": 117.041801,
+              "coord_system": "wgs84",
+              "adcode": "370102",
+              "source": "snapshot",
+              "confidence": "official",
+              "sources": [
+                {
+                  "provider": "12348",
+                  "name": "山东省济南市历下区法律援助中心",
+                  "address": "济南市历下区历山路151号",
+                  "telephone": "0531-88580775",
+                  "lat": 36.677819,
+                  "lng": 117.041801,
+                  "coord_system": "wgs84",
+                  "native_lat": 36.677819,
+                  "native_lng": 117.041801,
+                  "native_coord_system": "wgs84"
+                }
+              ],
+              "discrepancies": [],
+              "warnings": [],
+              "cached": false,
+              "mock": false
+            }
+          ],
+          "coverage": {
+            "districts_total": 1,
+            "districts_live": 0,
+            "districts_snapshot": 1,
+            "districts_map": 0,
+            "districts_failed": 0
+          },
+          "warnings": [
+            {
+              "code": "LEGAL_AID_PARTIAL",
+              "district": "历下区",
+              "message": "12348 实时查询不可用，已使用本地快照"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "prompt": "诉讼请求金额 100 万元，财产案件受理费大概多少？",
+    "calls": [
+      {
+        "tool": "legal_calculator",
+        "arguments": {
+          "action": "litigation_fee",
+          "amount": 1000000,
+          "case_type": "财产案件"
+        },
+        "result": {
+          "case_type": "财产案件",
+          "fee": 13800.0,
+          "fee_min": 13800.0,
+          "fee_max": 13800.0,
+          "breakdown": [
+            {
+              "range": "不超过1万元",
+              "rate": "每件50元",
+              "fee": 50.0
+            },
+            {
+              "range": "10000-100000",
+              "rate": "2.5%",
+              "fee": 2250.0
+            },
+            {
+              "range": "100000-200000",
+              "rate": "2%",
+              "fee": 2000.0
+            },
+            {
+              "range": "200000-500000",
+              "rate": "1.5%",
+              "fee": 4500.0
+            },
+            {
+              "range": "500000-1e+06",
+              "rate": "1%",
+              "fee": 5000.0
+            }
+          ],
+          "notes": [
+            "按财产案件分段累计计算"
+          ],
+          "action": "litigation_fee",
+          "legal_basis": {
+            "law": "诉讼费用交纳办法",
+            "article": "第十三条",
+            "text": "第十三条　案件受理费分别按照下列标准交纳：\n(一)财产案件根据诉讼请求的金额或者价额，按照下列比例分段累计交纳：\n1．不超过1万元的，每件交纳50元；\n2．超过1万元至10万元的部分，按照2.5%交纳；\n3．超过10万元至20万元的部分，按照2%交纳；\n4．超过20万元至50万元的部分，按照1.5%交纳；\n5．超过50万元至100万元的部分，按照1%交纳；\n6．超过100万元至200万元的部分，按照0.9%交纳；\n7．超过200万元至500万元的部分，按照0.8%交纳；\n8．超过500万元至1000万元的部分，按照0.7%交纳；\n9．超过1000万元至2000万元的部分，按照0.6%交纳；\n10．超过2000万元的部分，按照0.5%交纳。\n(二)非财产案件按照下列标准交纳：\n1．离婚案件每件交纳50元至300元。涉及财产分割，财产总额不超过20万元的，不另行交纳；超过20万元的部分，按照0.5%交纳。\n2．侵害姓名权、名称权、肖像权、名誉权、荣誉权以及其他人格权的案件，每件交纳100元至500元。涉及损害赔偿，赔偿金额不超过5万元的，不另行交纳；超过5万元至10万元的部分，按照1%交纳；超过10万元的部分，按照0.5%交纳。\n3．其他非财产案件每件交纳50元至100元。\n(三)知识产权民事案件，没有争议金额或者价额的，每件交纳500元至1000元；有争议金额或者价额的，按照财产案件的标准交纳。\n(四)劳动争议案件每件交纳10元。\n(五)行政案件按照下列标准交纳：\n1．商标、专利、海事行政案件每件交纳100元；\n2．其他行政案件每件交纳50元。\n(六)当事人提出案件管辖权异议，异议不成立的，每件交纳50元至100元。\n省、自治区、直辖市人民政府可以结合本地实际情况在本条第(二)项、第(三)项、第(六)项规定的幅度内制定具体交纳标准。",
+            "effective_date": "",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8080816f3e98bd016f41e1395a015f&type=%E8%A1%8C%E6%94%BF%E6%B3%95%E8%A7%84&title=%E8%AF%89%E8%AE%BC%E8%B4%B9%E7%94%A8%E4%BA%A4%E7%BA%B3%E5%8A%9E%E6%B3%95",
+            "status": "有效"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "prompt": "判决书 2026 年 11 月 6 日送达，上诉期到哪天？",
+    "calls": [
+      {
+        "tool": "legal_calculator",
+        "arguments": {
+          "action": "deadline",
+          "start_date": "2026-11-06",
+          "days": 15,
+          "deadline_type": "appeal_judgment"
+        },
+        "result": {
+          "start_date": "2026-11-06",
+          "days": 15,
+          "day_type": "natural",
+          "original_end_date": "2026-11-21",
+          "end_date": "2026-11-23",
+          "adjusted": true,
+          "holiday_source": "timor.tech",
+          "action": "deadline",
+          "deadline_type": "appeal_judgment",
+          "legal_basis": {
+            "law": "中华人民共和国民事诉讼法",
+            "article": "第一百七十一条",
+            "text": "第一百七十一条　当事人不服地方人民法院第一审判决的，有权在判决书送达之日起十五日内向上一级人民法院提起上诉。\n当事人不服地方人民法院第一审裁定的，有权在裁定书送达之日起十日内向上一级人民法院提起上诉。",
+            "effective_date": "2024-01-01",
+            "source_url": "https://flk.npc.gov.cn/detail?id=ff8081818a21dc13018b425303b7086d&type=%E6%B3%95%E5%BE%8B&title=%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E6%B0%91%E4%BA%8B%E8%AF%89%E8%AE%BC%E6%B3%95",
+            "status": "有效"
+          },
+          "notes": [
+            "期间开始日不计算在内",
+            "原届满日 2026-11-21 是休假日，顺延至 2026-11-23"
+          ]
+        }
+      }
+    ]
+  }
+]
