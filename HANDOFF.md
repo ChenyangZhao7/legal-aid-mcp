@@ -1,10 +1,10 @@
 # 法律援助一条龙 MCP · 交接与优化清单
 
-> 日期：2026-11-08
-> 当前分支：`v2`（基于 `master` 的 v1.2）
-> 状态：**v2 实现完成**；`200 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
+> 日期：2026-11-09
+> 当前分支：`master`；本地领先 `origin/master` 1 个提交（`5aa2853`，截图归档），**暂未 push**
+> 状态：**v2 实现完成 + WorkBuddy 工具级 12 条实测完成**；`200 passed`；默认 `USE_MOCK=1`；百度真实调用预算 `20`，已用 10
 >
-> 2026-11-08 本轮：v1.2 修复 P0-1～P0-4 并补齐参数 description；v2 增加多源地图、民事诉讼语料、12348/区划/节假日/计算器（见 CHANGELOG）。
+> 当前收尾：截图已归档到 `docs/screenshots/`；3 张合格，2 张缺工具调用块待补；模型自主选择（DeepSeek V4.1 Flash）仍待逐条新建对话复测。
 
 ---
 
@@ -19,16 +19,18 @@
 | 项 | 状态 |
 |---|---|
 | MCP 工具 | 5 个，stdio 可加载 |
-| WorkBuddy | 已挂载，配置条目 `legal-aid-mcp` |
+| WorkBuddy | 已挂载 5 个工具；工具级 12 条实测 11 通过 / 1 部分通过 |
 | 自动化测试 | `200 passed` |
 | 语料 | 1678 条：民法典合同编 526 + 合同编司法解释 69 + 民诉法 306 + 民诉法解释 550 + 证据规定 100 + 诉讼费办法 56 + 法律援助法 71 |
 | 地图 | 百度 primary；腾讯/天地图可选（无 key 自动跳过） |
 | 免费数据源 | 12348 法援目录、民政部区划、timor 节假日，均有本地快照 |
 | 真实百度调用 | 已用 10 次 / 上限 20 |
 | 默认模式 | `USE_MOCK=1`，不耗额度 |
-| 安全 | tracked files 无 AK；`.env` 已 gitignore |
-| Inspector | 工具列表截图 + JSON 已保存 |
-| WorkBuddy 8 条人工场景 | **待执行** |
+| 安全 | tracked files 无 AK；`.env` 已 gitignore；Inspector 截图 token 已打码 |
+| Inspector | 5 工具列表截图 + `search_law` 调用结果截图 |
+| WorkBuddy 8 条人工场景 | 工具级已跑；**模型自主选择待复测** |
+| 截图 | 3 张合格；`workbuddy-multi-tool` / `workbuddy-calculator` 缺工具调用块 |
+| 远程 | 本地 `5aa2853` 未 push（代理不可用） |
 
 ### 快速验证
 
@@ -214,10 +216,10 @@ docs/                         设计、测试报告、学习笔记、WorkBuddy �
 
 ## 5. 下一 session 建议顺序
 
-1. 先跑 WorkBuddy 8 条场景，填 `docs/test-report.md`（当前唯一未完成的交付项）。
-2. P0 的 1–4 已在 v1.2 修复；v2 已完成地图多源、民事诉讼语料、12348/区划/节假日/计算器（200 passed）。
-3. 做一次真实百度小流量验收：1 次机构 + 1 次路线，确认预算计数和缓存。
-4. 再考虑 IDF/BM25、Amap adapter、打包。
+1. 重启 WorkBuddy（含托盘），用 DeepSeek V4.1 Flash **逐条新建对话**复测 8 条，重点第 5、7 条；填 `docs/test-report.md`。
+2. 在 WorkBuddy 里展开「已完成 …s ›」工具调用详情，补拍 `workbuddy-multi-tool.png` 和 `workbuddy-calculator.png`。
+3. 网络/代理恢复后 `git push origin master`（本地 `5aa2853` 领先 1 个提交）。
+4. 可选：真实百度小流量验收（1 次机构 + 1 次路线）；IDF/BM25、打包留到后续。
 
 ---
 
