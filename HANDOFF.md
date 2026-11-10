@@ -33,7 +33,7 @@
 ### 快速验证
 
 ```powershell
-cd Z:\project-mcp
+cd legal-aid-mcp
 .venv\Scripts\python -m pytest -q
 .venv\Scripts\python scripts\verify_laws.py --data-dir data\laws
 .venv\Scripts\python scripts\check_secrets.py
@@ -52,13 +52,13 @@ OK: no secrets in tracked files
 ## 2. WorkBuddy 环境
 
 - 程序：`D:\workbuddy\WorkBuddy.exe`
-- MCP 配置：`C:\Users\21165\.workbuddy\connectors\default\mcp.json`
-- 配置备份：`C:\Users\21165\.workbuddy\connectors\default\mcp.json.bak-20261108-200348`
+- MCP 配置：`%USERPROFILE%\.workbuddy\connectors\default\mcp.json`
+- 配置备份：`%USERPROFILE%\.workbuddy\connectors\default\mcp.json.bak-20261108-200348`
 - 条目名：`legal-aid-mcp`
 - 当前环境变量：`USE_MOCK=1`、`USE_LIVE=0`
 - 工具审批：第一次调用需批准 5 个工具
 - 日志：
-  - `C:\Users\21165\.workbuddy\logs`
+  - `%USERPROFILE%\.workbuddy\logs`
   - `D:\workbuddy\debug.log`
 
 当前条目：

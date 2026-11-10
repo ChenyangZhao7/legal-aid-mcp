@@ -7,7 +7,7 @@
 
 - 项目版本：`git 899e86d`（v2，23:27 提交），5 个工具：`find_legal_service`、`plan_route`、
   `search_law`、`verify_citation`、`legal_calculator`。
-- 启动方式：**本地 stdio 子进程**连 `Z:\project-mcp\server.py`，env `USE_MOCK=1 / USE_LIVE=0`。
+- 启动方式：**本地 stdio 子进程**连 `legal-aid-mcp\server.py`，env `USE_MOCK=1 / USE_LIVE=0`。
   原因是当前 WorkBuddy 会话挂载的仍是 v1 的 4 个工具（`legal_calculator` 查不到），
   需按文档前置第 1 条「完全退出 WorkBuddy（托盘也退出）再打开」后，才能在会话内直接测。
 - 与文档前置的偏差：

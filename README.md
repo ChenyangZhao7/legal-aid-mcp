@@ -82,7 +82,7 @@ docs/                     设计、计划、测试报告、学习笔记
 ## 安装
 
 ```powershell
-cd Z:\project-mcp
+cd legal-aid-mcp
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
@@ -151,7 +151,7 @@ npx @modelcontextprotocol/inspector python server.py
 本机已写入 WorkBuddy 的 MCP 配置：
 
 ```text
-C:\Users\21165\.workbuddy\connectors\default\mcp.json
+%USERPROFILE%\.workbuddy\connectors\default\mcp.json
 ```
 
 条目名 `legal-aid-mcp`，当前是 `USE_MOCK=1`、`USE_LIVE=0`，不消耗百度额度。重启 WorkBuddy 后在 MCP / Connectors 设置里启用，并批准 5 个工具。

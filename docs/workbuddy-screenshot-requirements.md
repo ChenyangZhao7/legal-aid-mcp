@@ -2,13 +2,13 @@
 
 > 目标：补齐任务书要求的运行截图，证明 5 个工具能在 WorkBuddy / MCP Inspector 中真实调用。
 > 只拍真实界面，不要 P 图、不要伪造工具调用、不要补造返回结果。
-> 保存目录：`Z:\project-mcp\docs\screenshots\`
+> 保存目录：`legal-aid-mcp\docs\screenshots\`
 
 ---
 
 ## 0. 给 WorkBuddy 的直接指令
 
-请按下面的顺序完成 5 张截图，并保存到 `Z:\project-mcp\docs\screenshots\`：
+请按下面的顺序完成 5 张截图，并保存到 `legal-aid-mcp\docs\screenshots\`：
 
 1. `inspector-tools-5.png`：MCP Inspector 的工具列表，必须能看到 5 个工具名。
 2. `inspector-search-law.png`：Inspector 执行 `search_law(query="违约金过高")` 的结果，必须能看到返回的民法典第五百八十五条。
@@ -147,7 +147,7 @@
 统一保存到：
 
 ```text
-Z:\project-mcp\docs\screenshots\
+legal-aid-mcp\docs\screenshots\
 ```
 
 文件名必须是：

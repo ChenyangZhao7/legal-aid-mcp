@@ -56,7 +56,7 @@
 | 司法解释规模 | 官方 docx 解析出 69 条 |
 | 运行环境 | Python 3.14.7；`mcp` 2.3.0 声明 `requires_python >=3.10`，并对 3.14 有专门依赖分支；2.x 把 `FastMCP` 更名为 `MCPServer`（`mcp.server.mcpserver.MCPServer`） |
 | pi agent | `pi 1.4.0`，模型 `deepseek/deepseek-flash`；有 bash，可用 `curl` 访问 flk；没有 webfetch |
-| 仓库现状 | `Z:\project-mcp` 目前只有执行书和 `.opencode` 配置，不是 git 仓库 |
+| 仓库现状 | `legal-aid-mcp` 目前只有执行书和 `.opencode` 配置，不是 git 仓库 |
 
 ## 5. 方案选择
 
@@ -291,7 +291,7 @@ python scripts/mcp_transcript.py --out docs/mcp-transcript.json
 ## 11. 交付物与目录
 
 ```text
-legal-aid-mcp/                      （即 Z:\project-mcp）
+legal-aid-mcp/                      （即 legal-aid-mcp）
 ├─ server.py
 ├─ config.py
 ├─ errors.py

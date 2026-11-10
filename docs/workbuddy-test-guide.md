@@ -8,7 +8,7 @@
 本机已把 `legal-aid-mcp` 写入 WorkBuddy 的 MCP 配置：
 
 ```text
-C:\Users\21165\.workbuddy\connectors\default\mcp.json
+%USERPROFILE%\.workbuddy\connectors\default\mcp.json
 ```
 
 条目使用 `USE_MOCK=1`、`USE_LIVE=0`，不会消耗百度额度。原文件备份在同目录的 `mcp.json.bak-20261108-200348`。
@@ -30,7 +30,7 @@ C:\Users\21165\.workbuddy\connectors\default\mcp.json
 
 然后重启 WorkBuddy。`USE_MOCK` 可以保留 1，`USE_LIVE=1` 会优先走真实调用。
 
-如果设置里看不到 `legal-aid-mcp`，先检查 JSON 是否合法，再看 `C:\Users\21165\.workbuddy\logs` 里的 MCP 日志。
+如果设置里看不到 `legal-aid-mcp`，先检查 JSON 是否合法，再看 `%USERPROFILE%\.workbuddy\logs` 里的 MCP 日志。
 
 
 ## 8 条场景
