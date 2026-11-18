@@ -1,126 +1,128 @@
-# 法律援助一条龙 MCP
+# Legal Aid MCP
 
-面向济南的 stdio MCP Server：普通人能找法院/法律援助/律所、查路线、算诉讼费和期间；律师能查民事诉讼条文、核对引用。
+**English** | [中文](README.zh-CN.md)
 
-## 5 个工具
+A stdio MCP server for Jinan, Shandong. Ordinary people can find courts, legal-aid centres and law firms, plan a route, and compute filing fees and deadlines; lawyers can look up civil-procedure articles and check citations.
 
-| 工具 | 作用 |
+## The five tools
+
+| Tool | What it does |
 |---|---|
-| `find_legal_service` | 在济南搜索法院、律师事务所、法律援助中心，返回名称、地址、电话、经纬度、来源和置信度 |
-| `plan_route` | 规划驾车/步行路线，返回距离、预计时间、主要步骤；可多地图源交叉验证 |
-| `search_law` | 在民法典合同编、民诉法、民诉法解释、证据规定、诉讼费办法、法律援助法中检索条文 |
-| `verify_citation` | 核对文字里的法条引用：存在 / 不存在 / 已修改 / 不在收录范围 |
-| `legal_calculator` | 计算诉讼费、保全费、上诉期/答辩期/自定义期间，附官方条文依据 |
+| `find_legal_service` | Search courts, law firms and legal-aid centres in Jinan; returns name, address, phone, coordinates, source and confidence |
+| `plan_route` | Driving or walking routes with distance, estimated time and main steps; cross-checked across map providers |
+| `search_law` | Search articles in the Civil Code contract book, the Civil Procedure Law, its interpretation, the evidence rules, the litigation-fee rules and the Legal Aid Law |
+| `verify_citation` | Check an article citation in text: exists / does not exist / amended / out of scope |
+| `legal_calculator` | Filing fees, preservation fees, appeal and defence periods, custom periods, each with the governing article |
 
-## 选型与任务书对照
+## API choice against the brief
 
-任务书要求自选 API 满足“国内直连、有免费额度、HTTPS、有官方文档”。本项目选百度地图开放平台：
+The brief asked for an API with mainland-China access, a free tier, HTTPS and official docs. This project uses Baidu Maps:
 
-| 要求 | 本项目情况 |
+| Requirement | This project |
 |---|---|
-| 国内直连 | `https://api.map.baidu.com`，2026-11-06 实测地点检索、地理编码、驾车路线均返回 `status: 0` |
-| 有免费额度 | 百度地图开放平台个人开发者有免费配额，具体以控制台“配额”页为准；项目另设 `LIVE_BUDGET=20` 生命周期硬上限，默认 mock 不耗额度 |
-| HTTPS | 全部请求走 HTTPS |
-| 官方文档 | <https://lbsyun.baidu.com/> |
+| Mainland access | `https://api.map.baidu.com`; on 2026-11-06 place search, geocoding and driving routes all returned `status: 0` |
+| Free tier | Baidu's personal developer quota; check the console's Quota page. The project also enforces a lifetime cap of `LIVE_BUDGET=20` live calls, and defaults to mock so no quota is spent |
+| HTTPS | Every request |
+| Official docs | <https://lbsyun.baidu.com/> |
 
-高德 key 实测返回 `INVALID_USER_KEY`，且用户明确不用高德；v2 不接高德，改用**百度 + 腾讯 + 天地图**多源：
+AMap's key returned `INVALID_USER_KEY` in testing, and the user explicitly did not want AMap. v2 therefore uses **Baidu + Tencent + Tianditu**:
 
-| provider | key | 说明 |
+| Provider | Key | Notes |
 |---|---|---|
-| 百度地图 | `BAIDU_AK` | 默认 primary；有免费个人配额 |
-| 腾讯位置服务 | `TENCENT_MAP_KEY` | 可选；无 key 自动跳过 |
-| 天地图 | `TIANDITU_KEY` | 可选；官方地理信息，无 key 自动跳过 |
+| Baidu Maps | `BAIDU_AK` | Default primary; free personal quota |
+| Tencent Location | `TENCENT_MAP_KEY` | Optional; skipped without a key |
+| Tianditu | `TIANDITU_KEY` | Optional, official geographic data; skipped without a key |
 
-- 默认顺序 `MAP_PROVIDERS=baidu,tencent,tianditu`。
-- 任一 provider 超时/配额/key 失效，自动尝试下一个；全部失败时按 `MAP_LIVE_FAILURE_MODE` 处理（默认 `cache`）。
-- 有 2 个以上源成功时，返回 `confidence` 和 `discrepancies`；结果取去重并集，不丢 secondary 独有 POI。
-- 坐标统一输出 WGS-84；`plan_route` 的坐标输入默认 WGS-84，可用 `coord_system=gcj02|bd09` 兼容旧坐标。
+- Default order is `MAP_PROVIDERS=baidu,tencent,tianditu`.
+- A timeout, exhausted quota or bad key falls through to the next provider; if all fail, `MAP_LIVE_FAILURE_MODE` decides (default `cache`).
+- With two or more successful sources the result carries `confidence` and `discrepancies`; the merge is a de-duplicated union, so POIs unique to a secondary provider are not lost.
+- Coordinates are always WGS-84; `plan_route` accepts `coord_system=gcj02|bd09` for older coordinates.
 
-## 免费数据源
+## Free data sources
 
-| 数据源 | 用途 | 失败时 |
+| Source | Used for | On failure |
 |---|---|---|
-| 12348 中国法律服务网 | 济南区县法律援助中心名称/地址/电话 | 本地快照 → 地图 POI |
-| 民政部国家地名信息库 | 济南 12 区县校验和区划码 | 本地快照 |
-| timor.tech 节假日 | 诉讼期间/上诉期顺延 | 本地快照 → 仅周末 |
-| flk.npc.gov.cn | 全部法条原文 | 已提交的本地语料 |
-| 本地计算器 | 诉讼费/保全费/期间 | 不依赖外部服务 |
+| 12348 China Legal Service Network | Names, addresses and phones of Jinan district legal-aid centres | Local snapshot → map POI |
+| Ministry of Civil Affairs gazetteer | Validation and division codes for Jinan's 12 districts | Local snapshot |
+| timor.tech holidays | Shifting litigation and appeal deadlines around holidays | Local snapshot → weekends only |
+| flk.npc.gov.cn | All statutory text | The committed local corpus |
+| Local calculators | Fees and periods | No external service |
 
-12348 接口是官方页面使用的未公开接口，带反爬签名；本项目做了低频查询、24 小时缓存和快照兜底。它变化时不会阻塞法条、计算器或地图工具。
+The 12348 endpoint is the undocumented one behind the official page and carries an anti-bot signature. This project queries it at low frequency, caches for 24 hours, and falls back to a snapshot. If it changes, the statutes, calculators and map tools keep working.
 
-## 目录
+## Layout
 
 ```text
-server.py                 MCP server 入口（stdio）
-config.py                 环境变量与路径
-errors.py                 统一错误结构与 run_tool
-context.py                AppContext
-coord.py                  BD-09 / GCJ-02 / WGS-84 转换
-baidu.py                  百度地图客户端（mock/live/缓存/预算）
-maps/                     多地图 provider、failover、交叉验证
-divisions.py              民政部区划索引（济南 12 区县）
-holidays.py               节假日/工作日计算
-legal_aid.py              12348 法律援助目录客户端
-calculators.py            诉讼费、保全费、期间计算
-laws.py                   中文数字、引用解析、语料加载与检索
-tools/                    5 个工具
-scripts/fetch_laws.py     从国家法律法规数据库抓官方 docx/pdf
-scripts/verify_laws.py    校验 1678 条、条号、抽样和 SHA256
-scripts/fetch_divisions.py 抓取济南区划快照
-scripts/fetch_holidays.py 抓取节假日快照
-scripts/fetch_legal_aid.py 抓取 12348 济南法援中心快照
-scripts/record_fixtures.py 录制百度样本
-scripts/mcp_transcript.py 生成 stdio JSON-RPC 对话记录
-data/laws/                已生成的语料 JSON + manifest
-data/divisions/           济南区划快照
-data/holidays/            2025/2026 节假日快照
-data/legal_aid/           12348 济南法援中心快照
-fixtures/baidu/           百度样本（测试/演示默认走这里）
-docs/                     设计、计划、测试报告、学习笔记
+server.py                  MCP server entry point (stdio)
+config.py                  Environment variables and paths
+errors.py                  Uniform error shape and run_tool
+context.py                 AppContext
+coord.py                   BD-09 / GCJ-02 / WGS-84 conversion
+baidu.py                   Baidu Maps client (mock / live / cache / budget)
+maps/                      Multiple map providers, failover, cross-checking
+divisions.py               Ministry gazetteer index (Jinan's 12 districts)
+holidays.py                Holiday / working-day arithmetic
+legal_aid.py               12348 legal-aid directory client
+calculators.py             Filing fees, preservation fees, period arithmetic
+laws.py                    Chinese numerals, citation parsing, corpus loading and search
+tools/                     The five tools
+scripts/fetch_laws.py      Fetch official docx/pdf from the national law database
+scripts/verify_laws.py     Verify 1678 articles, numbering, sampling and SHA256
+scripts/fetch_divisions.py Snapshot Jinan's divisions
+scripts/fetch_holidays.py  Snapshot public holidays
+scripts/fetch_legal_aid.py Snapshot 12348's Jinan legal-aid centres
+scripts/record_fixtures.py Record Baidu samples
+scripts/mcp_transcript.py  Produce a stdio JSON-RPC transcript
+data/laws/                 Generated corpus JSON + manifest
+data/divisions/            Jinan division snapshot
+data/holidays/             2025/2026 holiday snapshots
+data/legal_aid/            12348 Jinan legal-aid snapshot
+fixtures/baidu/            Baidu samples (tests and demos read these by default)
+docs/                      Design, plan, test report, study notes
 ```
 
-## 安装
+## Install
 
 ```powershell
-cd legal-aid-mcp
+cd <path-to-project-mcp>
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-也可以用 `uv`：
+Or with `uv`:
 
 ```powershell
 uv venv --python 3.14 .venv
 uv pip install --python .venv\Scripts\python.exe -r requirements.txt
 ```
 
-## 配置
+## Configure
 
 ```powershell
 copy .env.example .env
 notepad .env
 ```
 
-至少填：
+At minimum:
 
 ```text
-BAIDU_AK=你的百度服务端AK
+BAIDU_AK=<your Baidu server-side AK>
 ```
 
-默认 `USE_MOCK=1`、`USE_LIVE=0`，测试和演示都读 `fixtures/baidu/`，不消耗百度额度。要做真实调用时改：
+`USE_MOCK=1` and `USE_LIVE=0` are the defaults; tests and demos read `fixtures/baidu/` and spend no Baidu quota. For real calls:
 
 ```text
 USE_LIVE=1
 ```
 
-`USE_MOCK=0` 且 `USE_LIVE=0` 会启动失败，避免“关掉 mock 却仍在读样本”。`LIVE_BUDGET=20` 是项目生命周期真实调用硬上限，不按日重置。相同请求会走 `cache/`，不重复花预算。
+`USE_MOCK=0` together with `USE_LIVE=0` refuses to start, so you cannot turn mock off and still read samples. `LIVE_BUDGET=20` is a lifetime hard cap on real calls, not a daily one; identical requests hit `cache/` and do not spend budget twice.
 
-v2 新增：
+New in v2:
 
 ```text
-TENCENT_MAP_KEY=          # 可选
-TIANDITU_KEY=             # 可选
+TENCENT_MAP_KEY=          # optional
+TIANDITU_KEY=             # optional
 MAP_PROVIDERS=baidu,tencent,tianditu
 MAP_CROSS_CHECK=1
 MAP_LIVE_FAILURE_MODE=cache
@@ -128,15 +130,15 @@ LEGAL_AID_LIVE=1
 HOLIDAY_LIVE=1
 ```
 
-`USE_LIVE=0` 是全局离线开关：地图只用 fixtures，12348/民政部/节假日只用本地快照，测试不会联网。没有腾讯/天地图 key 时它们自动跳过，百度/mock/法条/计算器照常工作。
+`USE_LIVE=0` is the global offline switch: maps use fixtures only, 12348, the gazetteer and holidays use local snapshots only, and tests never touch the network. Without Tencent or Tianditu keys they are skipped and Baidu, mock, statutes and calculators still work.
 
-## 运行
+## Run
 
 ```powershell
 python server.py
 ```
 
-这是 stdio server，直接运行会等待 MCP Client 输入；用下面的 Inspector 或 WorkBuddy 连接。
+This is a stdio server; running it directly waits for an MCP client. Connect it through the Inspector or WorkBuddy below.
 
 ### MCP Inspector
 
@@ -144,25 +146,25 @@ python server.py
 npx @modelcontextprotocol/inspector python server.py
 ```
 
-在 Inspector 里应看到 5 个工具；`search_law("违约金过高")` 应返回民法典第五百八十五条。
+The Inspector should list five tools; `search_law("违约金过高")` should return Article 585 of the Civil Code.
 
 ### WorkBuddy
 
-本机已写入 WorkBuddy 的 MCP 配置：
+The MCP configuration on this machine lives at:
 
 ```text
 %USERPROFILE%\.workbuddy\connectors\default\mcp.json
 ```
 
-条目名 `legal-aid-mcp`，当前是 `USE_MOCK=1`、`USE_LIVE=0`，不消耗百度额度。重启 WorkBuddy 后在 MCP / Connectors 设置里启用，并批准 5 个工具。
+The entry is named `legal-aid-mcp` and currently runs `USE_MOCK=1`, `USE_LIVE=0`, so it spends no Baidu quota. Restart WorkBuddy, enable it under MCP / Connectors, and approve the five tools.
 
-完整条目：
+The full entry:
 
 ```json
 "legal-aid-mcp": {
   "type": "stdio",
-  "command": "Z:\\project-mcp\\.venv\\Scripts\\python.exe",
-  "args": ["Z:\\project-mcp\\server.py"],
+  "command": "<path-to-project-mcp>\\.venv\\Scripts\\python.exe",
+  "args": ["<path-to-project-mcp>\\server.py"],
   "env": {
     "USE_MOCK": "1",
     "USE_LIVE": "0"
@@ -172,9 +174,9 @@ npx @modelcontextprotocol/inspector python server.py
 }
 ```
 
-需要真实地图调用时，把 `env` 改成 `USE_LIVE=1` 并加 `BAIDU_AK`，然后重启 WorkBuddy。详细步骤见 `docs/workbuddy-test-guide.md`。
+For real map calls, set `USE_LIVE=1` and add `BAIDU_AK` to `env`, then restart WorkBuddy. Details in `docs/workbuddy-test-guide.md`.
 
-## 测试
+## Tests
 
 ```powershell
 .venv\Scripts\python -m pytest -q
@@ -183,63 +185,67 @@ npx @modelcontextprotocol/inspector python server.py
 .venv\Scripts\python scripts\mcp_transcript.py --out docs\mcp-transcript.json
 ```
 
-`--require-raw` 用于 CI 或干净 clone：`data/raw/` 不存在时直接失败，而不是只 WARN。
+`--require-raw` is for CI and clean clones: when `data/raw/` is missing it fails instead of only warning.
 
-当前结果：`200 passed`；语料校验输出 `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`。
+Current result: `200 passed`; corpus verification prints `OK: 1678 条；民法典合同编 526 条；司法解释 69 条；民事诉讼核心包已校验`.
 
-## 交付证据
+## Delivery evidence
 
-- `HANDOFF.md`：交接与优化清单（下一 session 先读这个）
-- `docs/screenshots/inspector-tools.jpeg`：MCP Inspector 工具列表
-- `docs/inspector-tools.json`：Inspector `tools/list` 的 JSON 输出
-- `docs/mcp-transcript.json`：stdio 5 个工具调用记录
-- `docs/workbuddy-test-guide.md`：WorkBuddy 8 条人工测试步骤
-- `docs/workbuddy-prompts.md`：可直接复制到 WorkBuddy 的 8 条核心 + 4 条 v2 prompt
-- `docs/test-report.md`：8 条场景与真实调用记录
+- `HANDOFF.md`: handover and improvement list (read this first in a new session)
+- `docs/screenshots/inspector-tools.jpeg`: MCP Inspector tool list
+- `docs/inspector-tools.json`: Inspector `tools/list` output
+- `docs/mcp-transcript.json`: five stdio tool calls
+- `docs/workbuddy-test-guide.md`: eight manual test steps in WorkBuddy
+- `docs/workbuddy-prompts.md`: eight core and four v2 prompts to paste into WorkBuddy
+- `docs/test-report.md`: eight scenarios and real call records
 
-## 法条来源与范围
+## Sources and scope of the statutes
 
-- 来源：国家法律法规数据库 `flk.npc.gov.cn` 的官方 docx（解析用）和公报 PDF（存证用）。
-- 民法典合同编：第 463–988 条，共 526 条。
-- 合同编通则司法解释：第 1–69 条，共 69 条。
-- 民事诉讼法（2023 修正）：306 条。
-- 民诉法解释（2022 修正）：550 条。
-- 民事诉讼证据规定：100 条。
-- 诉讼费用交纳办法：56 条。
-- 法律援助法：71 条。
-- 合计 1678 条。
-- 元数据：`data/laws/manifest.json` 记录条数、全文条号范围、公布/施行日期、docx/PDF SHA256。
-- 重新生成：
+- Source: official docx (for parsing) and gazette PDFs (for evidence) from `flk.npc.gov.cn`.
+- Civil Code, contract book: Articles 463–988, 526 articles.
+- Interpretation on the General Provisions of the Contract Book: Articles 1–69.
+- Civil Procedure Law (2023 amendment): 306 articles.
+- Interpretation of the Civil Procedure Law (2022 amendment): 550 articles.
+- Evidence rules in civil litigation: 100 articles.
+- Measures on Payment of Litigation Costs: 56 articles.
+- Legal Aid Law: 71 articles.
+- 1678 articles in total.
+- Metadata: `data/laws/manifest.json` records counts, full-text article ranges, promulgation and effective dates, and docx/PDF SHA256.
+- Regenerate with:
 
 ```powershell
 .venv\Scripts\python scripts\fetch_laws.py --out data\laws --raw-dir data\raw
 .venv\Scripts\python scripts\verify_laws.py --data-dir data\laws
 ```
 
-`data/raw/` 里的原始 docx/PDF 已 gitignore；仓库只提交解析后的 JSON。
+The original docx/PDF under `data/raw/` are git-ignored; only the parsed JSON is committed.
 
-## 安全
+## Security
 
-- AK 只从环境变量 `BAIDU_AK` 读取，不写进代码、日志、错误信息或缓存元数据。
-- `.env` 已 gitignore；提交前用 `git check-ignore .env` 和 `git ls-files` 确认。
-- 错误信息只带百度 `status`/`message`，不拼接带 `ak=` 的 URL。
+- The AK is read from `BAIDU_AK` only; it never appears in code, logs, error messages or cache metadata.
+- `.env` is git-ignored; confirm before committing with `git check-ignore .env` and `git ls-files`.
+- Errors carry Baidu's `status`/`message` and never a URL with `ak=` in it.
 
-## v1 限制
+## v1 limitations
 
-- 只覆盖济南及下属区县；其他城市返回 `CITY_NOT_FOUND`。
-- 收录民法典合同编、合同编通则司法解释、民事诉讼法、民诉法解释、民事诉讼证据规定、诉讼费用交纳办法、法律援助法；其他法律（民法典其他编、旧合同法、刑法等）返回 `out_of_scope`，不会说成“不存在”。
-- `verify_citation` 对没有写法律名的引用（如“第585条”）返回 `ambiguous`；传 `law_hint` 或写明“民法典第585条”才会核对。这是为了避免刑法/合同混合文书误判。
-- 不判断管辖、不预测胜诉、不推荐“最好的律师”、不代写诉状。
-- 不接高德；腾讯/天地图 key 未配置时自动跳过，百度/mock/法条/计算器仍可工作。
-- WorkBuddy 的 8 条人工测试待在有 WorkBuddy 的环境复测；本仓库提供 `docs/mcp-transcript.json` 作为 stdio 证据。
+- Covers Jinan and its districts only; other cities return `CITY_NOT_FOUND`.
+- Covers the Civil Code contract book, its general-provisions interpretation, the Civil Procedure Law, its interpretation, the evidence rules, the litigation-fee measures and the Legal Aid Law. Other laws return `out_of_scope` rather than claiming the article does not exist.
+- `verify_citation` returns `ambiguous` for citations without a law name (e.g. "第585条"); pass `law_hint` or write "民法典第585条" to have it checked. This avoids misjudging documents that mix criminal and contract law.
+- It does not decide jurisdiction, predict outcomes, recommend "the best lawyer" or draft pleadings.
+- AMap is not wired in; Tencent and Tianditu are skipped when unconfigured, and Baidu, mock, statutes and calculators keep working.
+- The eight WorkBuddy manual tests still need re-running in a WorkBuddy environment; this repository ships `docs/mcp-transcript.json` as stdio evidence.
 
-## 8 条场景
+## Eight scenarios
 
-见 `docs/test-report.md`。常用问法：
+See `docs/test-report.md`. Common questions:
 
-- “济南市中级人民法院在哪？”
-- “违约金过高，法律怎么规定？”
-- “我在济南西站，要去济南中院立案，附近有法律援助吗？”
-- “这份答辩状引用了民法典第 585 条，帮我核对，并找济南的律所。”
-- “历下法院怎么走？”
-- “民法典第 9999 条怎么说？”
+- "Where is the Jinan Intermediate People's Court?"
+- "The penalty clause is excessive — what does the law say?"
+- "I'm at Jinan West Station and need to file at the Jinan Intermediate Court. Is there legal aid nearby?"
+- "This defence cites Article 585 of the Civil Code. Check it, and find me a law firm in Jinan."
+- "How do I get to the Lixia court?"
+- "What does Article 9999 of the Civil Code say?"
+
+## License
+
+MIT
